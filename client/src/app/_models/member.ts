@@ -6,7 +6,10 @@ import { Property } from './property'
 export interface Member {
   id: number;
   email: string;
+  firstName: string;
+  lastName: string;
   userName: string;
+  fullAddress: string;
   phone?: number;
   created: Date;
   lastActive: Date;

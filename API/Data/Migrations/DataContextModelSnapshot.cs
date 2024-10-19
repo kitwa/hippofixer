@@ -55,6 +55,9 @@ namespace API.Data.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
+                    b.Property<int>("CityId")
+                        .HasColumnType("int");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("longtext");
@@ -76,6 +79,9 @@ namespace API.Data.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<string>("FirstName")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("FullAddress")
                         .HasColumnType("longtext");
 
                     b.Property<int>("GenderId")

@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { AccountService } from '../_services/account.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { take } from 'rxjs';
+import { User } from '../_models/user';
 
 @Component({
   selector: 'app-sidebar',
@@ -10,6 +12,15 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class SidebarComponent {
 
-  constructor(public accountService: AccountService, private router: Router, private toastr: ToastrService) { }
+  user: User;
+  
+  constructor(public accountService: AccountService, private router: Router, private toastr: ToastrService) {
+    this.accountService.currentUser$.pipe(take(1)).subscribe(user => this.user = user);
+   }
+
+  logout(){
+    this.accountService.logout();
+    this.router.navigateByUrl('/');
+  }
 
 }

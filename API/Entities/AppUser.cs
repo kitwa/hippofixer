@@ -8,9 +8,11 @@ namespace API.Entities
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public string FullAddress { get; set; }
         public int Phone { get; set; }
         public int GenderId { get; set; }
         public Gender Gender {get; set; }
+        public int CityId { get; set; }
         public string PhotoUrl { get; set; }
         public string PhotoPublicId { get; set; }
         public string Twitter { get; set; }

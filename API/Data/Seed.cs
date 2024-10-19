@@ -60,11 +60,11 @@ namespace API.Data
             var admin = new AppUser
             {
                 UserName = "admin",
-                Email = "admin@kibokopropertymanager.co.za",
+                Email = "admin@kibokofixer.co.za",
                 GenderId = 1,
             };
 
-            var result = await userManager.CreateAsync(admin, "Kibokohouse1502@2022");
+            var result = await userManager.CreateAsync(admin, "KibokoFixer1502@2024");
 
             if(!result.Succeeded) {
                 Console.WriteLine(result.Errors);

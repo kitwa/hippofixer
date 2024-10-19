@@ -37,6 +37,8 @@ namespace API.Controllers
 
             if (await EmailExists(registerDto.Email)) return BadRequest("Cette adresse e-mail est prise");
 
+            var randomUserName = $"user_{Guid.NewGuid().ToString().Substring(0, 8)}"; 
+            registerDto.Username = randomUserName;
             registerDto.CityId = 1;
             registerDto.CountryId = 1;
             registerDto.GenderId = 1;

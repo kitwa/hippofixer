@@ -9,26 +9,26 @@
       </div>
       <div class="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">
         <ul class="nav flex-column">
-          <li class="nav-item" routerLink="/">
-            <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" >
+          <li class="nav-item">
+            <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" routerLink="/">
               <i class="bi bi-house text-black bi-icon-font-size"></i>
               Home
             </a>
           </li>
-          <li class="nav-item" routerLink='/issues'>
-            <a class="nav-link d-flex align-items-center gap-2" >
+          <li class="nav-item" >
+            <a class="nav-link d-flex align-items-center gap-2" routerLink='/issues'>
               <i class="bi bi-file-earmark-text text-black bi-icon-font-size"></i>
               Issues
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link d-flex align-items-center gap-2" >
+            <a class="nav-link d-flex align-items-center gap-2" routerLink="/invoices">
               <i class="bi bi-file-earmark-check text-black bi-icon-font-size"></i>
               Invoices
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link d-flex align-items-center gap-2" >
+            <a class="nav-link d-flex align-items-center gap-2" routerLink="/workorders">
               <i class="bi bi-list-check text-black bi-icon-font-size"></i>
               Workorders
             </a>
@@ -38,37 +38,32 @@
         <hr class="my-3">
     
         <ul class="nav flex-column mb-auto">
-          <li class="nav-item">
-            <a class="nav-link d-flex align-items-center gap-2" >
-              <i class="bi bi-info-circle text-black bi-icon-font-size"></i>
-              Info
-            </a>
-          </li>
+
           <!-- <li class="nav-item">
             <a class="nav-link d-flex align-items-center gap-2" >
               <i class="bi bi-gear-wide text-black "></i>
               Settings
             </a>
           </li> -->
-          <li class="nav-item" *ngIf="(accountService.currentUser$ | async) as user">
-            <a class="nav-link d-flex align-items-center gap-2" >
+          <li class="nav-item" *ngIf="user">
+            <a class="nav-link d-flex align-items-center gap-2" routerLink="/member/edit">
               <i class="bi bi-person text-black bi-icon-font-size"></i>
               Profile
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link d-flex align-items-center gap-2" >
-              <i class="bi bi-currency-dollar text-black bi-icon-font-size"></i>
-              Payments
+            <a class="nav-link d-flex align-items-center gap-2" routerLink="/support">
+              <i class="bi bi-info-circle text-black bi-icon-font-size"></i>
+              Support
             </a>
           </li>
-          <li class="nav-item" *ngIf="(accountService.currentUser$ | async) as user">
-            <a class="nav-link d-flex align-items-center gap-2" >
+          <li class="nav-item" *ngIf="user">
+            <a class="nav-link d-flex align-items-center gap-2" (click)="logout()">
               <i class="bi bi-box-arrow-right text-black bi-icon-font-size"></i>
               Sign out
             </a>
           </li>
-          <li class="nav-item" *ngIf="!(accountService.currentUser$ | async) as user">
+          <li class="nav-item" *ngIf="!user">
             <a class="nav-link d-flex align-items-center gap-2" routerLink="/login">
               <i class="bi bi-box-arrow-left text-black bi-icon-font-size"></i>
               Sign In
