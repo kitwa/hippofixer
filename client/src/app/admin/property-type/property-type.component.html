@@ -1,0 +1,43 @@
+<div class="float-lg-end">
+  <button type="button" class="btn btn-outline-primary primary btn-sm" (click)="$event.stopPropagation()" (click)="openAddPropertyTypeModal(addPropertyTypeModal)" >Ajouter</button>
+</div>
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let propertyType of propertyTypes">
+        <th scope="row">{{propertyType.id}}</th>
+        <td>{{propertyType.name}}</td>
+        <td><a (click)="$event.stopPropagation()" (click)="deletePropertyType(propertyType.id)"
+            class='btn btn-sm btn-outline-danger float-end'><i class="bi bi-trash"></i></a></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <ng-template #addPropertyTypeModal>
+    <div class="modal-body text-center" id="dialog-sizes-name2">
+        <div class="modal-header">
+            <h4 class="modal-title text-dark">Type de bien</h4>
+          </div>
+          <form [formGroup]='addPropertyTypeForm' (ngSubmit)="addPropertyTypeForm.valid && addPropertyType()" autocomplete="off">
+          <div class="modal-body">
+                <div class="form-group">
+                    <input type="text"
+                        [class.is-invalid]='addPropertyTypeForm.get("name")?.errors && addPropertyTypeForm.get("name")?.touched'
+                        class="form-control" placeholder="Entrer type de bien" formControlName='name'>
+                    <div class="invalid-feedback">Veuillez saisir le type de bien.</div>
+                </div>
+        
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" (click)="modalRef.hide()">Annuler</button>
+            <input [disabled]='!addPropertyTypeForm.valid' type="submit" class="btn btn-success" value="Sauver">
+          </div>
+        </form>
+    </div>
+  </ng-template>

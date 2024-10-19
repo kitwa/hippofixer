@@ -1,0 +1,209 @@
+<div *ngIf="!loading" >
+
+
+    <div class="p-4 p-md-5 mb-4 text-white rounded bg-info">
+
+        <h1 class="display-6 pb-2">Trouvez la maison de vos rêves</h1>
+        <div class="container pb-2">
+            <form [formGroup]='searchForm' (ngSubmit)="searchForm.valid && searchProperty()" autocomplete="off">
+
+                <!-- <div class="row">
+                    <div class="col-lg-9"> -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="row">
+
+                            <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                                <label for="cityId" class="form-label">Localisation</label>
+                                <select [class.is-invalid]='searchForm.get("cityId")?.errors && searchForm.get("cityId")?.touched' formControlName='cityId'      class="form-control search-slt">
+                                    <option *ngFor="let city of cities;" [value]=city.id>{{city.name}}</option>
+                                  </select>
+                                <div class="invalid-feedback">La Localisation est obligatoire</div>
+                            </div>
+
+                            <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                                <label for="propertyTypeId" class="form-label">Type de bien</label>
+
+                                <select [class.is-invalid]='searchForm.get("propertyTypeId")?.errors && searchForm.get("propertyTypeId")?.touched' formControlName='propertyTypeId' class="form-control search-slt">
+                                    <option *ngFor="let propertyType of propertyTypes;" [value]=propertyType.id>{{propertyType.name}}</option>
+                                  </select>
+                                <div class="invalid-feedback">Type de bien est obligatoire</div>
+                            </div>
+
+                            <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                                <label for="bedRooms" class="form-label">Nombre de chambres</label>
+                                <select formControlName='bedRooms' class="form-control search-slt">
+                                    <option value="0">0+</option>
+                                    <option value="1">1+</option>
+                                    <option value="2">2+</option>
+                                    <option value="3">3+</option>
+                                    <option value="4">4+</option>
+                                    <option value="5">5+</option>
+                                    <option value="6">6+</option>
+                                    <option value="7">7+</option>
+                                    <option value="8">8+</option>
+                                    <option value="9">9+</option>
+                                </select>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="row">
+
+                            <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                                <label for="minPrice" class="form-label">Prix ​​minimum</label>
+                                <select class="form-control search-slt" formControlName='minPrice'>
+                                    <option value="500"> 500 $</option>
+                                    <option value="1000">1 000 $</option>
+                                    <option value="10000">10 000 $</option>
+                                    <option value="100000">100 000 $</option>
+                                    <option value="200000">200 000 $</option>
+                                    <option value="300000">300 000 $</option>
+                                    <option value="400000">400 000 $</option>
+                                    <option value="500000">500 000 $</option>
+                                    <option value="1000000">1.000 000 $</option>
+                                    <option value="1500000">1.500 000 $</option>
+                                    <option value="2000000">2.000 000 $</option>
+                                </select>
+                            </div>
+
+                            <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                                <label for="maxPrice" class="form-label">Prix ​​maximum</label>
+                                <select class="form-control search-slt" formControlName='maxPrice'>
+                                    <option value="100">100 $</option>
+                                    <option value="1000">1000 $</option>
+                                    <option value="10000">10 000 $</option>
+                                    <option value="100000">100 000 $</option>
+                                    <option value="200000">200 000 $</option>
+                                    <option value="300000">300 000 $</option>
+                                    <option value="400000">400 000 $</option>
+                                    <option value="500000">500 000 $</option>
+                                    <option value="1000000">1.000 000 $</option>
+                                    <option value="1500000">1.500 000 $</option>
+                                    <option value="2000000">2.000 000 $</option>
+                                </select>
+                            </div>
+
+                            <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                                <label for="bathRooms" class="form-label">Nombre salles de bain</label>
+                                <select formControlName='bathRooms' class="form-control search-slt">
+                                    <option value="0">0+</option>
+                                    <option value="1">1+</option>
+                                    <option value="2">2+</option>
+                                    <option value="3">3+</option>
+                                    <option value="4">4+</option>
+                                    <option value="5">5+</option>
+                                    <option value="6">6+</option>
+                                </select>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-lg-12 pt-2">
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                                <button [disabled]='!searchForm.valid' type="submit" name="submit" id="submit"
+                                    class="btn btn-success wrn-btn">Rechercher</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- </div> -->
+                <!-- <div class="col-lg-3 pt-2">
+                        <img [src]="./assets/girl.jpg" class="img-fluid" alt="photo">
+                    </div>
+                </div> -->
+
+            </form>
+        </div>
+    </div>
+
+    <div class="row" *ngIf="properties.length > 0 && searchClicked == true">
+        <div class="col-sm-12 " *ngFor="let property of properties">
+            <app-property-card [property]="property"></app-property-card>
+        </div>
+    </div>
+
+    <div class="row" *ngIf="properties.length > 0 && searchClicked != true">
+        <div class="col-sm-12 p-3 text-center">
+            <h4 class="fw-light">Récemment publié</h4>
+
+        </div>
+        <div class="col-sm-6 " *ngFor="let property of properties">
+            <app-property-card [property]="property"></app-property-card>
+        </div>
+    </div>
+
+    <div class="row" *ngIf="properties.length == 0 && searchClicked == true">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header text-center">
+                    <h3 class="text-dark">Aucun resultat trouvé </h3>
+                </div>
+                <div class="card-body text-center">
+                    <h5 class="card-title">Aucun bien ne correspond à vos critères de recherche</h5>
+                    <p class="card-text">Si vous souhaitez vendre votre propriété ou être guidé sur la façon d'acheter sur notre plateforme,
+                        contactez-nous ci-dessous.</p>
+                    <a href="tel:+27813516105" class="btn btn-primary">+243 912 916 778</a> 
+                    <!-- <a href="mailto:info@kibokohouse.com" class="btn btn-primary">kibokohouse2@gmail.com</a> -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-center pt-5" *ngIf="properties.length > 1 && searchClicked == true">
+        <pagination [boundaryLinks]="true" [itemsPerPage]="pagination.itemsPerPage" [totalItems]="pagination.totalItems"
+            [(ngModel)]="pagination.currentPage" (pageChanged)="pageChanged($event)" previousText="&lsaquo;"
+            nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
+
+        </pagination>
+    </div>
+
+    <div class="row text-center pt-5 " *ngIf="searchClicked == false">
+        <div class="col-sm-12 p-3 text-center">
+            <h4 class="fw-light">Articles Récents</h4>
+        </div>
+        <div class="col-lg-4" routerLink="/blogposts/1">
+            <img class="bd-placeholder-img rounded-circle" width="140" height="140" [src]="blogPosts[0]?.photoUrl || './assets/property.jpg'" alt="photo">
+
+            <h5 class="p-3 text-dark text-truncate">{{blogPosts[0].title}}</h5>
+            <p class="text-truncate">{{blogPosts[0].content}}</p>
+            <p><a class="btn btn-outline-info" routerLink="/blogposts/1">Lire plus &raquo;</a></p>
+        </div>
+        <div class="col-lg-4" routerLink="/blogposts/2">
+            <ng-container *ngIf="blogPosts && blogPosts.length; else defaultImage">
+                <img class="bd-placeholder-img rounded-circle" width="140" height="140" 
+                     [src]="blogPosts[1]?.photoUrl" alt="photo">
+              </ng-container>
+              
+              <ng-template #defaultImage>
+                <img class="bd-placeholder-img rounded-circle" width="140" height="140" 
+                     src="./assets/property.jpg" alt="default photo">
+              </ng-template>
+              
+
+            <h5 class="p-3 text-dark text-truncate">{{blogPosts[1].title}}</h5>
+            <p class="text-truncate">{{blogPosts[1].content}}</p>
+            <p><a class="btn btn-outline-info" routerLink="/blogposts/2">Lire plus &raquo;</a></p>
+        </div>
+        <div class="col-lg-4" routerLink="/blogposts/3">
+            <ng-container *ngIf="blogPosts && blogPosts.length; else defaultImage">
+                <img class="bd-placeholder-img rounded-circle" width="140" height="140" 
+                     [src]="blogPosts[2]?.photoUrl" alt="photo">
+              </ng-container>
+              
+              <ng-template #defaultImage>
+                <img class="bd-placeholder-img rounded-circle" width="140" height="140" 
+                     src="./assets/property.jpg" alt="default photo">
+              </ng-template>
+
+            <h5 class="p-3 text-dark text-truncate">{{blogPosts[2].title}}</h5>
+            <p class="text-truncate">{{blogPosts[2].content}}</p>
+            <p><a class="btn btn-outline-info" routerLink="/blogposts/3">Lire plus &raquo;</a></p>
+        </div>
+    </div><!-- /.row -->
+
+    <app-footer></app-footer>
+</div>

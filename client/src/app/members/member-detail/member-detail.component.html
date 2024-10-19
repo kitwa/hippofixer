@@ -1,0 +1,37 @@
+<div class="row">
+  <div class="col-md-6">
+    <div class="row">
+      <div class="col-sm-6 text-center m-4">
+        <h6>Details</h6>
+      </div>
+    </div>
+    <div class="card" *ngIf="member">
+      <!-- <img src="..." class="card-img-top" alt="..."> -->
+      <div class="card-body">
+        <h5 class="card-title">{{member.email}}</h5>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">{{member.city}} {{member.country}}</li>
+        <li class="list-group-item" *appHasRole='["Agent"]'>Genre : {{member.gender}}</li>
+        <li class="list-group-item" *appHasRole='["Agent"]'>Vue : {{member.lastActive | timeago}}</li>
+        <li class="list-group-item" *appHasRole='["Agent"]'>Date d'adhésion : {{member.created | date: 'dd MMM yyyy'}}</li>
+      </ul>
+      <div class="card-body">
+        <a href="tel:0{{member.phone}}" class="btn btn-outline-info btn-block btn-sm me-2" *ngIf="member.phone"><i class="bi bi-telephone-outbound me-2"></i> 0{{member.phone}}</a>
+        <a href="mailto:{{member.email}}" class="btn btn-outline-info btn-block btn-sm" *ngIf="member.email"><i class="bi bi-envelope me-2"></i> {{member.email}}</a>
+        <a href="https://wa.me/{{member.phone}}/?text=Hi, I'm interrested in buying or selling a house!" class="h4 p-3 pt-3 btn btn-lg text-info" *ngIf="member.phone"><i class="bi bi-whatsapp"></i></a>
+
+      </div>
+
+    </div>
+  </div>
+
+  <div class="col-md-6" *ngIf="member">
+    <div class="row">
+      <div class="col-12 text-center m-4">
+        <h6>Live Chat</h6>
+      </div>
+    </div>
+    <app-member-messages [email]="member.email" [messages]="messages"></app-member-messages>
+  </div>
+</div>

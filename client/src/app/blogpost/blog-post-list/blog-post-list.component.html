@@ -1,0 +1,45 @@
+
+
+
+<div class="float-lg-end" *appHasRole='["Admin"]'>
+  <button type="button" class="btn btn-outline-primary primary btn-sm" routerLink='/blogpost/add' >Ajouter un article</button>
+</div>
+
+<div class="row">
+
+    <div class="col-md-12" *ngFor="let blogPost of blogPosts">
+            <app-blog-post-card [blogPost]="blogPost"></app-blog-post-card>
+    </div>
+</div>
+
+<div class="d-flex justify-content-center pt-5" *ngIf="pagination && blogPosts.length > 0">
+  <pagination 
+  [boundaryLinks]="true" 
+  [itemsPerPage]="pagination.itemsPerPage" 
+  [totalItems]="pagination.totalItems" 
+  [(ngModel)]="pagination.currentPage"
+  (pageChanged)="pageChanged($event)"
+  previousText="&lsaquo;" 
+  nextText="&rsaquo;" 
+  firstText="&laquo;" 
+  lastText="&raquo;">
+
+</pagination>
+</div>
+
+<div class="row" *ngIf="blogPosts.length == 0">
+  <div class="col-sm-12">
+      <div class="card">
+          <div class="card-header text-center">
+              <h3 class="text-dark">Aucun article de blog trouvé</h3>
+          </div>
+          <div class="card-body text-center">
+              <h5 class="card-title">Il n’y a pas encore d’article de blog publié.</h5>
+              <!-- <p class="card-text">If you want to sell your blogPost or guide on how to buy on our plateform,
+                  contact us below.</p>
+              <a href="tel:+27813516105" class="btn btn-primary">+27 81 35 16 105 </a> or
+              <a href="tel:+27813516105" class="btn btn-primary">info@kibokohouse.com </a> -->
+          </div>
+      </div>
+  </div>
+</div>

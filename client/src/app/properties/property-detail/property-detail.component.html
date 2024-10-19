@@ -1,0 +1,127 @@
+<div class="container" *ngIf="property">
+    <div class="row">
+        <div class="col-lg-1 col-md-1"></div>
+        <div class="col-lg-10 col-md-10">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div *ngIf="property.sold">
+                        <img src="./assets/vendu.png" alt="tes">
+                    </div>
+                    <div *ngIf="images.length > 0 && !property.sold">
+                        <gallery [items]="images" imageSize="cover"></gallery>
+                        <!-- <div *ngIf="galleryImages.length > 0 && !property.sold"> -->
+                        <!-- <ngx-gallery [options]="galleryOptions" [images]="galleryImages" class="ngx-gallery"></ngx-gallery> -->
+                    </div>
+                </div>
+
+                <div class="col-lg-12">
+                    <div class="section border bg-white rounded p-2">
+                        <div class="row">
+
+                            <div class="col-lg-8 p-2">
+                                <h3 class="p-2">{{property.bedRooms}} chambres, {{property.propertyType.name}} à vendre à
+                                    {{property.city.name}}</h3>
+                            </div>
+
+                            <div class="col-lg-12">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <span class="badge bg-success p-2 m-2">Prix: {{property.price}} $</span>
+                                        <span class="badge bg-danger p-2 m-2"><i class="bi bi-pin-map"></i>
+                                            Localisation: {{property.city.name}}</span>
+
+                                    </div>
+
+                                    <div class="col-lg-12">
+                                        <span class="badge bg-info p-2 m-2"><i class="bi bi-printer"></i> Chambres:
+                                            {{property.bedRooms}}</span>
+                                        <span class="badge bg-dark p-2 m-2"><i class="bi bi-door-closed"></i> Salles de
+                                            bain: {{property.bathRooms}}</span>
+                                        <span class="badge bg-dark p-2 m-2"><i class="bi bi-truck"></i> Garage:
+                                            {{property.garage}}</span>
+                                    </div>
+
+                                    <div class="col-lg-12 p-2 pe-4">
+                                        <p class="float-end">Numéro de réference: {{property.id}}</p>
+                                    </div>
+                                    <ng-container
+                                        *ngIf="user && (user.roles.includes('Agent') || user.roles.includes('Admin'))">
+                                        <div class="col-lg-12 p-2 pe-4">
+                                            <a routerLink="/property/edit/{{property.id}}"
+                                                class="btn btn-outline-primary float-end btn-sm">Modifier </a>
+                                        </div>
+                                    </ng-container>
+                                </div>
+                                <hr>
+                            </div>
+                            <div class="col-lg-12 section-detail">
+                                <p class="ml-2">{{property.description}}</p>
+                                <hr>
+                            </div>
+
+                            <div class="col-lg-12" *ngIf="property.youtubeLink">
+                                <h6 class="m-3">Tour virtuel</h6>
+                                <iframe width="100%" height="600" [src]="youtubeVideo" title="YouTube video player"
+                                    frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowfullscreen></iframe>
+                            </div>
+
+                            <div class="col-lg-12">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="card">
+                                            <div class="card-body p-0 ps-2">
+                                                <h5 class="card-title p-2">Intéressé ? Parlez à l'agent</h5>
+
+                                                <ng-container *ngIf="user">
+                                                    <ng-container *appHasRole='["Admin","Member","Agent"]'>
+                                                        <a routerLink="/members/{{member.email}}"
+                                                            class="btn btn-outline-info btn-block btn-sm me-2"
+                                                            *ngIf="member.email"><i class="bi bi-chat-dots me-2"></i>
+                                                            Live Chat</a>
+                                                    </ng-container>
+                                                </ng-container>
+
+                                                <a href="tel:{{member.phone}}"
+                                                    class="btn btn-outline-info btn-block btn-sm me-2"
+                                                    *ngIf="member.phone"><i class="bi bi-telephone-outbound me-2"></i>
+                                                    +243{{member.phone}}</a>
+                                                <!-- <a href="mailto:{{member.email}}"
+                                                    class="btn btn-outline-info btn-block btn-sm me-2"
+                                                    *ngIf="member.email"><i class="bi bi-envelope me-2"></i>
+                                                    {{member.email}}</a> -->
+                                                    <a href="https://wa.me/+243{{member.phone}}/?text=Bonjour, je suis intéressé par ce produit: {{ getFullUrl() }}"
+                                                    class="h4 p-3 pt-3 btn btn-lg text-info" *ngIf="member.phone"><i
+                                                    class="bi bi-whatsapp"></i></a>
+
+                                                    <button (click)="sharePropertyDetails()"
+                                                    class="btn btn-outline-primary btn-sm">
+                                                    <i class="bi bi-share"></i> Partager
+                                                </button>
+                                                 
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+
+                                        <div class="col-lg-4">
+                                            <img [src]="property.agent?.photoUrl || './assets/agent.png'" alt="photo"
+                                                class="bd-placeholder-img rounded-circle" width="120" height="120"
+                                                xmlns="http://www.w3.org/2000/svg" role="img">
+                                            <!-- <h5 class="fw-normal pl-5">Vendu par: {{property.agent.userName}}</h5> -->
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="col-lg-1 col-md-1"></div>
+
+    </div>

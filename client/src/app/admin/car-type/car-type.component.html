@@ -1,0 +1,55 @@
+<div class="float-lg-end">
+    <button type="button" class="btn btn-outline-primary primary btn-sm" (click)="$event.stopPropagation()" (click)="openAddCarTypeModal(addCarTypeModal)" >Ajouter</button>
+  </div>
+  <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Marque</th>
+          <th scope="col">Modèle</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let carType of carTypes">
+          <th scope="row">{{carType.id}}</th>
+          <td>{{carType.model}}</td>
+          <td>{{carType.make}}</td>
+          <td><a (click)="$event.stopPropagation()" (click)="deleteCarType(carType.id)"
+              class='btn btn-sm btn-outline-danger float-end'><i class="bi bi-trash"></i></a></td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <ng-template #addCarTypeModal>
+      <div class="modal-body text-center" id="dialog-sizes-name2">
+          <div class="modal-header">
+              <h4 class="modal-title text-dark">Modèle</h4>
+            </div>
+            <form [formGroup]='addCarTypeForm' (ngSubmit)="addCarTypeForm.valid && addCarType()" autocomplete="off">
+            <div class="modal-body">
+                  <div class="form-group">
+                    <p>Marque</p>
+                      <input type="text"
+                          [class.is-invalid]='addCarTypeForm.get("model")?.errors && addCarTypeForm.get("model")?.touched'
+                          class="form-control" placeholder="Entrer la marque" formControlName='model'>
+                      <div class="invalid-feedback">Veuillez saisir la marque.</div>
+                  </div>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <p>Modèle</p>
+                    <input type="text"
+                        [class.is-invalid]='addCarTypeForm.get("make")?.errors && addCarTypeForm.get("make")?.touched'
+                        class="form-control" placeholder="Entrer le modele" formControlName='make'>
+                    <div class="invalid-feedback">Veuillez saisir le modèle.</div>
+                </div>
+        
+          </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" (click)="modalRef.hide()">Annuler</button>
+              <input [disabled]='!addCarTypeForm.valid' type="submit" class="btn btn-success" value="Sauver">
+            </div>
+          </form>
+      </div>
+    </ng-template>

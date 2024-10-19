@@ -1,0 +1,35 @@
+<div class="row">
+    <div class="col-12">
+        <p>Ajouter un nouvel article</p>
+    </div>
+    
+    <div class="col-12 pb-5">
+    <form [formGroup]='addBlogPostForm' (ngSubmit)="addBlogPost()" autocomplete="off"  class="row g-3">
+
+        <div class="col-md-12">
+            <label for="title"  class="form-label"><Title></Title></label>
+            <input type="text" 
+            [class.is-invalid]='addBlogPostForm.get("title")?.errors && addBlogPostForm.get("title")?.touched'
+            class="form-control" id="title" formControlName='title' placeholder="title">
+            <div class="invalid-feedback">Veuillez entrer un titre</div>
+        </div>
+
+        <div class="col-md-12">
+            <label for="content"  class="form-label">Contenu</label>
+            <textarea 
+            [class.is-invalid]='addBlogPostForm.get("content")?.errors && addBlogPostForm.get("content")?.touched' 
+            class="form-control" formControlName='content' rows="*" placeholder="content"></textarea>
+            <div class="invalid-feedback">Veuillez saisir un contenu</div>
+          </div>
+
+        <div class="col-md-6" hidden>
+            <input type="text" [(ngModel)]="user.id" formControlName='appUserId' class="form-control">
+          </div>
+
+        <div class="col-md-12">
+          <button type="submit" name="submit" id="submit" class="btn btn-primary ">Sauvegarder</button>
+        </div>
+      </form>
+      </div>
+    </div>
+

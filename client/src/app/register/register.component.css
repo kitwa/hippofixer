@@ -1,0 +1,32 @@
+/* Carousel container */
+.bg-container {
+    position: relative;
+    min-height: 100vh;
+}
+
+.carousel-item img {
+    height: 100vh; /* Make the carousel images cover the full height */
+    object-fit: cover; /* Ensure the image fits properly without distortion */
+}
+
+/* Padding for content */
+.pt-50 {
+    padding-top: 700px !important;
+}
+
+.container {
+    z-index: 2; /* Bring the form content above the carousel */
+}
+
+/* Optional: Customize the carousel controls */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: #000; /* Add some background color for better visibility */
+    border-radius: 50%;
+}
+
+
+.back-icon {
+    font-size: 25px;
+    color: rgb(48, 196, 223);
+}

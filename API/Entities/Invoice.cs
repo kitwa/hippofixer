@@ -1,0 +1,13 @@
+namespace  API.Entities;
+
+public class Invoice
+{
+    public int Id { get; set; }
+    public int WorkOrderId { get; set; }
+    public int ContractorId { get; set; }
+    public decimal Amount { get; set; }
+    public DateTime DateSubmitted { get; set; }
+    public DateTime? DatePaid { get; set; }
+    public WorkOrder WorkOrder { get; set; }
+    public AppUser Contractor { get; set; }
+}

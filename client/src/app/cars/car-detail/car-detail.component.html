@@ -1,0 +1,144 @@
+<div class="container" *ngIf="car">
+    <div class="row">
+        <div class="col-lg-1 col-md-1"></div>
+        <div class="col-lg-10 col-md-10">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div *ngIf="car.sold">
+                        <img src="./assets/vendu.png" alt="tes">
+                    </div>
+                    <div *ngIf="images.length > 0 && !car.sold">
+                        <gallery [items]="images" imageSize="cover"></gallery>
+                        <!-- <div *ngIf="galleryImages.length > 0 && !car.sold"> -->
+                        <!-- <ngx-gallery [options]="galleryOptions" [images]="galleryImages" class="ngx-gallery"></ngx-gallery> -->
+                    </div>
+                </div>
+
+                <div class="col-lg-12">
+                    <div class="section border bg-white rounded p-2">
+                        <div class="row">
+
+                            <div class="col-lg-12">
+                                <div class="row">
+                                    <div class="col-lg-12 p-2 pe-4">
+                                        <ng-container
+                                            *ngIf="user && (user.roles.includes('Agent') || user.roles.includes('Admin'))">
+                                            <div class="col-lg-12 p-2 pe-4">
+                                                <a routerLink="/car/edit/{{car.id}}"
+                                                    class="btn btn-outline-primary float-end btn-sm">Modifier </a>
+                                            </div>
+                                        </ng-container>
+                                        <h6 class="p-2 text-black">Numéro de réference: {{car.id}}</h6>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="table-responsive">
+                                            <table class="table table-striped align-middle">
+                                                <tbody>
+                                                    <tr>
+                                                        <th scope="col">Prix</th>
+                                                        <th scope="row">{{car.price}}$</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="col">Transmission</th>
+                                                        <td>{{car.transmission}}</td>
+
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="col">Etat</th>
+                                                        <td>{{car.newUsed}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="col">Essence/Mazout</th>
+                                                        <td>{{car.fuelType}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="col">Année</th>
+                                                        <td>{{car.year}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="col">Kilometrage</th>
+                                                        <td>{{car.mileage}}km</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <hr>
+                            </div>
+                            <div class="col-lg-12 ">
+                                <h6 class="text-black">Description</h6>
+                                <p class="ml-2">{{car.description}}</p>
+                                <hr>
+                            </div>
+
+                            <div class="col-lg-12" *ngIf="car.youtubeLink">
+                                <h6 class="m-3">Tour virtuel</h6>
+                                <iframe width="100%" height="600" [src]="youtubeVideo" title="YouTube video player"
+                                    frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowfullscreen></iframe>
+                            </div>
+
+                            <div class="col-lg-12">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="card">
+                                            <div class="card-body p-0 ps-2">
+                                                <h5 class="card-title p-2">Intéressé ? Parlez à l'agent</h5>
+                                                <ng-container *ngIf="user">
+                                                    <ng-container *appHasRole='["Admin","Member","Agent"]'>
+                                                        <a routerLink="/members/{{member.email}}"
+                                                            class="btn btn-outline-info btn-block btn-sm me-2"
+                                                            *ngIf="member.email"><i class="bi bi-chat-dots me-2"></i>
+                                                            Live
+                                                            Chat</a>
+                                                    </ng-container>
+                                                </ng-container>
+
+                                                <ng-container *ngIf="member">
+                                                    <a href="tel:+243{{member.phone}}"
+                                                        class="btn btn-outline-info btn-block btn-sm me-2"
+                                                        *ngIf="member.phone"><i
+                                                            class="bi bi-telephone-outbound me-2"></i>
+                                                        +243{{member.phone}}</a>
+                                                    <!-- <a href="mailto:{{member.email}}"
+                                                        class="btn btn-outline-info btn-block btn-sm me-2"
+                                                        *ngIf="member.email"><i class="bi bi-envelope me-2"></i>
+                                                        {{member.email}}</a> -->
+                                                    <a href="https://wa.me/+243{{member.phone}}/?text=Bonjour, je suis intéressé par ce produit: {{ getFullUrl() }}"
+                                                        class="h4 p-3 pt-3 btn btn-lg text-info" *ngIf="member.phone"><i
+                                                            class="bi bi-whatsapp"></i></a>
+
+
+                                                    <button (click)="shareCarDetails()"
+                                                        class="btn btn-outline-primary btn-sm">
+                                                        <i class="bi bi-share"></i> Partager
+                                                    </button>
+
+                                                </ng-container>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col">
+
+                                        <div class="col-6">
+                                            <img [src]="car.agent?.photoUrl || './assets/agent.png'" alt="photo"
+                                                class="bd-placeholder-img rounded-circle" width="120" height="120"
+                                                xmlns="http://www.w3.org/2000/svg" role="img">
+                                            <h5 class="fw-normal pl-5">Vendu par: {{car.agent?.userName}}</h5>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-1 col-md-1"></div>
+
+    </div>

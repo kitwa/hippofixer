@@ -1,0 +1,97 @@
+<!-- <div *ngIf="user && user.roles.includes('Tenant')">
+    <h1>Tenant APP</h1>
+</div>
+<div *ngIf="user && user.roles.includes('Contractor')">
+    <h1>Contractor APP</h1>
+</div>
+<div *ngIf="user && user.roles.includes('PropertyManager')">
+    <h1>Property Manager APP</h1>
+</div>
+<div *ngIf="user && user.roles.includes('Admin')">
+    <h1>Admin APP</h1>
+</div>
+<div *ngIf="!user">
+    <app-login></app-login>
+</div> -->
+
+<app-nav></app-nav>
+
+<div class="container-fluid">
+  <div class="row">
+    
+    <div class="border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary">
+      <app-sidebar></app-sidebar>
+    </div>
+
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+      <div
+        class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Home</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+          <div class="btn-group me-2">
+            <button type="button" class="btn btn-sm btn-outline-secondary"><i
+                class="bi bi-share text-black"></i><span>&nbsp;</span> Share</button>
+            <!-- <button type="button" class="btn btn-sm btn-outline-secondary">Export</button> -->
+          </div>
+          <!-- <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle d-flex align-items-center gap-1">
+            <i class="bi bi-info-circle text-black "></i>
+            Info
+          </button> -->
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- <p class="m-4">Contractors at Your Fingertips!</p> -->
+        <div class="col-1">
+        </div>
+        <div class="col-10 text-center ">
+          <div data-bs-toggle="modal" data-bs-target="#exampleModal">
+          <div class="raise-icon-size">
+            <i class="bi bi-plus-circle-dotted text-primary"></i>
+          </div>
+          <h5 class="pl-4 ml-5">Raise Issue</h5>
+        </div>
+          <p>Click on the plus icon to raise you issue</p>
+        </div>
+        <div class="col-1">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4 col-sm-12 text-center">
+          <div class="card text-center">
+            <div class="card-body">
+              <h5 class="card-title">You are not Logged In</h5>
+              <p class="card-text">You need to login to be able to raise an issue</p>
+              <button type="button" class="btn btn-outline-primary primary btn-sm" routerLink='/login'>Login Now</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4"></div>
+      </div>
+    </main>
+
+  </div>
+</div>
+
+<app-footer></app-footer>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">You are not Log In</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        In order to raise an issue you need to login
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" routerLink="/login">Log In Now</button>
+      </div>
+    </div>
+  </div>
+</div>

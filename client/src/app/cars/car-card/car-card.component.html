@@ -1,0 +1,19 @@
+
+<div class="card mb-3" style="max-width: 700px;" routerLink='/car/{{car.id}}'>
+    <div class="row g-0 ">
+      <div class="col-md-4">
+        <img src="{{mainPhoto?.url || './assets/car.jpg'}}"  class="img-fluid" alt="photo">
+      </div>
+      <div class="col-md-6 ">
+        <div class="card-body">
+          <h5 class="card-title mb-0">${{car.price}}</h5>
+          <h6 class="card-text mb-0 text-black">{{car.year}} {{car.carType.model}} {{car.carType.make}}</h6>
+          <!-- <p class="card-text mb-0 text-truncate">{{car.description}}</p> -->
+          <p class="card-text mb-0"><small class="text-muted">  {{car.newUsed}} | {{car.mileage}}km | {{car.transmission}}</small></p>
+          <p class="card-text mb-0"><small class="text-muted"> Ville: {{car.city.name}}</small></p>
+          <p class="card-text mb-0"><small class="text-muted"> {{car.carPhotos.length}} photos disponible</small></p>
+        </div>
+      </div>
+    </div>
+  </div>
+

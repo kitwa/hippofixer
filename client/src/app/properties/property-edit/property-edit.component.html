@@ -1,0 +1,144 @@
+<div class="row" *ngIf="property">
+    <div class="col-12 pb-3">
+        <h3>Modifier</h3>
+    </div>
+
+    <div class="alert alert-info col-6 text-center" *ngIf="editForm.dirty" role="alert">
+      <p>Vous avez apporté des modifications. Toutes les modifications non enregistrées seront perdues.</p>
+    </div>
+    <div class="col-12">
+      <app-photo-editor [property]="property"></app-photo-editor>
+    </div>
+    <div class="col-12 pb-5">
+    <form [formGroup]='editForm'  (ngSubmit)="updateProperty()" class="row g-3">
+
+      <div class="col-md-6">
+        <label for="price"  class="form-label">Price</label>
+        <input type="text" 
+        [class.is-invalid]='editForm.get("price")?.errors && editForm.get("price")?.touched'
+        class="form-control" id="price" formControlName='price' placeholder="price"  [(ngModel)]="property.price">
+        <div class="invalid-feedback">Veuillez saisir un prix.</div>
+    </div>
+
+      <div class="col-md-6">
+        <label for="bedRooms" class="form-label">Chambres</label>
+        <select [class.is-invalid]='editForm.get("bedRooms")?.errors && editForm.get("bedRooms")?.touched' 
+        formControlName='bedRooms'  [(ngModel)]="property.bedRooms" class="form-select">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+        </select>
+        <div class="invalid-feedback">Veuillez choisir le nombre de chambres.</div>
+      </div>
+
+      <div class="col-md-6">
+        <label for="bathRooms" class="form-label">Salle de bains</label>
+        <select  [class.is-invalid]='editForm.get("bathRooms")?.errors && editForm.get("bathRooms")?.touched' 
+        [(ngModel)]="property.bathRooms" formControlName='bathRooms' class="form-select">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+        </select>
+        <div class="invalid-feedback">Veuillez choisir le nombre de salles de bains.</div>
+      </div>
+
+      <div class="col-md-6">
+          <label for="garage" class="form-label">garages</label>
+          <select [class.is-invalid]='editForm.get("garage")?.errors && editForm.get("garage")?.touched' 
+          [(ngModel)]="property.garage" formControlName='garage' class="form-select">
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+          </select>
+          <div class="invalid-feedback">Merci de choisir le nombre de garages.</div>
+        </div>
+
+        
+      <div class="col-md-6">
+          <label for="propertyTypeId" class="form-label">Type de bien</label>
+          <select [class.is-invalid]='editForm.get("propertyTypeId")?.errors && editForm.get("propertyTypeId")?.touched' 
+          [(ngModel)]="property.propertyTypeId" formControlName='propertyTypeId' class="form-select">
+          <option *ngFor="let propertyType of propertyTypes;" [value]=propertyType.id>{{propertyType.name}}</option>
+          </select>
+          <div class="invalid-feedback">Veuillez choisir un type de bien.</div>
+        </div>
+
+        <div class="col-md-6">
+          <label for="cityId"  class="form-label">Ville</label>
+          <select [class.is-invalid]='editForm.get("cityId")?.errors && editForm.get("cityId")?.touched' 
+          [(ngModel)]="property.cityId" formControlName='cityId' class="form-select">
+          <option *ngFor="let city of cities;" [value]=city.id>{{city.name}}</option>
+          </select>
+            <div class="invalid-feedback">Veuillez choisir la ville.</div>
+        </div>
+
+        <div class="col-6">
+          <label for="countryId"  class="form-label">Pays</label> 
+          <!-- <input type="text" [(ngModel)]="property.country"  class="form-control" formControlName='country' rows="5" placeholder="country"> -->
+          <select [class.is-invalid]='editForm.get("countryId")?.errors && editForm.get("countryId")?.touched' 
+          [(ngModel)]="property.countryId" formControlName='countryId' class="form-select">
+            <option value="1">RD Congo</option>
+            <option value="1">Afrique du Sud</option>
+          </select>
+            <div class="invalid-feedback">Veuillez choisir le pays.</div>
+        </div>
+
+        <div class="col-md-12">
+          <label for="description"  class="form-label">Description</label>
+          <textarea 
+          [class.is-invalid]='editForm.get("description")?.errors && editForm.get("description")?.touched' 
+          class="form-control" [(ngModel)]="property.description"  formControlName='description' rows="5" placeholder="description"></textarea>
+        </div>
+
+        <div class="col-md-6">
+          <label for="youtubeLink"  class="form-label">Vidéo Youtube</label>
+          <input type="text" 
+          [class.is-invalid]='editForm.get("youtubeLink")?.errors && editForm.get("youtubeLink")?.touched'
+          class="form-control" [(ngModel)]="property.youtubeLink" formControlName='youtubeLink' placeholder="youtubeLink">
+          <div class="invalid-feedback">Veuillez entrer le lien.</div>
+      </div>
+
+      <div class="col-md-6" hidden>
+        <input type="text" [(ngModel)]="user.id" formControlName='appUserId' class="form-control">
+      </div>
+
+        <div class="col-12">
+          <button type="submit" [disabled]="!editForm.dirty" name="submit" id="submit" class="btn btn-primary m-2">Save Changes</button>
+          <a (click)="$event.stopPropagation()" (click)="markAsSoldModal(markAsSoldProperty)" class="btn btn-info"><i class="bi bi-trash"></i> Marquer comme vendu</a>
+          <a (click)="$event.stopPropagation()" (click)="openDeleteModal(deleteProperty)" class="btn btn-danger m-2"><i class="bi bi-trash"></i> Supprimer ce bien</a>
+        </div>
+      </form>
+      </div>
+
+
+      <ng-template #deleteProperty>
+        <div class="modal-body text-center">
+          <p>Voulez-vous supprimer cette propriété ?</p>
+          <button type="button" class="btn btn-default" (click)="confirmDeleteProperty()" >Oui</button>
+          <button type="button" class="btn btn-primary" (click)="declineDeleteProperty()" >Non</button>
+        </div>
+      </ng-template>
+
+      <ng-template #markAsSoldProperty>
+        <div class="modal-body text-center" id="dialog-sizes-name2">
+          <p>Voulez-vous marquer cette propriété comme vendue ?</p>
+          <button type="button" class="btn btn-default" (click)="confirmMarkAsSoldProperty()" >Oui</button>
+          <button type="button" class="btn btn-primary" (click)="declineMarkAsSoldProperty()" >Non</button>
+        </div>
+      </ng-template>
+
+    </div>
+

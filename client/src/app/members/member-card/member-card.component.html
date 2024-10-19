@@ -1,0 +1,13 @@
+
+<div class="list-group">
+
+    <a routerLink='/members/{{member.email}}' class="list-group-item list-group-item-action">
+      <div class="d-flex w-100 justify-content-between">
+        <h6 class="mb-1">{{member.email}}</h6>
+        <!-- <small class="text-muted">Number of properties: {{member.properties.length}}</small> -->
+      </div>
+      <p class="mb-1">Last Active : {{member.lastActive}}</p>
+      <small class="text-muted">Joined Date: {{member.created}}</small>
+    </a>
+
+  </div>

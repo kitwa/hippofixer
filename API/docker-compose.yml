@@ -1,0 +1,85 @@
+version: '3.8'
+
+services:
+  mariadb:
+    image: mariadb:latest
+    container_name: mariadb
+    environment:
+      MYSQL_ROOT_PASSWORD: KibokoHouse1502@
+      MYSQL_DATABASE: maria_db
+      MYSQL_USER: kibokouser
+      MYSQL_PASSWORD: KibokoHouse1502@
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - my_network
+
+  kibokohouse:
+    image: dominichdocker/kibokohouse:latest
+    container_name: kibokohouse
+    environment:
+      DB_HOST: mariadb
+      DB_NAME: congomaison
+      DB_USER: kibokouser
+      DB_PASSWORD: KibokoHouse1502@
+    depends_on:
+      - mariadb
+    networks:
+      - my_network
+
+  zakibokohouse:
+    image: dominichdocker/za.kibokohouse.com:latest
+    container_name: za.kibokohouse
+    environment:
+      DB_HOST: mariadb
+      DB_NAME: zacongomaison
+      DB_USER: kibokouser
+      DB_PASSWORD: KibokoHouse1502@
+    depends_on:
+      - mariadb
+      - kibokohouse
+
+    networks:
+      - my_network
+
+  troisiemadamkibokohouse:
+    image: dominichdocker/troisiemeadam.kibokohouse.com:latest
+    container_name: troisiemeadam.kibokohouse
+    environment:
+      DB_HOST: mariadb
+      DB_NAME: troisiemeadam
+      DB_USER: kibokouser
+      DB_PASSWORD: KibokoHouse1502@
+    depends_on:
+      - mariadb
+      - kibokohouse
+      - zakibokohouse
+
+    networks:
+      - my_network
+
+  testkibokohouse:
+    image: dominichdocker/test.kibokohouse.com:latest
+    container_name: test.kibokohouse
+    environment:
+      DB_HOST: mariadb
+      DB_NAME: test
+      DB_USER: kibokouser
+      DB_PASSWORD: KibokoHouse1502@
+    depends_on:
+      - mariadb
+      - kibokohouse
+      - zakibokohouse
+      - troisiemadamkibokohouse
+
+    networks:
+      - my_network
+
+networks:
+  my_network:
+    driver: bridge
+
+volumes:
+  db_data:

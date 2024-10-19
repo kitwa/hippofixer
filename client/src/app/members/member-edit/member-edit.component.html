@@ -1,0 +1,76 @@
+<div class="row" *ngIf="member">
+    <div class="col-12">
+        <p>Votre profile</p>
+    </div>
+
+    <div class="alert alert-info col-6 text-center" *ngIf="editForm.dirty" role="alert">
+      <p>Vous avez apporté des modifications. Toutes les modifications non enregistrées seront perdues.</p>
+    </div>
+
+    <div class="col-md-3S">
+      <img [src]="member?.photoUrl || './assets/agent.png'" class="img-fluid" alt="photo">
+    </div>
+
+    <div class="col-md-12">
+      <label>Select an image: </label>
+      <br>
+      <input type="file" (change)="onFileSelected($event)" />
+    </div>
+    
+    <form #editForm="ngForm" (ngSubmit)="updateMember()" class="row g-3">
+      <div class="col-6">
+        <label for="phone"  class="form-label">Phone Number</label>
+        <input type="number" [(ngModel)]="member.phone" class="form-control" id="phone" name="phone" placeholder="phone">
+      </div>
+
+      <div class="col-md-6">
+        <label for="genderId" class="form-label">Sex</label>
+        <select id="genderId" [(ngModel)]="member.gender.id" name="genderId" class="form-select">
+          <option value="1">Homme</option>
+          <option value="2">Femme</option>
+        </select>
+      </div>
+
+      
+      <div class="col-md-6">
+        <label for="cityId" class="form-label">Ville</label>
+        <select id="cityId" [(ngModel)]="member.city.id" name="cityId" class="form-select">
+          <option value="1">Lubumbashi</option>
+          <option value="2">Kolwezi</option>
+        </select>
+      </div>
+
+      <div class="col-md-6">
+        <label for="countryId" class="form-label">Pays</label>
+        <select id="countryId" [(ngModel)]="member.country.id" name="countryId" class="form-select">
+          <option value="1">R.D. Congo</option>
+          <option value="2">Afrique Du Sud</option>
+        </select>
+      </div>
+
+        <div class="col-6">
+          <label for="facebook"  class="form-label">FaceBook</label>
+          <input type="text" [(ngModel)]="member.facebook"  class="form-control" id="facebook" name="facebook" placeholder="facebook">
+        </div>
+
+        <div class="col-6">
+          <label for="instagram"  class="form-label">Instagram</label>
+          <input type="text" [(ngModel)]="member.instagram"  class="form-control" id="instagram" name="instagram" placeholder="instagram">
+        </div>
+
+        <div class="col-6">
+          <label for="twitter"  class="form-label">Twitter</label>
+          <input type="text" [(ngModel)]="member.twitter"  class="form-control" id="twitter" name="twitter" placeholder="twitter">
+        </div>
+
+        <div class="col-6">
+          <label for="youtube"  class="form-label">Youtube</label>
+          <input type="text" [(ngModel)]="member.youtube"  class="form-control" id="youtube" name="youtube" placeholder="youtube">
+        </div>
+
+        <div class="col-12">
+          <button type="submit" [disabled]="!editForm.dirty" name="submit" id="submit" class="btn btn-primary ">Enregistrer</button>
+        </div>
+      </form>
+
+    </div>

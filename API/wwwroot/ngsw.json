@@ -1,0 +1,139 @@
+{
+  "configVersion": 1,
+  "timestamp": 1727782484206,
+  "index": "/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/favicon.ico",
+        "/index.html",
+        "/main.f85f8851060eb068.js",
+        "/manifest.webmanifest",
+        "/polyfills.77251648888294a2.js",
+        "/runtime.1e70f244cc06fa31.js",
+        "/scripts.6fe6725b87f2ceac.js",
+        "/styles.bd4329415b8a6300.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/assets/advice.jpg",
+        "/assets/agent.png",
+        "/assets/flag.png",
+        "/assets/h1.png",
+        "/assets/h2.png",
+        "/assets/h3.png",
+        "/assets/h4.png",
+        "/assets/home/car.jpg",
+        "/assets/home/car2.jpg",
+        "/assets/home/dubai.jpg",
+        "/assets/home/house.jpg",
+        "/assets/home/house2.jpg",
+        "/assets/home/southafrica.jpg",
+        "/assets/house.jpg",
+        "/assets/house.png",
+        "/assets/househome.jpg",
+        "/assets/icons/icon-128x128.png",
+        "/assets/icons/icon-144x144.png",
+        "/assets/icons/icon-152x152.png",
+        "/assets/icons/icon-192x192.png",
+        "/assets/icons/icon-384x384.png",
+        "/assets/icons/icon-512x512.png",
+        "/assets/icons/icon-72x72.png",
+        "/assets/icons/icon-96x96.png",
+        "/assets/logoname.PNG",
+        "/assets/logono.png",
+        "/assets/property.jpg",
+        "/assets/sell.jpg",
+        "/assets/sellbuy.jpg",
+        "/assets/spinner.gif",
+        "/assets/spinner2.gif",
+        "/assets/spinner3.gif",
+        "/assets/spinner4.gif",
+        "/assets/vendu.png",
+        "/bootstrap-icons.70a9dee9e5ab72aa.woff",
+        "/bootstrap-icons.bfa90bda92a84a6a.woff2"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "/assets/advice.jpg": "8aea8d23eea2a4b0dfeec3f2488a53a62f0cbe1e",
+    "/assets/agent.png": "537b1e25e53cf636fdf7736e9ba4e6699ab523b5",
+    "/assets/flag.png": "b8a9606aa3686c5f151fa9fd23965a7e81c815bb",
+    "/assets/h1.png": "d69aeecb03a997d3d06f6a8854d5360724fbe993",
+    "/assets/h2.png": "d41830f6710836b46b65a835f2a08a25c631906e",
+    "/assets/h3.png": "0ec76859e52ce20a4ec19032a62bff23ec213c6f",
+    "/assets/h4.png": "09870cb5d812ed51763dc603a2b867c8de826aae",
+    "/assets/home/car.jpg": "ef420b2ad4652352e3d307c3bed89c5180f89a19",
+    "/assets/home/car2.jpg": "de644ec5c0c0018efe50bda9d00172e78b87aa90",
+    "/assets/home/dubai.jpg": "503bdb06d5a4fda71f86b68ba3c74aeba19788aa",
+    "/assets/home/house.jpg": "45383a2c720b8f28d1b4fc26269437d644bed711",
+    "/assets/home/house2.jpg": "1c1f90cb1c53a5eaa72fc275c6653644cead8b85",
+    "/assets/home/southafrica.jpg": "b80fe141039c58429d1c5f0e4e8e0ce1723789e8",
+    "/assets/house.jpg": "57a9670724fcab63e4e41139c1bdf4e4bbb7f154",
+    "/assets/house.png": "5ea1ac5f93e5c6daac6b2e02d7aee60f08d29028",
+    "/assets/househome.jpg": "24493df7a3f0562a6a6a06b5165eef5cde473331",
+    "/assets/icons/icon-128x128.png": "d2b3d115bfcb1d4af63b14c0d95f47f0bae49b2f",
+    "/assets/icons/icon-144x144.png": "a17d0666719c25acaf8f089c0460fcc4017a3a7b",
+    "/assets/icons/icon-152x152.png": "a92ba180f1586a45ce4b44f60c60aa27fe1baf79",
+    "/assets/icons/icon-192x192.png": "2807211ea66e741ffec153469afdc473d42d7304",
+    "/assets/icons/icon-384x384.png": "6f5235f6782b4d9f6e896b90395e190dbdb22b00",
+    "/assets/icons/icon-512x512.png": "6f5235f6782b4d9f6e896b90395e190dbdb22b00",
+    "/assets/icons/icon-72x72.png": "d43501034116ac2e5c6ac656d07289a8cd5303ce",
+    "/assets/icons/icon-96x96.png": "6c1da4c607e3cfab8c7c1725bf10f4546cefb1cb",
+    "/assets/logoname.PNG": "004d9fd1a0f5612ae181e941267bfb25e10d47cc",
+    "/assets/logono.png": "f646a3371eb7c5dadc7633f43781781fae602e95",
+    "/assets/property.jpg": "0cd7f511e58b341b2bd5cf2da4dbdddae3583148",
+    "/assets/sell.jpg": "6d05b4ac80a961dfdc4f23227291c2bb870da4b6",
+    "/assets/sellbuy.jpg": "e7dcbe783fadc0358b678cd1a81cdd0f65ae9c28",
+    "/assets/spinner.gif": "1ce6e764c7e2506a5207f1a03bdd7acadcce7f39",
+    "/assets/spinner2.gif": "a4afc5ab860738b4ff276eb6d604d97ea298a6f7",
+    "/assets/spinner3.gif": "5d4e688b87f525e79d41bbafce449041e90256ba",
+    "/assets/spinner4.gif": "1259c4fdde27ad0aff75671796124f13ef723897",
+    "/assets/vendu.png": "29ceb6ed181d4e49bb825903446145b28ce65d59",
+    "/bootstrap-icons.70a9dee9e5ab72aa.woff": "d5831fd39baf13aff7626e483b9a089730f18604",
+    "/bootstrap-icons.bfa90bda92a84a6a.woff2": "020c3c6f9280a315e8425d7f92e15bcd0cdda1b2",
+    "/favicon.ico": "bbf3dcfdaeb57470408b10c26cd3c2e73a551a7f",
+    "/index.html": "2773b7767fa26ae8488ae5bbf82cbdcc18809f5c",
+    "/main.f85f8851060eb068.js": "48236c72cccbe4f9653a0f6a1eb03acac5fcef8c",
+    "/manifest.webmanifest": "5cc997c1c3970ab84a35e369259f223f56dc765d",
+    "/polyfills.77251648888294a2.js": "2f70361c3c89df51af1c14b8c52edb64963ba650",
+    "/runtime.1e70f244cc06fa31.js": "c7d926b2cf694e3d597bb7dc6c8c3298ffebf6c5",
+    "/scripts.6fe6725b87f2ceac.js": "dfbe7325f9ddb75510f260a67039422cf45caf11",
+    "/styles.bd4329415b8a6300.css": "4a34f55436c473bbad70ceceb7cdcd3afb3c2abf"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ],
+  "navigationRequestStrategy": "performance"
+}

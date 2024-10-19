@@ -1,0 +1,13 @@
+@media (min-width: 768px) {
+    .mobile-only {
+        display: none !important;
+    }
+}
+
+.pl-3 {
+    padding-left: 30px;
+}
+
+.pr-3 {
+    padding-right: 30px;
+}

@@ -1,0 +1,52 @@
+<div class="row mb-4">
+    <div class="btn-group" name='container'>
+        <!-- <button class="btn btn-outline-warning" (click)="loadMessages('Unread')">
+            <i class="bi bi-envelope"></i> Unread
+        </button> -->
+        <button class="btn btn-outline-success" (click)="loadMessages('Inbox')">
+            <i class="bi bi-envelope-open"></i> Boîte de réception
+        </button>
+        <button class="btn btn-outline-info" (click)="loadMessages('Outbox')">
+            <i class="bi bi-arrow-up-right-square"></i> Boîte d'envoi
+        </button>
+    </div>
+</div>
+
+<div class="row pb-5" *ngIf="messages?.length === 0">
+    <div class="col-sm-12">
+        <div class="card p-3 card-header">
+            <div class="text-center">
+                <h6 class="text-dark"> 0 <strong class="text-danger">{{container}} </strong> Messages Found </h6>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row pb-5" *ngIf="messages?.length > 0">
+    <div style="cursor: pointer">
+        <div [hidden]="loading" *ngFor="let message of messages" routerLink='{{container === "Outbox" 
+                ? "/members/" + message.recipientEmail 
+                : "/members/" + message.senderEmail}}'>
+
+            <div class="card">
+                <div class="card-body">
+                        <h6 class="card-title" *ngIf="container === 'Outbox'">{{message.recipientEmail | titlecase}}</h6>
+                        <h6 class="card-title" *ngIf="container !== 'Outbox'">{{message.senderEmail | titlecase}}</h6>
+                        <!-- <div class="d-flex w-100 justify-content-between"> -->
+                        <p class="card-text">{{message.content}}</p>
+                        <a (click)="$event.stopPropagation()" (click)="deleteMessage(message.id)"
+                        class='btn btn-sm btn-outline-danger float-end'><i class="bi bi-trash"></i></a>
+                    <!-- </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="d-flex justify-content-center" *ngIf="pagination && !loading">
+    <pagination [boundaryLinks]="true" [totalItems]="pagination.totalItems" [itemsPerPage]="pagination.itemsPerPage"
+        [(ngModel)]="pagination.currentPage" (pageChanged)="pageChanged($event)" previousText="&lsaquo;"
+        nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
+    </pagination>
+</div>
