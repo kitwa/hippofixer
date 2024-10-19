@@ -50,7 +50,7 @@
               Settings
             </a>
           </li> -->
-          <li class="nav-item">
+          <li class="nav-item" *ngIf="(accountService.currentUser$ | async) as user">
             <a class="nav-link d-flex align-items-center gap-2" >
               <i class="bi bi-person text-black bi-icon-font-size"></i>
               Profile
@@ -62,13 +62,13 @@
               Payments
             </a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" *ngIf="(accountService.currentUser$ | async) as user">
             <a class="nav-link d-flex align-items-center gap-2" >
               <i class="bi bi-box-arrow-right text-black bi-icon-font-size"></i>
               Sign out
             </a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" *ngIf="!(accountService.currentUser$ | async) as user">
             <a class="nav-link d-flex align-items-center gap-2" routerLink="/login">
               <i class="bi bi-box-arrow-left text-black bi-icon-font-size"></i>
               Sign In

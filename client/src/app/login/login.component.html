@@ -33,15 +33,15 @@
         <div class="col-md-10 mx-auto col-lg-6">
           <form [formGroup]='loginForm' (ngSubmit)="loginForm.valid && login()" autocomplete="off" class="p-4 p-md-5 ">
             <div class="form-group">
-              <label for="email" class="text-white font-weight-bold">Adresse e-mail</label>
-              <input type="text" [class.is-invalid]='loginForm.get("email")?.errors && loginForm.get("email")?.touched' class="form-control" placeholder="Entrez l'e-mail" formControlName='email'>
-              <div class="invalid-feedback">Veuillez saisir un e-mail.</div>
+              <label for="email" class="text-white font-weight-bold">Email</label>
+              <input type="text" [class.is-invalid]='loginForm.get("email")?.errors && loginForm.get("email")?.touched' class="form-control" placeholder="Enter Email" formControlName='email'>
+              <div class="invalid-feedback">Please enter an email.</div>
             </div>
             <div class="form-group">
-              <label for="password" class="text-white">Mot de passe</label>
-              <input [class.is-invalid]='loginForm.get("password")?.errors && loginForm.get("password")?.touched' type="password" class="form-control" formControlName='password' placeholder="Entrer le mot de passe">
-              <div *ngIf="loginForm.get('password')?.hasError('required')" class="invalid-feedback">Veuillez saisir un mot de passe.</div>
-              <div *ngIf="loginForm.get('password')?.hasError('minlength')" class="invalid-feedback">Le mot de passe doit comporter au moins 6 caractères.</div>
+              <label for="password" class="text-white">Password</label>
+              <input [class.is-invalid]='loginForm.get("password")?.errors && loginForm.get("password")?.touched' type="password" class="form-control" formControlName='password' placeholder="Enter Password">
+              <div *ngIf="loginForm.get('password')?.hasError('required')" class="invalid-feedback">Please enter a password.</div>
+              <!-- <div *ngIf="loginForm.get('password')?.hasError('minlength')" class="invalid-feedback">The password must be at least 6 characters long.</div> -->
             </div>
             <div class="row" *ngIf="validationErrors.length > 0">
               <ul class="text-danger">
@@ -49,10 +49,10 @@
               </ul>
             </div>
             <div class="pt-3">
-              <button [disabled]='!loginForm.valid' type="submit" class="w-100 btn btn-lg btn-primary">Se connecter</button>
+              <button [disabled]='!loginForm.valid' type="submit" class="w-100 btn btn-lg btn-primary">Sign In</button>
               <p class="text-white mt-2 float-end" routerLink="/resetpassword"><strong>Forgot Password?</strong></p><br/><br/>
               <hr class="my-4">
-              <button class="w-100 btn btn-sm btn-info text-white" type="button" routerLink='/register'><strong>Créer un compte</strong></button>
+              <button class="w-100 btn btn-sm btn-info text-white" type="button" routerLink='/register'><strong>Create an account</strong></button>
             </div>
           </form>
         </div>

@@ -44,7 +44,7 @@
           <div class="form-group">
             <label for="email" class="text-white">Email</label>
             <input type="text" (keydown.space)="$event.preventDefault()"
-              [class.is-invalid]='registerForm.get("email")?.errors && registerForm.get("email")?.touched'n m
+              [class.is-invalid]='registerForm.get("email")?.errors && registerForm.get("email")?.touched'
               class="form-control" placeholder="Adresse courriel" formControlName='email'>
             <div class="invalid-feedback">Please enter an email</div>
           </div>
@@ -72,7 +72,7 @@
               be at
               most 12 characters.</div> -->
               <div class="invalid-feedback" *ngIf="(registerForm.get('password').value !== registerForm.get('confirmPassword').value)">
-                Les 2 Passwords doivent correspondre.
+                The 2 Passwords must match.
               </div>
           </div>
   
@@ -86,11 +86,11 @@
           </div>
   
           <div class="pt-2">
-            <button [disabled]='!registerForm.valid' type="submit" class="w-100 btn btn-lg  btn-primary">Register</button>
+            <button [disabled]='!registerForm.valid' type="submit" class="w-100 btn btn-lg  btn-primary">Create Account</button>
             <small class="text-white m-2">By clicking Register, you agree to the terms of use.</small>
             <h6 class="m-2">Terms and conditions</h6>
             <hr class="my-4">
-            <button type="button" class="w-100 btn btn-sm mt-2 btn-info" routerLink="/login">Log In</button>
+            <button type="button" class="w-100 btn btn-sm mt-2 btn-info" routerLink="/login">Sign In</button>
           </div>
         </form>
       </div>

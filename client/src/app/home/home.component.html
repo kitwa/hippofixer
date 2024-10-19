@@ -56,14 +56,15 @@
         <div class="col-1">
         </div>
       </div>
-      <div class="row">
+      <div class="row" *ngIf="!user">
         <div class="col-md-4"></div>
         <div class="col-md-4 col-sm-12 text-center">
-          <div class="card text-center">
+          <div class="card text-center bg-success bg-opacity-25">
             <div class="card-body">
-              <h5 class="card-title">You are not Logged In</h5>
+              <h5 class="card-title text-black">You are not Logged In</h5>
               <p class="card-text">You need to login to be able to raise an issue</p>
-              <button type="button" class="btn btn-outline-primary primary btn-sm" routerLink='/login'>Login Now</button>
+              <button type="button" class="btn btn-outline-primary primary btn-sm" routerLink='/login'>Sign Now</button> or
+              <button type="button" class="btn btn-outline-primary primary btn-sm" routerLink='/register'>Create Account</button>
             </div>
           </div>
         </div>
