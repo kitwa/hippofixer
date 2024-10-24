@@ -59,6 +59,8 @@ import { CarSearchComponent } from './cars/car-search/car-search.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { IssueListsComponent } from './issues/issue-lists/issue-lists.component';
+import { IssueAddComponent } from './issues/issue-add/issue-add.component';
+import { IssueDetailComponent } from './issues/issue-detail/issue-detail.component';
 
 @NgModule({
   declarations: [
@@ -108,6 +110,8 @@ import { IssueListsComponent } from './issues/issue-lists/issue-lists.component'
     CarSearchComponent,
     SidebarComponent,
     IssueListsComponent,
+    IssueAddComponent,
+    IssueDetailComponent,
     FooterComponent
   ],
   imports: [

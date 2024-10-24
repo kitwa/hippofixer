@@ -33,7 +33,7 @@ namespace API.Services
                  {
                      File = new FileDescription(file.FileName, stream),
                      Transformation = new Transformation().Height(500).Width(500),
-                     Folder = Constants.Cloudinary.KibokoPropertyManagerFolder + env + "/" + id
+                     Folder = Constants.Cloudinary.KibokoFixerFolder + env + "/" + id
                  };
                  uploadResult = await _cloudinary.UploadAsync(uploadParams);
             }

@@ -1,27 +1,25 @@
 using API.Data;
 using API.DTOs;
-using API.Entities;
 using API.Interfaces;
 using AutoMapper;
-using CloudinaryDotNet.Actions;
 using MediatR;
 
-namespace API.Features.BlogPosts.Commands
+namespace API.Features.Issues.Commands
 {
-    public class UploadImageBlogPost
+    public class UploadPhotoForIssue
     {
-        public class Command : IRequest<BlogPostDto> {
+        public class Command : IRequest<IssueDto> {
             public Command(int id, IFormFile file)
             {
-                BlogPostId = id;
+                IssueId = id;
                 File = file;
             }
-            public int BlogPostId { get; set; }
+            public int IssueId { get; set; }
             public IFormFile File { get; set; }
 
         }
 
-        public class Handler : IRequestHandler<Command, BlogPostDto>
+        public class Handler : IRequestHandler<Command, IssueDto>
         {
             private readonly DataContext _context;
             private readonly IMapper _mapper;
@@ -33,36 +31,36 @@ namespace API.Features.BlogPosts.Commands
                 _mapper = mapper;
                 _photoService = photoService;
             }
-            public async Task<BlogPostDto> Handle(Command command, CancellationToken cancellationToken)
+            public async Task<IssueDto> Handle(Command command, CancellationToken cancellationToken)
             {
-                if(command.File == null || command.BlogPostId == 0)
+                if(command.File == null || command.IssueId == 0)
                 {
                     throw new ArgumentNullException();
                 }
 
                 var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
-                var folderName = Constants.Cloudinary.KibokoFixerBlogPostFolder + env + '/' + command.BlogPostId;
+                var folderName = Constants.Cloudinary.KibokoFixerIssueFolder + env + '/' + command.IssueId;
 
                 var result = await _photoService.AddPhotoAsync(command.File, folderName);
 
                 if (result != null || result.StatusCode == System.Net.HttpStatusCode.OK)
                 {
-                    var blogPost = _context.BlogPosts.FirstOrDefault(p => p.Id == command.BlogPostId);
+                    var issue = _context.Issues.FirstOrDefault(p => p.Id == command.IssueId);
 
-                    if(blogPost != null && blogPost?.PhotoPublicId != null){
-                        DeletePhoto(blogPost.PhotoPublicId);
+                    if(issue != null && issue?.PhotoPublicId != null){
+                        DeletePhoto(issue.PhotoPublicId);
                     }
 
-                    blogPost.PhotoPublicId =  result.PublicId;
-                    blogPost.PhotoUrl = result.SecureUrl.AbsoluteUri;
+                    issue.PhotoPublicId =  result.PublicId;
+                    issue.PhotoUrl = result.SecureUrl.AbsoluteUri;
 
-                    _context.BlogPosts.Update(blogPost);
+                    _context.Issues.Update(issue);
 
                     await _context.SaveChangesAsync();
                             
-                    var BlogPostDtoRet = _mapper.Map<BlogPostDto>(blogPost);
+                    var res = _mapper.Map<IssueDto>(issue);
 
-                    return BlogPostDtoRet;
+                    return res;
                 }else
                 {
                     throw(new Exception("Unable to upload Image"));

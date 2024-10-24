@@ -21,30 +21,20 @@ namespace API.Helpers
 
             CreateMap<Photo, PhotoDto>();
 
-            CreateMap<Property, PropertyDto>();
-            CreateMap<PropertyDto, Property>();
-            CreateMap<PropertyUpdateDto, Property>();
-            CreateMap<Property, PropertyUpdateDto>();
-            CreateMap<Property, SearchPropertyDto>();
-
             CreateMap<BlogPost, BlogPostDto>();
             CreateMap<BlogPostDto, BlogPost>();
             CreateMap<BlogPost, BlogPostUpdateDto>();
             CreateMap<BlogPostUpdateDto, BlogPost>();
-
-            CreateMap<UnitDto, Unit>();
-            CreateMap<Unit, UnitDto>();
-            CreateMap<Unit, UnitUpdateDto>();
-            CreateMap<UnitUpdateDto, Unit>();
-            CreateMap<Unit, SearchUnitDto>();
 
             CreateMap<WorkOrder, WorkOrderDto>();
             CreateMap<WorkOrderDto, WorkOrder>();
             CreateMap<WorkOrderStatus, WorkOrderStatusDto>();
             CreateMap<WorkOrderStatusDto, WorkOrderStatus>();
 
-            CreateMap<MaintenanceRequest, MaintenanceRequestDto>();
-            CreateMap<MaintenanceRequestDto, MaintenanceRequest>();
+            CreateMap<Issue, IssueDto>();
+            CreateMap<IssueDto, Issue>();            
+            CreateMap<IssueUpdateDto, Issue>();
+            CreateMap<Issue, IssueUpdateDto>();
 
             CreateMap<Invoice, InvoiceDto>();
             CreateMap<InvoiceDto, Invoice>();            

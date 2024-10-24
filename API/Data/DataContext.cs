@@ -18,7 +18,8 @@ namespace API.Data
         public DbSet<BlogPost> BlogPosts { get; set; }
         public DbSet<Unit> Units { get; set; }
         public DbSet<WorkOrder> WorkOrders { get; set; }
-        public DbSet<MaintenanceRequest> MaintenanceRequests { get; set; }
+        public DbSet<Issue> Issues { get; set; }
+        public DbSet<IssueType> IssueTypes { get; set; }
         public DbSet<Gender> Genders { get; set; }
         public DbSet<WorkOrderStatus> WorkOrderStatuses { get; set; }
         public DbSet<Quote> Quotes { get; set; }

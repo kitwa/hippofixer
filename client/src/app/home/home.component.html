@@ -29,14 +29,9 @@
         <h1 class="h2">Home</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
           <div class="btn-group me-2">
-            <button type="button" class="btn btn-sm btn-outline-secondary"><i
-                class="bi bi-share text-black"></i><span>&nbsp;</span> Share</button>
-            <!-- <button type="button" class="btn btn-sm btn-outline-secondary">Export</button> -->
+            <button type="button" class="btn btn-sm btn-outline-primary" routerLink="/issue/add"><i
+                class="bi bi-plus-circle-dotted text-blue"></i><span>&nbsp;</span> Raise Issue</button>
           </div>
-          <!-- <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle d-flex align-items-center gap-1">
-            <i class="bi bi-info-circle text-black "></i>
-            Info
-          </button> -->
         </div>
       </div>
 
@@ -45,12 +40,20 @@
         <div class="col-1">
         </div>
         <div class="col-10 text-center ">
-          <div data-bs-toggle="modal" data-bs-target="#exampleModal">
+          <div *ngIf="!user" data-bs-toggle="modal" data-bs-target="#exampleModal">
           <div class="raise-icon-size">
             <i class="bi bi-plus-circle-dotted text-primary"></i>
           </div>
           <h5 class="pl-4 ml-5">Raise Issue</h5>
         </div>
+
+        <div *ngIf="user" routerLink="/issue/add">
+          <div class="raise-icon-size">
+            <i class="bi bi-plus-circle-dotted text-primary"></i>
+          </div>
+          <h5 class="pl-4 ml-5">Raise Issue</h5>
+        </div>
+
           <p>Click on the plus icon to raise you issue</p>
         </div>
         <div class="col-1">
@@ -83,7 +86,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">You are not Log In</h1>
+        <h1 class="modal-title fs-5" id="exampleModalLabel">You are not Logged In yet</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">

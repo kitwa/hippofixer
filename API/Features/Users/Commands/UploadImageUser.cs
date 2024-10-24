@@ -39,7 +39,7 @@ namespace API.Features.Users.Commands
                 }
                 var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
 
-                var result = await _photoService.AddPhotoAsync(command.File, Constants.Cloudinary.KibokoPropertyManagerProfileFolder + env + "/" + command.UserId);
+                var result = await _photoService.AddPhotoAsync(command.File, Constants.Cloudinary.KibokoFixerProfileFolder + env + "/" + command.UserId);
 
                 if (result != null || result.StatusCode == System.Net.HttpStatusCode.OK)
                 {

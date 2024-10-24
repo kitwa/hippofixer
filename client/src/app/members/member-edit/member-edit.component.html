@@ -15,8 +15,8 @@
         <h1 class="h2">Profile</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
           <div class="btn-group me-2">
-            <button type="button" class="btn btn-sm btn-outline-secondary"><i
-                class="bi bi-share text-black"></i><span>&nbsp;</span> Share</button>
+            <button type="button" class="btn btn-sm btn-outline-primary" routerLink="/issue/add"><i
+                class="bi bi-plus-circle-dotted text-blue"></i><span>&nbsp;</span> Raise Issue</button>
           </div>
         </div>
       </div>
@@ -25,7 +25,7 @@
       <div class="row" *ngIf="member">
 
         <div class="alert alert-success m-2 text-center" *ngIf="editForm.dirty" role="alert">
-          <p>Vous avez apporté des modifications. Toutes les modifications non enregistrées seront perdues.</p>
+          <p>You have made changes. Any unsaved changes will be lost.</p>
         </div>
 
         <div class="col-md-3">

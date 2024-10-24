@@ -8,5 +8,5 @@ public class WorkOrderStatus
 
     // Navigation properties
     public ICollection<WorkOrder> WorkOrders { get; set; }
-    public ICollection<MaintenanceRequest> MaintenanceRequests { get; set; }
+    public ICollection<Issue> Issues { get; set; }
 }

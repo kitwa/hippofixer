@@ -15,9 +15,9 @@ namespace API.Constants
 
     public class Cloudinary
     {
-        public const string KibokoPropertyManagerFolder = "kibokopropertymanager/";
-        public const string KibokoPropertyManagerBlogPostFolder = "kibokopropertymanager/blogpost/";
-        public const string KibokoPropertyManagerProfileFolder = "kibokopropertymanager/profile/";
-        public const string KibokoPropertyManagerWorkOrderFolder = "kibokopropertymanager/workorder/";
+        public const string KibokoFixerFolder = "kibokopropertymanager/";
+        public const string KibokoFixerBlogPostFolder = "kibokopropertymanager/blogpost/";
+        public const string KibokoFixerProfileFolder = "kibokopropertymanager/profile/";
+        public const string KibokoFixerIssueFolder = "kibokopropertymanager/issue/";
     }
 }

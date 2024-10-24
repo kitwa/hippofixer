@@ -1,0 +1,86 @@
+<!-- same starts here -->
+<app-nav></app-nav>
+
+<div class="container-fluid">
+    <div class="row">
+
+        <div class="border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary">
+            <app-sidebar></app-sidebar>
+        </div>
+
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            <div
+                class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h2">Issue Details</h1>
+                <div class="btn-toolbar mb-2 mb-md-0">
+                    <div class="btn-group me-2">
+                      <button type="button" class="btn btn-sm btn-outline-primary" routerLink="/issue/add"><i
+                          class="bi bi-plus-circle-dotted text-blue"></i><span>&nbsp;</span> Raise Issue</button>
+                    </div>
+                  </div>
+            </div>
+            <div *ngIf="issue">
+                    <div class="card mb-3">
+                        <div class="card-header text-center">
+                            <button type="button" class="btn btn-success me-2">Accept</button>
+                            <button type="button" class="btn btn-info me-2">Issue Quote</button>
+                            <button type="button" class="btn btn-secondary me-2"><i class="bi bi-chat-dots me-2"></i>Live Chat</button>
+                          </div>
+                        <div class="card-body">
+                            <h5 class="card-title">{{issue.issueType.name}}</h5>
+                            <p class="card-text">{{issue.description}}.</p>
+                            <p class="card-text"><small class="text-body-secondary">Created Date: {{issue.createdDate |
+                                    date}}</small></p>
+                        </div>
+                    </div>
+
+                    <div class="card mb-3" *ngIf="issue?.photoUrl">
+                        <div class="card-body">
+                        <h5 class="card-title">Image</h5>
+                        <img src="{{issue?.photoUrl}}" class="card-img-bottom" alt="...">
+                        </div>
+                    </div>
+
+                    <div class="col-lg-12 mb-5">
+                        <div class="row mb-5">
+                            <div class="col mb-5">
+                                <div class="card">
+                                    <div class="card-body p-0 ps-2">
+                                        <h5 class="card-title p-2">Contact Client</h5>
+
+                                        <ng-container *ngIf="issue.user">
+                                            <ng-container *appHasRole='["Admin","Member","Agent"]'>
+                                                <a routerLink="/members/{{issue.user.email}}"
+                                                    class="btn btn-outline-info btn-block btn-sm me-2"
+                                                    *ngIf="issue.user.email"><i class="bi bi-chat-dots me-2"></i>
+                                                    Live Chat</a>
+                                            </ng-container>
+                                        </ng-container>
+
+                                        <a href="tel:{{issue.user.phone}}"
+                                            class="btn btn-outline-info btn-block btn-sm me-2" *ngIf="issue.user.phone"><i
+                                                class="bi bi-telephone-outbound me-2"></i>
+                                            +243{{issue.user.phone}}</a>
+                                        <a href="mailto:{{issue.user.email}}"
+                                                            class="btn btn-outline-info btn-block btn-sm me-2"
+                                                            *ngIf="issue.user.email"><i class="bi bi-envelope me-2"></i>
+                                                            {{issue.user.email}}</a>
+                                        <a href="https://wa.me/+243{{issue.user.phone}}/?text=I have accepted your issue on Kiboko Fixer: {{ getFullUrl() }}"
+                                            class="h4 p-3 pt-3 btn btn-lg text-info" *ngIf="issue.user.phone"><i
+                                                class="bi bi-whatsapp"></i></a>
+
+                                        <button (click)="shareIssueDetails()" class="btn btn-outline-primary btn-sm me-2">
+                                            <i class="bi bi-share"></i> Share
+                                        </button>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </main>
+    </div>
+</div>
+
+<app-footer></app-footer>

@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20241019163637_InitialCreate")]
+    [Migration("20241023175328_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -251,31 +251,34 @@ namespace API.Data.Migrations
                     b.ToTable("Invoice");
                 });
 
-            modelBuilder.Entity("API.Entities.MaintenanceRequest", b =>
+            modelBuilder.Entity("API.Entities.Issue", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("ContractorId")
+                    b.Property<int?>("ContractorId")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("Description")
                         .HasColumnType("longtext");
 
-                    b.Property<DateTime>("RequestDate")
-                        .HasColumnType("datetime(6)");
+                    b.Property<int>("IssueTypeId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PhotoPublicId")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("PhotoUrl")
+                        .HasColumnType("longtext");
 
                     b.Property<int>("StatusId")
                         .HasColumnType("int");
 
-                    b.Property<int>("TenantId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("longtext");
-
-                    b.Property<int>("UnitId")
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -284,11 +287,26 @@ namespace API.Data.Migrations
 
                     b.HasIndex("StatusId");
 
-                    b.HasIndex("TenantId");
+                    b.HasIndex("UserId");
 
-                    b.HasIndex("UnitId");
+                    b.ToTable("Issues");
+                });
 
-                    b.ToTable("MaintenanceRequests");
+            modelBuilder.Entity("API.Entities.IssueType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Identifier")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("IssueTypes");
                 });
 
             modelBuilder.Entity("API.Entities.Message", b =>
@@ -540,7 +558,7 @@ namespace API.Data.Migrations
                     b.Property<bool>("Emergency")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<int>("MaintenanceRequestId")
+                    b.Property<int>("IssueId")
                         .HasColumnType("int");
 
                     b.Property<int>("PropertyId")
@@ -735,29 +753,21 @@ namespace API.Data.Migrations
                     b.Navigation("WorkOrder");
                 });
 
-            modelBuilder.Entity("API.Entities.MaintenanceRequest", b =>
+            modelBuilder.Entity("API.Entities.Issue", b =>
                 {
                     b.HasOne("API.Entities.AppUser", "Contractor")
                         .WithMany()
-                        .HasForeignKey("ContractorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ContractorId");
 
                     b.HasOne("API.Entities.WorkOrderStatus", "Status")
-                        .WithMany("MaintenanceRequests")
+                        .WithMany("Issues")
                         .HasForeignKey("StatusId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("API.Entities.AppUser", "Tenant")
+                    b.HasOne("API.Entities.AppUser", "User")
                         .WithMany()
-                        .HasForeignKey("TenantId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("API.Entities.Unit", "Unit")
-                        .WithMany()
-                        .HasForeignKey("UnitId")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -765,9 +775,7 @@ namespace API.Data.Migrations
 
                     b.Navigation("Status");
 
-                    b.Navigation("Tenant");
-
-                    b.Navigation("Unit");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("API.Entities.Message", b =>
@@ -983,7 +991,7 @@ namespace API.Data.Migrations
 
             modelBuilder.Entity("API.Entities.WorkOrderStatus", b =>
                 {
-                    b.Navigation("MaintenanceRequests");
+                    b.Navigation("Issues");
 
                     b.Navigation("WorkOrders");
                 });

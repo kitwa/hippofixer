@@ -32,6 +32,8 @@ import { CarAddComponent } from './cars/car-add/car-add.component';
 import { CarEditComponent } from './cars/car-edit/car-edit.component';
 import { CarDetailComponent } from './cars/car-detail/car-detail.component';
 import { IssueListsComponent } from './issues/issue-lists/issue-lists.component';
+import { IssueAddComponent } from './issues/issue-add/issue-add.component';
+import { IssueDetailComponent } from './issues/issue-detail/issue-detail.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -53,6 +55,8 @@ const routes: Routes = [
       {path: 'messages', component: MessagesComponent},
       {path: 'property/edit/:id', component: PropertyEditComponent, canDeactivate: [preventUnsavedChangesGuard], canActivate: [adminGuard]},
       {path: 'property/add', component: PropertyAddComponent, canActivate: [adminGuard]},
+      {path: 'issue/add', component: IssueAddComponent, canActivate: [adminGuard]},
+      {path: 'issue/detail/:id', component: IssueDetailComponent, canActivate: [adminGuard]},
       {path: 'admin', component: AdminPanelComponent, canActivate: [adminGuard]},
       {path: 'blogpost/edit/:id', component: BlogPostEditComponent, canDeactivate: [preventUnsavedChangesGuard], canActivate: [adminGuard]},
       {path: 'blogpost/add', component: BlogPostAddComponent, canActivate: [adminGuard]},

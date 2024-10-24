@@ -3,7 +3,7 @@ namespace  API.Entities;
 public class WorkOrder
 {
     public int Id { get; set; }
-    public int MaintenanceRequestId { get; set; }
+    public int IssueId { get; set; }
     public int PropertyId { get; set; }
     public int StatusId { get; set; }
     public int? UnitId { get; set; }    
