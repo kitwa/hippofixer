@@ -61,5 +61,19 @@
   .bi-icon-font-size {
     font-size: 20px;
   }
+
+  .raise-icon {
+    height: 100vh;           /* Full viewport height for vertical centering */
+  }
+
+  .raise-icon-size {
+    font-size: 100px;
+    margin-top: 180px;
+  }
+
+
+
+
+  
   
   

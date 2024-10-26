@@ -1,0 +1,69 @@
+<app-nav></app-nav>
+
+<div class="container-fluid">
+  <div class="row">
+
+    <div class="border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary">
+      <app-sidebar></app-sidebar>
+    </div>
+
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+      <div
+        class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-2 border-bottom">
+        <h1 class="h2">List of WorkOrders</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+          <div class="btn-group me-2">
+            <button type="button" class="btn btn-sm btn-outline-primary" routerLink="/issue/add"><i
+                class="bi bi-plus-circle-dotted text-blue"></i><span>&nbsp;</span> Raise Issue</button>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- all content start here -->
+      <div class="list-group" *ngFor="let workorder of workorders">
+        <a class="list-group-item list-group-item-action mb-1" routerLink="/workorder/detail/{{workorder.id}}">
+          <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1 text-black">{{workorder.issue.issueType.name}}</h5>
+            <i class="bi bi-arrow-right-short text-primary bi-icon-font-size"></i>
+
+          </div>
+
+          <p class="text-truncate">{{workorder.issue.description}}.</p>
+          <div>
+            <small class="text-body-secondary mb-1 flex-grow-1"><span
+                class="badge text-bg-info">{{workorder.status.identifier}}</span></small>
+            <small class="text-body-secondary mb-1 flex-grow-1 p-2" *ngIf="workorder.issue.emergency"><span
+                class="badge text-bg-danger">Urgent</span></small>
+            <small class="text-body-secondary float-end">Created Date: {{workorder.createdDate | date}}</small>
+          </div>
+        </a>
+
+      </div>
+      
+      <div class="row" *ngIf="workorders.length == 0">
+        <div class="col-md-4"></div>
+        <div class="col-md-4 col-sm-12 text-center">
+          <div class="card text-center bg-success bg-opacity-25">
+            <div class="card-body">
+              <h5 class="card-title text-black">No Workorder</h5>
+              <p class="card-text">You haven't accept an issue yet.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4"></div>
+      </div>
+
+      <!-- all content end here -->
+
+    </main>
+  </div>
+</div>
+<div class="d-flex justify-content-center pt-5 pb-5" *ngIf="pagination && workorders.length > 0">
+  <pagination class="pb-4" [boundaryLinks]="true" [itemsPerPage]="pagination.itemsPerPage"
+    [totalItems]="pagination.totalItems" [(ngModel)]="pagination.currentPage" (pageChanged)="pageChanged($event)"
+    previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
+
+  </pagination>
+</div>
+<app-footer></app-footer>

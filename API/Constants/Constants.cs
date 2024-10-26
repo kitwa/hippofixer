@@ -20,4 +20,13 @@ namespace API.Constants
         public const string KibokoFixerProfileFolder = "kibokopropertymanager/profile/";
         public const string KibokoFixerIssueFolder = "kibokopropertymanager/issue/";
     }
+
+    public class Status
+    {
+        public const int Pending = 1;
+        public const int InProgress = 2;
+        public const int Completed = 3;
+        public const int Approved = 4;
+        public const int Rejected = 5;
+    }
 }

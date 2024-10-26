@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
+import { take } from 'rxjs';
 import { Issue } from 'src/app/_models/issue';
 import { Pagination } from 'src/app/_models/pagination';
+import { User } from 'src/app/_models/user';
+import { AccountService } from 'src/app/_services/account.service';
 import { IssuesService } from 'src/app/_services/issues.service';
 
 @Component({
@@ -10,14 +13,16 @@ import { IssuesService } from 'src/app/_services/issues.service';
 })
 export class IssueListsComponent {
 
+  user: User;
   issues: Issue[];
   pagination: Pagination;
   pageNumber = 1;
   pageSize = 10;
 
 
-  constructor(private issuesService: IssuesService) { }
-
+  constructor(private accountService: AccountService, private issuesService: IssuesService) {     
+    this.accountService.currentUser$.pipe(take(1)).subscribe(user => this.user = user)
+  }
   ngOnInit(): void {
     this.loadIssues();
   }

@@ -3,6 +3,7 @@ import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { take } from 'rxjs';
+import { City } from 'src/app/_models/city';
 import { Issue } from 'src/app/_models/issue';
 import { IssueType } from 'src/app/_models/issueType';
 import { User } from 'src/app/_models/user';
@@ -23,6 +24,7 @@ export class IssueAddComponent {
   user: User;
   issueTypes: IssueType[];
   selectedFile: File = null;
+  cities: City[];
 
   constructor(private acountService: AccountService, private issuesService: IssuesService, 
     private toastr: ToastrService, private fb: UntypedFormBuilder, private router: Router, private memberService: MembersService) {
@@ -30,8 +32,8 @@ export class IssueAddComponent {
    }
 
    ngOnInit(): void {
-    this.initializeForm();
     this.getIssueTypes();
+    this.getCities();
   }
 
   initializeForm(){
@@ -39,9 +41,11 @@ export class IssueAddComponent {
       title: ['', Validators.required],
       issueTypeId: [null, Validators.required],
       description: ['', Validators.required],
-      userId: [null, Validators.required],
+      clientId: [null, Validators.required],
+      cityId: [null, Validators.required],
       contractorId: [null, Validators.required],
       statusId: [1, Validators.required],
+      emergency: [false, Validators.required]
 
     })
   }
@@ -78,6 +82,13 @@ export class IssueAddComponent {
     this.issuesService.uploadPhoto(issueId, this.selectedFile).subscribe(res => {
       this.toastr.success("saved successfully");
       this.router.navigateByUrl('/issues');
+    })
+  }
+
+  getCities(){
+    this.issuesService.getCities().subscribe(cities => {
+      this.cities = cities;
+      this.initializeForm();
     })
   }
 

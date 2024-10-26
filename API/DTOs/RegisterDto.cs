@@ -11,7 +11,8 @@ namespace API.DTOs
         // [StringLength(12, MinimumLength = 6)]
         public string Password { get; set; }
         public int CityId { get; set; }
-        public int CountryId { get; set; }
         public int GenderId { get; set; }
+        public int? Phone { get; set; }
+
     }
 }

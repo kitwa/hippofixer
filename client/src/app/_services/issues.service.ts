@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { Issue } from '../_models/issue';
 import { PaginatedResult } from '../_models/pagination';
 import { IssueType } from '../_models/issueType';
+import { City } from '../_models/city';
 
 
 @Injectable({
@@ -87,6 +88,14 @@ export class IssuesService {
     const formData = new FormData();
     formData.append('file', photo);
     return this.http.post<any>(this.baseUrl + 'issues/' + issueId + '/add-photo', formData);
+  }
+
+  acceptIssue(issueId: Number) {
+    return this.http.put(this.baseUrl + 'issues/' + issueId + '/accept', {}).pipe();
+  }
+
+  getCities() {
+    return this.http.get<City[]>(this.baseUrl + 'issues/cities');
   }
 
 }

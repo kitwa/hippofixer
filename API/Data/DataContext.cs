@@ -24,6 +24,7 @@ namespace API.Data
         public DbSet<WorkOrderStatus> WorkOrderStatuses { get; set; }
         public DbSet<Quote> Quotes { get; set; }
         public DbSet<QuoteItem> QuoteItems { get; set; }
+        public DbSet<City> Cities { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -49,12 +50,6 @@ namespace API.Data
                 .HasOne(u => u.Sender)
                 .WithMany(m => m.MessagesSent)
                 .OnDelete(DeleteBehavior.Restrict);
-
-            // // Configure one-to-one relationship
-            // builder.Entity<WorkOrder>()
-            //     .HasOne(w => w.Quote)             // WorkOrder has one Quote
-            //     .WithOne(q => q.WorkOrder)       // Quote has one WorkOrder
-            //     .HasForeignKey<Quote>(q => q.WorkOrderId);
         }
     }
 }

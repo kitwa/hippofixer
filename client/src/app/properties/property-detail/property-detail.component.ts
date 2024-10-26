@@ -56,7 +56,7 @@ export class PropertyDetailComponent implements OnInit {
     if (navigator.share) {
       navigator.share({
         title: `Découvrez ce bien!`,
-        text: `Jetez un œil à ce bien : ${this.property.description}`,
+        text: `Check this job : ${this.property.description}`,
         url: window.location.href,
       }).then(() => {
         console.log('Thanks for sharing!');

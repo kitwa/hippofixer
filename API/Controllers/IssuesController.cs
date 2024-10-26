@@ -1,6 +1,7 @@
 using API.Data;
 using API.DTOs;
 using API.Extensions;
+using API.Features.Admin.Queries;
 using API.Features.BlogPosts.Commands;
 using API.Features.BlogPosts.Queries;
 using API.Features.Issues.Commands;
@@ -105,6 +106,26 @@ namespace API.Controllers
             }
             return BadRequest("Failed uplaod photo");
 
+        }
+
+        [Authorize(Policy = "RequireAdminAgentRole")]
+        [HttpPut("{id:int}/accept")]
+        public async Task<ActionResult> AcceptIssue(int id)
+        {
+            var res = await _mediator.Send(new AcceptIssue.Command(id, User.GetEmail()));
+
+            if(res != null){
+                 return NoContent();
+            }
+            return BadRequest("Failed to accept issue");
+        }
+
+        [HttpGet("cities")]
+        public async Task<ActionResult> GetCities()
+        {
+            var cities = await _mediator.Send(new GetCities.Query());
+    
+            return Ok(cities);
         }
 
     }

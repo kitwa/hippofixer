@@ -35,12 +35,11 @@ namespace API.Controllers
         public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
         {
 
-            if (await EmailExists(registerDto.Email)) return BadRequest("Cette adresse e-mail est prise");
+            if (await EmailExists(registerDto.Email)) return BadRequest("This email address is taken");
 
             var randomUserName = $"user_{Guid.NewGuid().ToString().Substring(0, 8)}"; 
             registerDto.Username = randomUserName;
             registerDto.CityId = 1;
-            registerDto.CountryId = 1;
             registerDto.GenderId = 1;
 
             var user = _mapper.Map<AppUser>(registerDto);
@@ -51,7 +50,7 @@ namespace API.Controllers
 
             if(!result.Succeeded) return BadRequest(result.Errors);
 
-            var roleResult =  await _userManager.AddToRoleAsync(user, "Member"); 
+            var roleResult =  await _userManager.AddToRoleAsync(user, "Client"); 
 
             if(!roleResult.Succeeded) return BadRequest(result.Errors);
 
@@ -71,11 +70,11 @@ namespace API.Controllers
         {
             var user = await _userManager.Users.SingleOrDefaultAsync(x => x.Email == loginDto.Email.ToLower());
 
-            if (user == null) return Unauthorized("Vous avez entré un mauvais email");
+            if (user == null) return Unauthorized("You entered a wrong email");
 
             var result = await _signInManager.CheckPasswordSignInAsync(user, loginDto.Password, false);
 
-            if(!result.Succeeded) return Unauthorized("Vous avez entré un mauvais mot de passe");
+            if(!result.Succeeded) return Unauthorized("You entered a wrong password");
 
             return new UserDto
             {
@@ -95,7 +94,7 @@ namespace API.Controllers
             if (user == null)
             {
                 // Don't reveal that the user does not exist or is not confirmed
-                return BadRequest("Nous ne trouvons pas de compte associé à cette adresse e-mail.");
+                return BadRequest("We can't find an account associated with this email address.");
             }
 
             var resetToken = await _userManager.GeneratePasswordResetTokenAsync(user);
@@ -110,7 +109,7 @@ namespace API.Controllers
             if(await sendEmail.SendResetPasswordEmailAsync(user.Email, user.UserName, callbackUrl)) 
                 return NoContent();
             else
-                return BadRequest("Nous n'avons pas pu envoyer d'e-mail, veuillez réessayer.");
+                return BadRequest("We were unable to send an email, please try again.");
    
         }
 
@@ -120,7 +119,7 @@ namespace API.Controllers
             var user = await _userManager.Users.SingleOrDefaultAsync(x => x.Email == newPasswordDto.Email.ToLower());
              var user2 = await _userManager.FindByIdAsync(user.Id.ToString());
 
-            if (user == null) return Unauthorized("Vous avez entré un mauvais email ou votre lien a expiré.");
+            if (user == null) return Unauthorized("You entered the wrong email or your link has expired.");
 
             // user.ResetToken = null;
             var result = await _userManager.ResetPasswordAsync(user, newPasswordDto.ResetToken, newPasswordDto.Password);

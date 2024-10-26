@@ -11,10 +11,10 @@ export const adminGuard: CanActivateFn = (route, state) => {
   return accountService.currentUser$.pipe(
     map(user => {
       if (!user) return false;
-      if (user.roles.includes('Admin') || user.roles.includes('Agent')) {
+      if (user.roles.includes('Admin') || user.roles.includes('Client') || user.roles.includes('SuperAdmin') || user.roles.includes('Contractor')) {
         return true;
       } else {
-        toastr.error('Vous n"avez pas le droit');
+        toastr.error('You do not have the right.');
         return false;
       }
     })

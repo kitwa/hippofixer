@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
 
   login(){
     this.accountService.login(this.loginForm.value).subscribe(response => {
-      this.router.navigateByUrl('/');
+      this.router.navigateByUrl('/issues');
     }, error => {
       this.validationErrors = error.error;
     });

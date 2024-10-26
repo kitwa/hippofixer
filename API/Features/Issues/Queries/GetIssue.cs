@@ -35,7 +35,7 @@ namespace API.Features.Issues.Queries
                 var issue = await _context.Issues.Where(x => x.Id == query.IssueId)
                                                 .Include(x => x.IssueType)
                                                 .Include(x => x.Status)
-                                                .Include(x => x.User)
+                                                .Include(x => x.Client)
                                                 .SingleOrDefaultAsync();
                             
                 var result =  _mapper.Map<IssueDto>(issue);

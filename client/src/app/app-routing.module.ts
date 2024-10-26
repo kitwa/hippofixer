@@ -34,6 +34,8 @@ import { CarDetailComponent } from './cars/car-detail/car-detail.component';
 import { IssueListsComponent } from './issues/issue-lists/issue-lists.component';
 import { IssueAddComponent } from './issues/issue-add/issue-add.component';
 import { IssueDetailComponent } from './issues/issue-detail/issue-detail.component';
+import { WorkorderListsComponent } from './workorders/workorder-lists/workorder-lists.component';
+import { WorkorderDetailComponent } from './workorders/workorder-detail/workorder-detail.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -51,17 +53,14 @@ const routes: Routes = [
       {path: 'members', component: MemberListComponent, canActivate: [adminGuard]},
       {path: 'members/:email', component: MemberDetailComponent},
       {path: 'member/edit', component: MemberEditComponent, canDeactivate: [preventUnsavedChangesGuard]},
-      // {path: 'issues', component: IssueListsComponent, canActivate: [adminGuard]},
       {path: 'messages', component: MessagesComponent},
-      {path: 'property/edit/:id', component: PropertyEditComponent, canDeactivate: [preventUnsavedChangesGuard], canActivate: [adminGuard]},
-      {path: 'property/add', component: PropertyAddComponent, canActivate: [adminGuard]},
       {path: 'issue/add', component: IssueAddComponent, canActivate: [adminGuard]},
       {path: 'issue/detail/:id', component: IssueDetailComponent, canActivate: [adminGuard]},
+      {path: 'workorders', component: WorkorderListsComponent, canActivate: [adminGuard]},
+      {path: 'workorder/detail/:id', component: WorkorderDetailComponent, canActivate: [adminGuard]},
       {path: 'admin', component: AdminPanelComponent, canActivate: [adminGuard]},
       {path: 'blogpost/edit/:id', component: BlogPostEditComponent, canDeactivate: [preventUnsavedChangesGuard], canActivate: [adminGuard]},
       {path: 'blogpost/add', component: BlogPostAddComponent, canActivate: [adminGuard]},
-      {path: 'car/add', component: CarAddComponent, canActivate: [adminGuard]},
-      {path: 'car/edit/:id', component: CarEditComponent, canActivate: [adminGuard]},
     ]
   },
   {path: 'properties', component: PropertyListComponent},

@@ -35,6 +35,22 @@ namespace API.Data.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
+                name: "Cities",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Deleted = table.Column<bool>(type: "tinyint(1)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Cities", x => x.Id);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
                 name: "Genders",
                 columns: table => new
                 {
@@ -320,30 +336,38 @@ namespace API.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    ContractorId = table.Column<int>(type: "int", nullable: true),
+                    ClientId = table.Column<int>(type: "int", nullable: false),
                     Description = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     IssueTypeId = table.Column<int>(type: "int", nullable: false),
-                    StatusId = table.Column<int>(type: "int", nullable: false),
                     PhotoUrl = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     PhotoPublicId = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
+                    Emergency = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    CityId = table.Column<int>(type: "int", nullable: false),
+                    StatusId = table.Column<int>(type: "int", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime(6)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Issues", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Issues_AspNetUsers_ContractorId",
-                        column: x => x.ContractorId,
+                        name: "FK_Issues_AspNetUsers_ClientId",
+                        column: x => x.ClientId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Issues_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
+                        name: "FK_Issues_Cities_CityId",
+                        column: x => x.CityId,
+                        principalTable: "Cities",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Issues_IssueTypes_IssueTypeId",
+                        column: x => x.IssueTypeId,
+                        principalTable: "IssueTypes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -495,24 +519,16 @@ namespace API.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    IssueId = table.Column<int>(type: "int", nullable: false),
-                    PropertyId = table.Column<int>(type: "int", nullable: false),
-                    StatusId = table.Column<int>(type: "int", nullable: false),
-                    UnitId = table.Column<int>(type: "int", nullable: true),
-                    QuoteId = table.Column<int>(type: "int", nullable: true),
-                    Tittle = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Description = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    ContractorId = table.Column<int>(type: "int", nullable: false),
-                    Created = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    DateCompleted = table.Column<DateTime>(type: "datetime(6)", nullable: true),
                     Cost = table.Column<decimal>(type: "decimal(65,30)", nullable: true),
-                    QuoteRequired = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    Emergency = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     CancelledNote = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Deleted = table.Column<bool>(type: "tinyint(1)", nullable: false)
+                    IssueId = table.Column<int>(type: "int", nullable: false),
+                    ContractorId = table.Column<int>(type: "int", nullable: false),
+                    StatusId = table.Column<int>(type: "int", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    DateCompleted = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    Deleted = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    UnitId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -524,9 +540,9 @@ namespace API.Data.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_WorkOrders_Properties_PropertyId",
-                        column: x => x.PropertyId,
-                        principalTable: "Properties",
+                        name: "FK_WorkOrders_Issues_IssueId",
+                        column: x => x.IssueId,
+                        principalTable: "Issues",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -551,7 +567,7 @@ namespace API.Data.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     WorkOrderId = table.Column<int>(type: "int", nullable: false),
                     ContractorId = table.Column<int>(type: "int", nullable: false),
-                    Amount = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
+                    TotalAmount = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
                     DateSubmitted = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     DatePaid = table.Column<DateTime>(type: "datetime(6)", nullable: true)
                 },
@@ -568,6 +584,30 @@ namespace API.Data.Migrations
                         name: "FK_Invoice_WorkOrders_WorkOrderId",
                         column: x => x.WorkOrderId,
                         principalTable: "WorkOrders",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "InvoiceItem",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    InvoiceId = table.Column<int>(type: "int", nullable: false),
+                    Description = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Price = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
+                    Quantity = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_InvoiceItem", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_InvoiceItem_Invoice_InvoiceId",
+                        column: x => x.InvoiceId,
+                        principalTable: "Invoice",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 })
@@ -689,19 +729,29 @@ namespace API.Data.Migrations
                 column: "WorkOrderId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Issues_ContractorId",
+                name: "IX_InvoiceItem_InvoiceId",
+                table: "InvoiceItem",
+                column: "InvoiceId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Issues_CityId",
                 table: "Issues",
-                column: "ContractorId");
+                column: "CityId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Issues_ClientId",
+                table: "Issues",
+                column: "ClientId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Issues_IssueTypeId",
+                table: "Issues",
+                column: "IssueTypeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Issues_StatusId",
                 table: "Issues",
                 column: "StatusId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Issues_UserId",
-                table: "Issues",
-                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Messages_RecipientId",
@@ -764,9 +814,9 @@ namespace API.Data.Migrations
                 column: "ContractorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_WorkOrders_PropertyId",
+                name: "IX_WorkOrders_IssueId",
                 table: "WorkOrders",
-                column: "PropertyId");
+                column: "IssueId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_WorkOrders_StatusId",
@@ -801,10 +851,7 @@ namespace API.Data.Migrations
                 name: "BlogPosts");
 
             migrationBuilder.DropTable(
-                name: "Issues");
-
-            migrationBuilder.DropTable(
-                name: "IssueTypes");
+                name: "InvoiceItem");
 
             migrationBuilder.DropTable(
                 name: "Messages");
@@ -831,7 +878,16 @@ namespace API.Data.Migrations
                 name: "WorkOrders");
 
             migrationBuilder.DropTable(
+                name: "Issues");
+
+            migrationBuilder.DropTable(
                 name: "Units");
+
+            migrationBuilder.DropTable(
+                name: "Cities");
+
+            migrationBuilder.DropTable(
+                name: "IssueTypes");
 
             migrationBuilder.DropTable(
                 name: "WorkOrderStatuses");

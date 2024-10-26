@@ -61,6 +61,8 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { IssueListsComponent } from './issues/issue-lists/issue-lists.component';
 import { IssueAddComponent } from './issues/issue-add/issue-add.component';
 import { IssueDetailComponent } from './issues/issue-detail/issue-detail.component';
+import { WorkorderListsComponent } from './workorders/workorder-lists/workorder-lists.component';
+import { WorkorderDetailComponent } from './workorders/workorder-detail/workorder-detail.component';
 
 @NgModule({
   declarations: [
@@ -112,7 +114,8 @@ import { IssueDetailComponent } from './issues/issue-detail/issue-detail.compone
     IssueListsComponent,
     IssueAddComponent,
     IssueDetailComponent,
-    FooterComponent
+    WorkorderListsComponent,
+    WorkorderDetailComponent
   ],
   imports: [
     BrowserModule,

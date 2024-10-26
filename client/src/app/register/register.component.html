@@ -1,14 +1,14 @@
 <div id="carouselExampleInterval" class="carousel slide bg-container" data-bs-ride="carousel">
   <!-- Carousel Inner -->
   <div class="carousel-inner">
-    <div class="carousel-item active" data-bs-interval="50">
-      <img src="/assets/img1.jpg" class="d-block w-100" alt="Background Image 1">
+    <div class="carousel-item active" data-bs-interval="2000">
+      <img src="/assets/img3.jpg" class="d-block w-100" alt="Background Image 1">
     </div>
-    <div class="carousel-item" data-bs-interval="100">
-      <img src="/assets/img2.jpg" class="d-block w-100" alt="Background Image 2">
+    <div class="carousel-item" data-bs-interval="3000">
+      <img src="/assets/contractors.jpg" class="d-block w-100" alt="Background Image 2">
     </div>
     <div class="carousel-item">
-      <img src="/assets/img3.jpg" class="d-block w-100" alt="Background Image 3">
+      <img src="/assets/aircon.jpg" class="d-block w-100" alt="Background Image 3">
     </div>
   </div>
   
@@ -45,8 +45,16 @@
             <label for="email" class="text-white">Email</label>
             <input type="text" (keydown.space)="$event.preventDefault()"
               [class.is-invalid]='registerForm.get("email")?.errors && registerForm.get("email")?.touched'
-              class="form-control" placeholder="Adresse courriel" formControlName='email'>
+              class="form-control" placeholder="Email Address" formControlName='email'>
             <div class="invalid-feedback">Please enter an email</div>
+          </div>
+
+          <div class="form-group">
+            <label for="phone" class="text-white">Phone Number</label>
+            <input type="number" (keydown.space)="$event.preventDefault()"
+              [class.is-invalid]='registerForm.get("phone")?.errors && registerForm.get("phone")?.touched'
+              class="form-control" placeholder="Phone Number" formControlName='phone'>
+            <div class="invalid-feedback">Please enter a phone number</div>
           </div>
   
           <div class="form-group">

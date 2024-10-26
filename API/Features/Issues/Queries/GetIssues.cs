@@ -32,7 +32,8 @@ namespace API.Features.Issues.Queries
             public async Task<PagedList<IssueDto>> Handle(Query query, CancellationToken cancellationToken)
             {
 
-                var issues = _context.Issues.Include(x => x.IssueType)
+                var issues = _context.Issues.Where(x => x.StatusId == Constants.Status.Pending)
+                                        .Include(x => x.IssueType)
                                         .Include(x => x.Status)
                                         .ProjectTo<IssueDto>(_mapper.ConfigurationProvider)
                                         .AsNoTracking()

@@ -98,16 +98,16 @@
                                                 </ng-container>
 
                                                 <ng-container *ngIf="member">
-                                                    <a href="tel:+243{{member.phone}}"
+                                                    <a href="tel:+27{{member.phone}}"
                                                         class="btn btn-outline-info btn-block btn-sm me-2"
                                                         *ngIf="member.phone"><i
                                                             class="bi bi-telephone-outbound me-2"></i>
-                                                        +243{{member.phone}}</a>
+                                                        +27{{member.phone}}</a>
                                                     <!-- <a href="mailto:{{member.email}}"
                                                         class="btn btn-outline-info btn-block btn-sm me-2"
                                                         *ngIf="member.email"><i class="bi bi-envelope me-2"></i>
                                                         {{member.email}}</a> -->
-                                                    <a href="https://wa.me/+243{{member.phone}}/?text=Bonjour, je suis intéressé par ce produit: {{ getFullUrl() }}"
+                                                    <a href="https://wa.me/+27{{member.phone}}/?text=Bonjour, je suis intéressé par ce produit: {{ getFullUrl() }}"
                                                         class="h4 p-3 pt-3 btn btn-lg text-info" *ngIf="member.phone"><i
                                                             class="bi bi-whatsapp"></i></a>
 

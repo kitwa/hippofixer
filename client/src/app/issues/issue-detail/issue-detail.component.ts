@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { take } from 'rxjs';
+import { Client } from 'src/app/_models/client';
 import { Issue } from 'src/app/_models/issue';
-import { Member } from 'src/app/_models/member';
 import { User } from 'src/app/_models/user';
 import { AccountService } from 'src/app/_services/account.service';
 import { IssuesService } from 'src/app/_services/issues.service';
@@ -15,7 +14,7 @@ import { IssuesService } from 'src/app/_services/issues.service';
 export class IssueDetailComponent {
 
   issue: Issue;
-  member: Member;
+  client: Client;
   user: User;
 
   constructor(private issuesService: IssuesService, private route: ActivatedRoute, 
@@ -33,11 +32,16 @@ export class IssueDetailComponent {
     })
   }
 
+  acceptIsse(){
+    this.issuesService.acceptIssue(this.route.snapshot.params['id']).subscribe(issue => {
+      this.router.navigateByUrl('/workorders');
+    })
+  }
   shareIssueDetails() {
     if (navigator.share) {
       navigator.share({
         title: `Découvrez ce bien!`,
-        text: `Jetez un œil à ce bien : ${this.issue.description}`,
+        text: `Check this job : ${this.issue.description}`,
         url: window.location.href,
       }).then(() => {
         console.log('Thanks for sharing!');

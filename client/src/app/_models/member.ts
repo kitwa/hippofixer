@@ -6,17 +6,16 @@ import { Property } from './property'
 export interface Member {
   id: number;
   email: string;
-  firstName: string;
-  lastName: string;
-  userName: string;
-  fullAddress: string;
+  firstName?: string;
+  lastName?: string;
+  userName?: string;
+  fullAddress?: string;
   phone?: number;
   created: Date;
-  lastActive: Date;
   genderId?: number;
   gender: Gender;
   photo: File;
-  photoUrl: string;
+  photoUrl?: string;
   photoPublicId : string;
   cityId?: number;
   city: City;
@@ -26,7 +25,6 @@ export interface Member {
   youtube?: string;
   instagram?: string;
   facebook?: string;
-  properties: Property[];
 
 }
 

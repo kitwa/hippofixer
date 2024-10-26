@@ -19,9 +19,8 @@ namespace API.Entities
         public string Youtube { get; set; }
         public string Instagram { get; set; }
         public string Facebook { get; set; }
-        public ICollection<Property> Properties { get; set; } // For Property Managers
-        public ICollection<WorkOrder> WorkOrders { get; set; } // For Contractors
-        public ICollection<Unit> Units { get; set; } // For Tenants
+        public ICollection<WorkOrder> WorkOrders { get; set; }
+        public ICollection<Issue> Issues { get; set; }
         public ICollection<Message> MessagesSent {get; set; }
         public ICollection<Message> MessagesReceived {get; set; }
         public ICollection<AppUserRole> UserRoles { get; set; }

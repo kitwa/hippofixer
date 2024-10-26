@@ -13,7 +13,7 @@
       <ul class="list-group list-group-flush">
         <li class="list-group-item">{{member.city}} {{member.country}}</li>
         <li class="list-group-item" *appHasRole='["Agent"]'>Genre : {{member.gender}}</li>
-        <li class="list-group-item" *appHasRole='["Agent"]'>Vue : {{member.lastActive | timeago}}</li>
+        <!-- <li class="list-group-item" *appHasRole='["Agent"]'>Vue : {{member.lastActive | timeago}}</li> -->
         <li class="list-group-item" *appHasRole='["Agent"]'>Date d'adhésion : {{member.created | date: 'dd MMM yyyy'}}</li>
       </ul>
       <div class="card-body">

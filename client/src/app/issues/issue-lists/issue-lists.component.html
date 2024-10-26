@@ -2,7 +2,7 @@
 
 <div class="container-fluid">
   <div class="row">
-    
+
     <div class="border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary">
       <app-sidebar></app-sidebar>
     </div>
@@ -10,7 +10,7 @@
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-2 border-bottom">
-        <h1 class="h2">Issues</h1>
+        <h1 class="h2">List of Issues</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
           <div class="btn-group me-2">
             <button type="button" class="btn btn-sm btn-outline-primary" routerLink="/issue/add"><i
@@ -21,41 +21,106 @@
 
 
       <!-- all content start here -->
-      <div class="list-group" *ngFor="let issue of issues">
-        <a class="list-group-item list-group-item-action mb-1" routerLink="/issue/detail/{{issue.id}}">
+      <div *ngIf="issues.length > 0">
+        <div class="list-group" *ngFor="let issue of issues">
+          <a class="list-group-item list-group-item-action mb-1" routerLink="/issue/detail/{{issue.id}}">
             <div class="d-flex w-100 justify-content-between">
               <h5 class="mb-1 text-black">{{issue.issueType.name}}</h5>
               <i class="bi bi-arrow-right-short text-primary bi-icon-font-size"></i>
 
             </div>
 
-              <p class="text-truncate">{{issue.description}}.</p>
-            <div class="d-flex">
-            <small class="text-body-secondary mb-1 flex-grow-1"><span class="badge text-bg-info">{{issue.status.identifier}}</span></small>
-            <small class="text-body-secondary">Created Date: {{issue.createdDate | date}}</small>
-          </div>
+            <p class="text-truncate">{{issue.description}}.</p>
+            <div>
+              <small class="text-body-secondary mb-1 flex-grow-1"><span
+                  class="badge text-bg-info">{{issue.status.identifier}}</span></small>
+              <small class="text-body-secondary mb-1 flex-grow-1 p-2" *ngIf="issue.emergency"><span
+                  class="badge text-bg-danger">Urgent</span></small>
+              <small class="text-body-secondary float-end">Created Date: {{issue.createdDate | date}}</small>
+            </div>
           </a>
 
+        </div>
+      </div>
+
+      <div *ngIf="issues.length == 0">
+        <div class="row">
+          <!-- <p class="m-4">Contractors at Your Fingertips!</p> -->
+          <div class="col-1">
+          </div>
+          <div class="col-10 text-center ">
+            <div *ngIf="!user" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              <div class="raise-icon-size">
+                <i class="bi bi-plus-circle-dotted text-primary"></i>
+              </div>
+              <h5 class="pl-4 ml-5">Raise Issue</h5>
+            </div>
+
+            <div *ngIf="user" routerLink="/issue/add">
+              <div class="raise-icon-size">
+                <i class="bi bi-plus-circle-dotted text-primary"></i>
+              </div>
+              <h5 class="pl-4 ml-5">Raise Issue</h5>
+            </div>
+            <div class="card text-center bg-success bg-opacity-25">
+              <div class="card-body">
+                <p>You haven't raise an issue yet.</p>
+                <p>Click on the plus icon to raise you issue.</p>
+              </div>
+            </div>
+
+          </div>
+          <div class="col-1">
+          </div>
+        </div>
+        <div class="row" *ngIf="!user">
+          <div class="col-md-4"></div>
+          <div class="col-md-4 col-sm-12 text-center">
+            <div class="card text-center bg-success bg-opacity-25">
+              <div class="card-body">
+                <h5 class="card-title text-black">You are not Logged In</h5>
+                <p class="card-text">You need to login to be able to raise an issue</p>
+                <button type="button" class="btn btn-outline-primary primary btn-sm" routerLink='/login'>Sign
+                  Now</button> or
+                <button type="button" class="btn btn-outline-primary primary btn-sm" routerLink='/register'>Create
+                  Account</button>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4"></div>
+        </div>
       </div>
 
 
-            <!-- all content end here -->
+      <!-- all content end here -->
 
     </main>
   </div>
 </div>
 <div class="d-flex justify-content-center pt-5 pb-5" *ngIf="pagination && issues.length > 0">
-  <pagination class="pb-4"
-  [boundaryLinks]="true" 
-  [itemsPerPage]="pagination.itemsPerPage" 
-  [totalItems]="pagination.totalItems" 
-  [(ngModel)]="pagination.currentPage"
-  (pageChanged)="pageChanged($event)"
-  previousText="&lsaquo;" 
-  nextText="&rsaquo;" 
-  firstText="&laquo;" 
-  lastText="&raquo;">
+  <pagination class="pb-4" [boundaryLinks]="true" [itemsPerPage]="pagination.itemsPerPage"
+    [totalItems]="pagination.totalItems" [(ngModel)]="pagination.currentPage" (pageChanged)="pageChanged($event)"
+    previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
 
-</pagination>
+  </pagination>
 </div>
 <app-footer></app-footer>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">You are not Logged In yet</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        In order to raise an issue you need to login
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" routerLink="/login">Log In Now</button>
+      </div>
+    </div>
+  </div>
+</div>

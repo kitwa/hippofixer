@@ -49,7 +49,6 @@ export class MemberEditComponent implements OnInit {
   loadMember(){
     this.memberService.getMember(this.user.email).subscribe(member => {
       this.member = member;
-      // this.galleryImages = this.getImages();
     })
   }
 

@@ -19,10 +19,8 @@ namespace API.Data
             {
                 new AppRole{Name = "SuperAdmin"},
                 new AppRole{Name = "Admin"},
-                new AppRole{Name = "PropertyManager"},
-                new AppRole{Name = "Tenant"},
-                new AppRole{Name = "Contractor"},
-                new AppRole{Name = "Owner"},
+                new AppRole{Name = "Client"},
+                new AppRole{Name = "Contractor"}
             };
 
             foreach (var role in roles)
@@ -59,18 +57,46 @@ namespace API.Data
             {                
                 new IssueType{Id = 1, Name = "Plumbing System Repairs"},                
                 new IssueType{Id = 2, Name = "Electrical System Repairs"},
-                new IssueType{Id = 3, Name = "Pest Infestations"},
-                new IssueType{Id = 4, Name = "Pest Control"},
-                new IssueType{Id = 5, Name = "Painting Touch Ups"},
-                new IssueType{Id = 6, Name = "Professional Cleaning"},
-                new IssueType{Id = 7, Name = "Structural Repairs"},
-                new IssueType{Id = 8, Name = "Other Repair"}
-
+                new IssueType{Id = 3, Name = "Aircon Installations, Repairs"},
+                new IssueType{Id = 4, Name = "Floor And Wall Tiling Service"},
+                new IssueType{Id = 5, Name = "Pest Control"},
+                new IssueType{Id = 6, Name = "Painting Touch Ups"},
+                new IssueType{Id = 7, Name = "Professional Cleaning"},
+                new IssueType{Id = 8, Name = "Structural Repairs"},
+                new IssueType{Id = 9, Name = "Other Services or Repairs"}
             };
 
             foreach (var issueType in issueTypes)
             {
                 context.IssueTypes.Add(issueType);
+            }
+
+            // var provinces = new List<Province>
+            // {
+            //     new Province{Id = 1, Name = "Western Cape"},
+            //     new Province{Id = 2, Name = "Gauteng"},
+            //     new Province{Id = 3, Name = "KwaZulu-Natal"},
+            //     new Province{Id = 4, Name = "Limpopo"},
+            //     new Province{Id = 5, Name = "Mpumalanga"},
+            //     new Province{Id = 6, Name = "North West"},
+            //     new Province{Id = 7, Name = "Free State"},
+            //     new Province{Id = 8, Name = "Eastern Cape"},
+            //     new Province{Id = 9, Name = "Northern Cape"},
+            // };
+
+            var cities = new List<City>
+            {
+                new City{Id = 1, Name = "Cape Town"},
+                new City{Id = 2, Name = "Johannesburg"},
+                new City{Id = 3, Name = "Durban"},
+                new City{Id = 4, Name = "Polokwane"},
+                new City{Id = 5, Name = "Mbombela"},
+                new City{Id = 6, Name = "Kimberley"}
+            };
+
+            foreach (var city in cities)
+            {
+                context.Cities.Add(city);
             }
             
             await context.SaveChangesAsync();
