@@ -39,12 +39,12 @@
     
         <ul class="nav flex-column mb-auto">
 
-          <!-- <li class="nav-item">
-            <a class="nav-link d-flex align-items-center gap-2" >
-              <i class="bi bi-gear-wide text-black "></i>
-              Settings
+          <li class="nav-item" *ngIf="user">
+            <a class="nav-link d-flex align-items-center gap-2" routerLink="/messages">
+              <i class="bi bi-envelope text-black bi-icon-font-size"></i>
+              Messages
             </a>
-          </li> -->
+          </li>
           <li class="nav-item" *ngIf="user">
             <a class="nav-link d-flex align-items-center gap-2" routerLink="/member/edit">
               <i class="bi bi-person text-black bi-icon-font-size"></i>
@@ -55,6 +55,12 @@
             <a class="nav-link d-flex align-items-center gap-2" routerLink="/support">
               <i class="bi bi-info-circle text-black bi-icon-font-size"></i>
               Support
+            </a>
+          </li>
+          <li class="nav-item" *appHasRole='["SuperAdmin","Admin"]'>
+            <a class="nav-link d-flex align-items-center gap-2" routerLink="/admin">
+              <i class="bi bi-gear-wide text-black bi-icon-font-size"></i>
+              Admin
             </a>
           </li>
           <li class="nav-item" *ngIf="user">

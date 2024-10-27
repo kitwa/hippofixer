@@ -12,7 +12,7 @@ export const authGuard: CanActivateFn = (route, state) => {
     map(user => {
       if (user) return true;
       else {
-        toastr.error('You are not allowed!');
+        toastr.error('Please login to access this page', 'You are not Logged In!');
         return false;
       }
     })

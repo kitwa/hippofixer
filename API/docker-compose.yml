@@ -30,7 +30,7 @@ services:
       - my_network
 
   zakibokohouse:
-    image: dominichdocker/za.kibokohouse.com:latest
+    image: dominichdocker/za.hippofixer.co.za:latest
     container_name: za.kibokohouse
     environment:
       DB_HOST: mariadb
@@ -45,7 +45,7 @@ services:
       - my_network
 
   troisiemadamkibokohouse:
-    image: dominichdocker/troisiemeadam.kibokohouse.com:latest
+    image: dominichdocker/troisiemeadam.hippofixer.co.za:latest
     container_name: troisiemeadam.kibokohouse
     environment:
       DB_HOST: mariadb
@@ -61,7 +61,7 @@ services:
       - my_network
 
   testkibokohouse:
-    image: dominichdocker/test.kibokohouse.com:latest
+    image: dominichdocker/test.hippofixer.co.za:latest
     container_name: test.kibokohouse
     environment:
       DB_HOST: mariadb

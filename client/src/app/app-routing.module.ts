@@ -39,12 +39,14 @@ import { WorkorderDetailComponent } from './workorders/workorder-detail/workorde
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
-  {path: 'maisons/rdc', component: PhotoCarouselComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'login', component: LoginComponent},
   {path: 'resetpassword', component: ResetPasswordComponent},
   {path: 'newpassword', component: NewPasswordComponent},
+  {path: 'blogposts', component: BlogPostListComponent},
+  {path: 'blogposts/:id', component: BlogPostDetailComponent},
   {path: 'issues', component: IssueListsComponent},
+  {path: 'issue/detail/:id', component: IssueDetailComponent},
   {
     path: '',
     runGuardsAndResolvers: 'always',
@@ -55,7 +57,6 @@ const routes: Routes = [
       {path: 'member/edit', component: MemberEditComponent, canDeactivate: [preventUnsavedChangesGuard]},
       {path: 'messages', component: MessagesComponent},
       {path: 'issue/add', component: IssueAddComponent, canActivate: [adminGuard]},
-      {path: 'issue/detail/:id', component: IssueDetailComponent, canActivate: [adminGuard]},
       {path: 'workorders', component: WorkorderListsComponent, canActivate: [adminGuard]},
       {path: 'workorder/detail/:id', component: WorkorderDetailComponent, canActivate: [adminGuard]},
       {path: 'admin', component: AdminPanelComponent, canActivate: [adminGuard]},
@@ -63,14 +64,6 @@ const routes: Routes = [
       {path: 'blogpost/add', component: BlogPostAddComponent, canActivate: [adminGuard]},
     ]
   },
-  {path: 'properties', component: PropertyListComponent},
-  {path: 'properties/:id', component: PropertyDetailComponent},
-  {path: 'cars', component: CarListComponent},
-  {path: 'cars/:location', component: CarListComponent},
-  {path: 'car/:id', component: CarDetailComponent},
-  {path: 'bonrepayment', component: BondRepaymentComponent},
-  {path: 'blogposts', component: BlogPostListComponent},
-  {path: 'blogposts/:id', component: BlogPostDetailComponent},
   {path: 'errors', component: TestErrorsComponent},
   {path: 'not-found', component: NotFoundComponent},
   {path: 'server-error', component: ServerErrorComponent},

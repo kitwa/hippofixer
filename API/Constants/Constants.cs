@@ -7,9 +7,9 @@ namespace API.Constants
 {
     public class MailClientConfigurations
     {
-        public const string Server = "mail.kibokohouse.com";
+        public const string Server = "mail.hippofixer.co.za";
         public const int Port = 26;
-        public const string SenderEmail = "sysinfo@kibokohouse.com";
+        public const string SenderEmail = "sysinfo@hippofixer.co.za";
         public const string Password = "k&A?zcmFu)%E";
     }
 

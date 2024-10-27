@@ -4,45 +4,53 @@ import { ReplaySubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { User } from '../_models/user';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AccountService {
   baseUrl = environment.apiUrl;
-  private currentUserSource = new ReplaySubject<User>(1);
+  private currentUserSource = new ReplaySubject<User | null>(1); // Initialize with `User | null`
   currentUser$ = this.currentUserSource.asObservable();
 
-  constructor( private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) {
+    // Check localStorage for a user on initialization
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user) {
+      this.setCurrentUser(user);
+    } else {
+      this.currentUserSource.next(null); // Emit null if no user is stored
+    }
+  }
 
   login(model: any) {
-    return  this.http.post(this.baseUrl + 'account/login', model).pipe(
+    return this.http.post<User>(this.baseUrl + 'account/login', model).pipe(
       map((response: User) => {
         const user = response;
-          this.setCurrentUser(user);
-      })
-    )
-  }
-
-  resetPassword(model: any) {
-    var response = this.http.post(this.baseUrl + 'account/reset-password/' + model.email, {});
-    return response;
-  }
-
-  newPassword(model: any) {
-    var response = this.http.post(this.baseUrl + 'account/new-password', model);
-    return response;
-  }
-
-
-  register(model: any) {
-    return this.http.post(this.baseUrl + 'account/register', model).pipe(
-      map((user : User) => {
-        if(user){
+        if (user) {
           this.setCurrentUser(user);
         }
       })
-    )
+    );
+  }
+
+  resetPassword(model: any) {
+    return this.http.post(this.baseUrl + 'account/reset-password/' + model.email, {});
+  }
+
+  newPassword(model: any) {
+    return this.http.post(this.baseUrl + 'account/new-password', model);
+  }
+
+  register(model: any) {
+    return this.http.post<User>(this.baseUrl + 'account/register', model).pipe(
+      map((user: User) => {
+        if (user) {
+          this.setCurrentUser(user);
+        }
+      })
+    );
   }
 
   setCurrentUser(user: User) {
@@ -50,17 +58,16 @@ export class AccountService {
     const roles = this.getDecodedToken(user.token).role;
     Array.isArray(roles) ? user.roles = roles : user.roles.push(roles);
     localStorage.setItem('user', JSON.stringify(user));
-    if(user != null){
-      this.currentUserSource.next(user);
-    }
+    this.currentUserSource.next(user);
   }
 
-  logout(){
+  logout() {
     localStorage.removeItem('user');
-    this.currentUserSource.next(null);
+    this.currentUserSource.next(null); // Emit null on logout
+    this.router.navigateByUrl('/login');
   }
 
-  getDecodedToken(token){
+  getDecodedToken(token: string) {
     return JSON.parse(atob(token.split('.')[1]));
   }
 }

@@ -43,14 +43,14 @@ Visit http://localhost:4200/ to access the application
 # Publish
 
 ## Docker
-- create ripo on docker called troisiemeadam.kibokohouse.com
+- create ripo on docker called troisiemeadam.hippofixer.co.za
 ### Client 
 ng build
 ### API
 - dotnet build
-- docker build -t dominichdocker/troisiemeadam.kibokohouse.com .
+- docker build -t dominichdocker/troisiemeadam.hippofixer.co.za .
 - docker login
-- docker push dominichdocker/troisiemeadam.kibokohouse.com:latest
+- docker push dominichdocker/troisiemeadam.hippofixer.co.za:latest
 
 ### SERVER
 
@@ -76,4 +76,4 @@ sudo apt install default-mysql-client
 
 mysqldump -u root --port=3306 -p troisiemeadam > db.sql
 
-scp root@kibokohouse.com:/root/db.sql C:\Users\dom\Desktop
+scp root@hippofixer.co.za:/root/db.sql C:\Users\dom\Desktop
