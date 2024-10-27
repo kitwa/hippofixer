@@ -22,14 +22,14 @@
 
       <!-- same ends here -->
        
-      <div class="row mb-3 pb-3">
+      <div class="row mb-3 pb-3 ms-1">
         <div class="col-md-6">
           <div class="alert alert-success m-2 text-center" *ngIf="addIssueForm.dirty" role="alert">
             <p>You have made changes. Any unsaved changes will be lost.</p>
           </div>
         </div>
 
-        <form [formGroup]='addIssueForm' (ngSubmit)="addIssue()" autocomplete="off" class="row g-3 ">
+        <form [formGroup]='addIssueForm' (ngSubmit)="addIssue()" autocomplete="off" class="row">
 
           <div class="col-md-6">
             <label for="cityId" class="form-label">Choose City</label>
@@ -57,7 +57,7 @@
               class="form-control" id="description" formControlName='description' rows="10"
               placeholder="description"></textarea>
           </div>
-          <div class="col-md-12">
+          <div class="col-md-12 mt-3 mb-2">
             <div class="form-check form-switch">
               <input class="form-check-input" type="checkbox" role="switch" value="" id="emergency"
                 formControlName='emergency'>
@@ -77,7 +77,7 @@
             <input type="text" [(ngModel)]="user.id" formControlName='clientId' class="form-control">
           </div>
 
-          <div class="col-12 mb-5 text-center">
+          <div class="col-12 mb-5 pt-5">
             <button type="submit" [disabled]="!addIssueForm.dirty" name="submit" id="submit"
               class="btn btn-lg btn-success mb-5">Save Issue</button>
           </div>

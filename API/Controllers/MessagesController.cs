@@ -47,15 +47,17 @@ namespace API.Controllers
             };
 
             var sendEmail = new SendMessageEmail();
-            if(await sendEmail.SendMessageEmailAsync(sender.Email, recipient.Email, recipient.UserName)) 
+
 
             _messageRepository.AddMessage(message);
+
+            await sendEmail.SendMessageEmailAsync(sender.Email, recipient.Email, recipient.UserName); 
 
             if(await _messageRepository.SaveAllAsync()) 
             
                 return Ok(_mapper.Map<MessageDto>(message));
             else
-                return BadRequest("Échec de l'envoi du message.");
+                return BadRequest("Failed to send message.");
 
         }
 
