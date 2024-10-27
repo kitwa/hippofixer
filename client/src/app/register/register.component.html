@@ -11,7 +11,7 @@
       <img src="/assets/aircon.jpg" class="d-block w-100" alt="Background Image 3">
     </div>
   </div>
-  
+
   <!-- Controls -->
   <!-- <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -24,25 +24,18 @@
 
   <!-- Form and Content -->
   <div class="container col-xl-10 col-xxl-8 px-4 position-absolute top-0 pt-50 start-50 translate-middle">
-    <i class="bi bi-arrow-left back-icon" routerLink="/"> Back</i>
-    <div class="row align-items-center g-lg-5">
+    <i class="bi bi-arrow-left back-icon me-5" routerLink="/"> Back</i>
+    <div class="row align-items-center g-lg-5 pt-5">
       <div class="col-lg-6 text-center text-lg-start">
-        <h6 class="display-4 fw-bold lh-1 mb-3">Fixer</h6>
-        <h2 class="col-lg-10 fs-4 text-white">Fix It Fast, Fix It Right – Contractors at Your Fingertips!</h2>
+        <h6 class="display-4 fw-bold lh-1 mb-3">Hippo Fixer</h6>
+        <h2 class="col-lg-10 fs-5 text-white">Fix It Fast, Fix It Right – Contractors at Your Fingertips!</h2>
       </div>
-      <div class="col-md-10 mx-auto col-lg-6">
-        <form [formGroup]='registerForm' (ngSubmit)="registerForm.valid && register()" autocomplete="off" class="p-4 p-md-">
-  
-          <!-- <div class="form-group">
-            <label for="username" class="text-white">Username</label>
-            <input type="text" (keydown.space)="$event.preventDefault()"
-              [class.is-invalid]='registerForm.get("username")?.errors && registerForm.get("username")?.touched'
-              class="form-control" placeholder="Nom d'utilisateur" formControlName='username'>
-            <div class="invalid-feedback">Please enter a username.</div>
-          </div> -->
-  
+      <div class="col-md-10 mx-auto col-lg-6" *ngIf="cities">
+        <form [formGroup]='registerForm' (ngSubmit)="registerForm.valid && register()" autocomplete="off"
+          class="p-4 p-md-">
+
           <div class="form-group">
-            <label for="email" class="text-white">Email</label>
+            <label for="email" class="text-white fs-5">Email</label>
             <input type="text" (keydown.space)="$event.preventDefault()"
               [class.is-invalid]='registerForm.get("email")?.errors && registerForm.get("email")?.touched'
               class="form-control" placeholder="Email Address" formControlName='email'>
@@ -50,41 +43,53 @@
           </div>
 
           <div class="form-group">
-            <label for="phone" class="text-white">Phone Number</label>
+            <label for="phone" class="text-white fs-5">Phone Number</label>
             <input type="number" (keydown.space)="$event.preventDefault()"
               [class.is-invalid]='registerForm.get("phone")?.errors && registerForm.get("phone")?.touched'
               class="form-control" placeholder="Phone Number" formControlName='phone'>
             <div class="invalid-feedback">Please enter a phone number</div>
           </div>
-  
+
           <div class="form-group">
-            <label for="password" class="text-white">Password</label>
+            <label for="password" class="text-white fs-5">Password</label>
             <input [class.is-invalid]='registerForm.get("password")?.errors && registerForm.get("password")?.touched'
               type="password" class="form-control" formControlName='password' placeholder="Password">
-            <div *ngIf="registerForm.get('password')?.hasError('required')" class="invalid-feedback">Please enter a password.
+            <div *ngIf="registerForm.get('password')?.hasError('required')" class="invalid-feedback">Please enter a
+              password.
             </div>
-            <div *ngIf="registerForm.get('password')?.hasError('minlength')" class="invalid-feedback">The password must be at least 6 characters long and must contain at least 1 uppercase letter and 1 lowercase letter.</div>
+            <div *ngIf="registerForm.get('password')?.hasError('minlength')" class="invalid-feedback">The password must
+              be at least 6 characters long and must contain at least 1 uppercase letter and 1 lowercase letter.</div>
             <!-- <div *ngIf="registerForm.get('password')?.hasError('maxlength')" class="invalid-feedback">Please must be at
               most 12
               characters.</div> -->
           </div>
-  
+
           <div class="form-group">
-            <label for="password" class="text-white">Confirm Password</label>
+            <label for="password" class="text-white fs-5">Confirm Password</label>
             <input
               [class.is-invalid]='registerForm.get("confirmPassword")?.errors && registerForm.get("confirmPassword")?.touched'
               type="password" class="form-control" formControlName='confirmPassword' placeholder="Confirm Password">
-            <div *ngIf="registerForm.get('confirmPassword')?.hasError('required')" class="invalid-feedback">Please confirm the password.</div>
+            <div *ngIf="registerForm.get('confirmPassword')?.hasError('required')" class="invalid-feedback">Please
+              confirm the password.</div>
             <!-- <div *ngIf="registerForm.get('confirmPassword')?.hasError('minlength')" class="invalid-feedback"></div> -->
             <!-- <div *ngIf="registerForm.get('confirmPassword')?.hasError('maxlength')" class="invalid-feedback">Please must
               be at
               most 12 characters.</div> -->
-              <div class="invalid-feedback" *ngIf="(registerForm.get('password').value !== registerForm.get('confirmPassword').value)">
-                The 2 Passwords must match.
-              </div>
+            <div class="invalid-feedback"
+              *ngIf="(registerForm.get('password').value !== registerForm.get('confirmPassword').value)">
+              The 2 Passwords must match.
+            </div>
           </div>
-  
-  
+
+          <div class="form-group">
+            <label for="cityId" class="form-label text-white fs-5">What City are you living in?</label>
+            <select [class.is-invalid]='registerForm.get("cityId")?.errors && registerForm.get("cityId")?.touched'
+              formControlName='cityId' class="form-select">
+              <option *ngFor="let city of cities;" [value]=city.id>{{city.name}}</option>
+            </select>
+            <div class="invalid-feedback">Please choose a city.</div>
+          </div>
+
           <div class="row" *ngIf="validationErrors.length > 0">
             <ul class="text-danger">
               <li *ngFor="let error of validationErrors">
@@ -92,9 +97,10 @@
               </li>
             </ul>
           </div>
-  
+
           <div class="pt-2">
-            <button [disabled]='!registerForm.valid' type="submit" class="w-100 btn btn-lg  btn-primary">Create Account</button>
+            <button [disabled]='!registerForm.valid' type="submit" class="w-100 btn btn-lg  btn-primary">Create
+              Account</button>
             <small class="text-white m-2">By clicking Register, you agree to the terms of use.</small>
             <h6 class="m-2">Terms and conditions</h6>
             <hr class="my-4">

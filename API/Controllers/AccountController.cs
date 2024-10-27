@@ -5,9 +5,11 @@ using API.Constants;
 using API.Data;
 using API.DTOs;
 using API.Entities;
+using API.Features.Admin.Queries;
 using API.Features.Users.Commands;
 using API.Interfaces;
 using AutoMapper;
+using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -18,15 +20,17 @@ namespace API.Controllers
     {
         private readonly ITokenService _tokenService;
         private readonly IMapper _mapper;
+        private readonly IMediator _mediator;
         private readonly SignInManager<AppUser> _signInManager;
         private readonly UserManager<AppUser> _userManager;
 
         public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, 
-            ITokenService tokenService, IMapper mapper)
+            ITokenService tokenService, IMapper mapper, IMediator mediator)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _mapper = mapper;
+            _mediator = mediator;
             _tokenService = tokenService;
 
         }
@@ -39,7 +43,6 @@ namespace API.Controllers
 
             var randomUserName = $"user_{Guid.NewGuid().ToString().Substring(0, 8)}"; 
             registerDto.Username = randomUserName;
-            registerDto.CityId = 1;
             registerDto.GenderId = 1;
 
             var user = _mapper.Map<AppUser>(registerDto);
@@ -128,6 +131,14 @@ namespace API.Controllers
 
 
             return NoContent();
+        }
+
+        [HttpGet("cities")]
+        public async Task<ActionResult> GetCities()
+        {
+            var cities = await _mediator.Send(new GetCities.Query());
+    
+            return Ok(cities);
         }
 
         private async Task<bool> EmailExists(string email)

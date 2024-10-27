@@ -30,7 +30,6 @@ export class IssuesService {
       params = params.append('PageSize', itemsPerPage.toString());
     }
 
-    // if(this.issues.length > 0) return of(this.issues); 
     return this.http.get<Issue[]>(this.baseUrl + 'issues', {observe: 'response', params}).pipe(
 
       map(response => {

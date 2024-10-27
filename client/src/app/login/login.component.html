@@ -13,32 +13,32 @@
     </div>
     
     <!-- Controls -->
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+    <!-- <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
       <span class="visually-hidden">Previous</span>
     </button>
     <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
       <span class="carousel-control-next-icon" aria-hidden="true"></span>
       <span class="visually-hidden">Next</span>
-    </button>
+    </button> -->
   
     <!-- Form and Content -->
     <div class="container col-xl-10 col-xxl-8 px-4 position-absolute top-0 pt-50 start-50 translate-middle">
         <i class="bi bi-arrow-left back-icon" routerLink="/"> Back</i>
       <div class="row align-items-center g-lg-5">
         <div class="col-lg-6 text-center text-lg-start">
-          <h6 class="display-4 fw-bold lh-1 mb-3">Fixer</h6>
+          <h6 class="display-4 fw-bold lh-1 mb-3">Hippo Fixer</h6>
           <h2 class="col-lg-10 fs-4 text-white">Fix It Fast, Fix It Right – Contractors at Your Fingertips!</h2>
         </div>
         <div class="col-md-10 mx-auto col-lg-6">
           <form [formGroup]='loginForm' (ngSubmit)="loginForm.valid && login()" autocomplete="off" class="p-4 p-md-5 ">
             <div class="form-group">
-              <label for="email" class="text-white font-weight-bold">Email</label>
+              <label for="email" class="text-white fs-5">Email</label>
               <input type="text" [class.is-invalid]='loginForm.get("email")?.errors && loginForm.get("email")?.touched' class="form-control" placeholder="Enter Email" formControlName='email'>
               <div class="invalid-feedback">Please enter an email.</div>
             </div>
             <div class="form-group">
-              <label for="password" class="text-white">Password</label>
+              <label for="password" class="text-white fs-5">Password</label>
               <input [class.is-invalid]='loginForm.get("password")?.errors && loginForm.get("password")?.touched' type="password" class="form-control" formControlName='password' placeholder="Enter Password">
               <div *ngIf="loginForm.get('password')?.hasError('required')" class="invalid-feedback">Please enter a password.</div>
               <!-- <div *ngIf="loginForm.get('password')?.hasError('minlength')" class="invalid-feedback">The password must be at least 6 characters long.</div> -->

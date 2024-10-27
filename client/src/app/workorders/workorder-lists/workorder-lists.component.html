@@ -21,27 +21,27 @@
 
 
       <!-- all content start here -->
-      <div class="list-group" *ngFor="let workorder of workorders">
-        <a class="list-group-item list-group-item-action mb-1" routerLink="/workorder/detail/{{workorder.id}}">
-          <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1 text-black">{{workorder.issue.issueType.name}}</h5>
-            <i class="bi bi-arrow-right-short text-primary bi-icon-font-size"></i>
+      <ng-container *ngIf="workorders">
+        <div class="list-group" *ngFor="let workorder of workorders">
+          <a class="list-group-item list-group-item-action mb-1" routerLink="/workorder/detail/{{workorder.id}}">
+            <div class="d-flex w-100 justify-content-between">
+              <h5 class="mb-1 text-black">{{workorder.issue.issueType.name}}</h5>
+              <i class="bi bi-arrow-right-short text-primary bi-icon-font-size"></i>
+            </div>
 
-          </div>
+            <p class="text-truncate">{{workorder.issue.description}}.</p>
+            <div>
+              <small class="text-body-secondary mb-1 flex-grow-1"><span
+                  class="badge text-bg-info">{{workorder.status.identifier}}</span></small>
+              <small class="text-body-secondary mb-1 flex-grow-1 p-2" *ngIf="workorder.issue.emergency"><span
+                  class="badge text-bg-danger">Urgent</span></small>
+              <small class="text-body-secondary float-end">Created Date: {{workorder.createdDate | date}}</small>
+            </div>
+          </a>
+        </div>
+      </ng-container>
 
-          <p class="text-truncate">{{workorder.issue.description}}.</p>
-          <div>
-            <small class="text-body-secondary mb-1 flex-grow-1"><span
-                class="badge text-bg-info">{{workorder.status.identifier}}</span></small>
-            <small class="text-body-secondary mb-1 flex-grow-1 p-2" *ngIf="workorder.issue.emergency"><span
-                class="badge text-bg-danger">Urgent</span></small>
-            <small class="text-body-secondary float-end">Created Date: {{workorder.createdDate | date}}</small>
-          </div>
-        </a>
-
-      </div>
-      
-      <div class="row" *ngIf="workorders.length == 0">
+      <div class="row" *ngIf="workorders && workorders.length == 0">
         <div class="col-md-4"></div>
         <div class="col-md-4 col-sm-12 text-center">
           <div class="card text-center bg-success bg-opacity-25">
@@ -59,7 +59,7 @@
     </main>
   </div>
 </div>
-<div class="d-flex justify-content-center pt-5 pb-5" *ngIf="pagination && workorders.length > 0">
+<div class="d-flex justify-content-center pt-5 pb-5" *ngIf="pagination && workorders && workorders.length > 0">
   <pagination class="pb-4" [boundaryLinks]="true" [itemsPerPage]="pagination.itemsPerPage"
     [totalItems]="pagination.totalItems" [(ngModel)]="pagination.currentPage" (pageChanged)="pageChanged($event)"
     previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">

@@ -3,6 +3,7 @@ import { AbstractControl, UntypedFormBuilder, FormControl, UntypedFormGroup, Val
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AccountService } from '../_services/account.service';
+import { City } from '../_models/city';
 
 @Component({
   selector: 'app-register',
@@ -14,12 +15,13 @@ export class RegisterComponent implements OnInit {
   @Output() cancelRegister = new EventEmitter();
   registerForm: UntypedFormGroup;
   validationErrors: any[] = [];
+  cities: City[];
 
 
   constructor(private accountService: AccountService,  private toastr: ToastrService, private fb: UntypedFormBuilder, private router: Router) { }
 
   ngOnInit(): void {
-    this.initializeForm();
+    this.getCities();
   }
 
   initializeForm(){
@@ -27,7 +29,8 @@ export class RegisterComponent implements OnInit {
       email: ['', Validators.required],
       phone: [null, Validators.required],
       password: ['', [Validators.required]],
-      confirmPassword: ['', [Validators.required]]
+      confirmPassword: ['', [Validators.required]],
+      cityId: [null, Validators.required]
     },
     {
       validators: this.matchValidator('password', 'confirmPassword')
@@ -40,6 +43,13 @@ export class RegisterComponent implements OnInit {
     }, error => {
       this.validationErrors = error.error;
     });
+  }
+
+  getCities(){
+    this.accountService.getCities().subscribe(cities => {
+      this.cities = cities;
+      this.initializeForm();
+    })
   }
 
   cancel() {

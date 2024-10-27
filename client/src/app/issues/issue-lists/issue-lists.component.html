@@ -21,7 +21,7 @@
 
 
       <!-- all content start here -->
-      <div *ngIf="issues.length > 0">
+      <div *ngIf="issues && issues.length > 0">
         <div class="list-group" *ngFor="let issue of issues">
           <a class="list-group-item list-group-item-action mb-1" routerLink="/issue/detail/{{issue.id}}">
             <div class="d-flex w-100 justify-content-between">
@@ -43,7 +43,7 @@
         </div>
       </div>
 
-      <div *ngIf="issues.length == 0">
+      <div *ngIf="issues && issues.length == 0">
         <div class="row">
           <!-- <p class="m-4">Contractors at Your Fingertips!</p> -->
           <div class="col-1">
@@ -97,7 +97,7 @@
     </main>
   </div>
 </div>
-<div class="d-flex justify-content-center pt-5 pb-5" *ngIf="pagination && issues.length > 0">
+<div class="d-flex justify-content-center pt-5 pb-5" *ngIf="pagination && issues && issues.length > 0">
   <pagination class="pb-4" [boundaryLinks]="true" [itemsPerPage]="pagination.itemsPerPage"
     [totalItems]="pagination.totalItems" [(ngModel)]="pagination.currentPage" (pageChanged)="pageChanged($event)"
     previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">

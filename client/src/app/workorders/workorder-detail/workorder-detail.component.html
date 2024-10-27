@@ -29,8 +29,10 @@
                         <div class="card-body">
                             <h5 class="card-title">{{workorder.issue.issueType.name}}</h5>
                             <p class="card-text">{{workorder.issue.description}}.</p>
-                            <p class="card-text"><small class="text-body-secondary">Created Date: {{workorder.createdDate |
-                                    date}}</small></p>
+                            <div class="d-flex w-100 justify-content-between">
+                              <small class="text-body-secondary mb-1 flex-grow-1"><span class="badge text-bg-info">{{workorder.status.identifier}}</span></small>
+                              <p class="card-text"><small class="text-body-secondary">Created Date: {{workorder.createdDate | date}}</small></p>
+                            </div>
                         </div>
                     </div>
 
@@ -57,15 +59,15 @@
                                             </ng-container>
                                         </ng-container>
 
-                                        <a href="tel:{{workorder.issue?.client.phone}}"
+                                        <a href="tel:{{workorder.issue?.client?.phone}}"
                                             class="btn btn-outline-info btn-block btn-sm me-2" *ngIf="workorder.issue?.client.phone"><i
                                                 class="bi bi-telephone-outbound me-2"></i>
                                             +27{{workorder.issue?.client.phone}}</a>
-                                        <a href="mailto:{{workorder.issue?.client.email}}"
-                                                            class="btn btn-outline-info btn-block btn-sm m-2"
+                                        <a href="mailto:{{workorder.issue?.client?.email}}"
+                                                            class="btn btn-outline-info btn-block btn-sm"
                                                             *ngIf="workorder.issue?.client.email"><i class="bi bi-envelope me-2"></i>
                                                             {{workorder.issue?.client.email}}</a>
-                                        <a href="https://wa.me/+27{{workorder.issue?.client.phone}}/?text=I have accepted your issue on Kiboko Fixer: {{ getFullUrl() }}"
+                                        <a href="https://wa.me/+27{{workorder.issue?.client?.phone}}/?text=I have accepted your issue on Kiboko Fixer: {{ getFullUrl() }}"
                                             class="h4 p-3 pt-3 btn btn-lg text-info" *ngIf="workorder.issue?.client.phone"><i
                                                 class="bi bi-whatsapp"></i></a>
 

@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { User } from '../_models/user';
 import { Router } from '@angular/router';
+import { City } from '../_models/city';
 
 @Injectable({
   providedIn: 'root'
@@ -69,5 +70,9 @@ export class AccountService {
 
   getDecodedToken(token: string) {
     return JSON.parse(atob(token.split('.')[1]));
+  }
+
+  getCities() {
+    return this.http.get<City[]>(this.baseUrl + 'account/cities');
   }
 }
