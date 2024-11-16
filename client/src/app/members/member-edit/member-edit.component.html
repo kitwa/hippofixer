@@ -33,7 +33,7 @@
 
         <div class="col-md-3 col-lg-12">
           <div class="ms-3">
-            <label>Choose your photo: </label>
+            <label>Choose your photo (optional): </label>
             <br>
             <input type="file" (change)="onFileSelected($event)" />
           </div>
@@ -41,16 +41,17 @@
 
         <div class="col-md-3 col-lg-12">
           <form #editForm="ngForm" (ngSubmit)="updateMember()" class="row g-3 m-2 mb-5">
-            <div class="col-6">
-              <label for="firstName" class="form-label">First Name</label>
-              <input type="text" [(ngModel)]="member.firstName" class="form-control" id="firstName" name="firstName"
-                placeholder="firstName">
-            </div>
 
             <div class="col-md-6">
               <label for="lastName" class="form-label">Surname</label>
               <input type="text" [(ngModel)]="member.lastName" class="form-control" id="lastName" name="lastName"
-                placeholder="lastName">
+                placeholder="Surname">
+            </div>
+            
+            <div class="col-6">
+              <label for="firstName" class="form-label">First Name</label>
+              <input type="text" [(ngModel)]="member.firstName" class="form-control" id="firstName" name="firstName"
+                placeholder="First Name">
             </div>
 
             <div class="col-md-6">

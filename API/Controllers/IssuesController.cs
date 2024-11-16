@@ -27,6 +27,7 @@ namespace API.Controllers
             _context = context;
         }
 
+        [Authorize(Policy = "RequireAdminAgentRole")]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<IssueDto>>> GetCars([FromQuery]UserParams userParams)
         {
@@ -36,7 +37,7 @@ namespace API.Controllers
             return Ok(issues);
         }
 
-
+        [Authorize(Policy = "RequireAdminAgentRole")]
         [HttpGet("{id}", Name = "GetIssue")]
         public async Task<ActionResult<IssueDto>> GetCar(int id)
         {
@@ -47,6 +48,7 @@ namespace API.Controllers
             return NotFound();
         }
 
+        [Authorize(Policy = "RequireAdminAgentRole")]
         [HttpPut("{id}")]
         public async Task<ActionResult> UpdateIssue(int id, PropertyUpdateDto carUpdateDto)
         {
@@ -58,7 +60,6 @@ namespace API.Controllers
             return BadRequest("Failed to create issue");
         }
 
-        [Authorize(Policy = "RequireAdminAgentRole")]
         [HttpPost]
         public async Task<ActionResult<IssueDto>> CreateIssue(IssueDto issueDto)
         {
@@ -95,7 +96,6 @@ namespace API.Controllers
             return Ok(result);
         }
 
-        [Authorize(Policy = "RequireAdminAgentRole")]
         [HttpPost("{id:int}/add-photo")]
         public async Task<ActionResult<IssueDto>> UploadPhotoForIssue(int id, IFormFile file)
         {

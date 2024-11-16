@@ -5,7 +5,9 @@ import { WorkOrderStatus } from "./workOrderStatus";
 
 export interface Issue {
   id: number;
-  clientId: number;
+  clientId?: number;
+  clientPhone: number;
+  clientEmail: string;
   description: string;
   issueTypeId: number;
   photoUrl: string;

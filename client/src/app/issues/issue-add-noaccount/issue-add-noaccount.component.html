@@ -1,0 +1,164 @@
+<!-- same starts here -->
+<app-nav></app-nav>
+
+<div class="container-fluid">
+    <div class="row">
+
+        <div class="border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary">
+            <app-sidebar></app-sidebar>
+        </div>
+
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            <div
+                class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h2">Raise Issue</h1>
+                <div class="btn-toolbar mb-2 mb-md-0">
+                    <!-- <div class="btn-group me-2">
+                        <button type="button" class="btn btn-sm btn-outline-primary" routerLink="/issue/add"><i
+                                class="bi bi-plus-circle-dotted text-blue"></i><span>&nbsp;</span> Raise Issue</button>
+                    </div> -->
+                </div>
+            </div>
+
+            <!-- same ends here -->
+
+            <div class="row mb-3 pb-3 ms-1">
+                <!-- <div class="col-md-6">
+                    <div class="alert alert-success m-2 text-center" *ngIf="addIssueForm && addIssueForm.dirty"
+                        role="alert">
+                        <p>You have made changes. Any unsaved changes will be lost.</p>
+                    </div>
+                </div> -->
+
+                <form [formGroup]='addIssueForm' (ngSubmit)="addIssue()" autocomplete="off" class="row"
+                    *ngIf="addIssueForm">
+
+                    <div class="col-md-6">
+                        <label for="cityId" class="form-label">Where are you based?</label>
+                        <input 
+                            class="form-control" 
+                            list="cities" 
+                            id="cityId" 
+                            formControlName="cityName"
+                            placeholder="Type to search..." 
+                            [class.is-invalid]="addIssueForm.get('cityName')?.errors && addIssueForm.get('cityName')?.touched">
+                        
+                        <datalist id="cities">
+                            <option *ngFor="let city of cities" [value]="city.name"></option>
+                        </datalist>
+                        
+                        <div class="invalid-feedback">Please choose where you are based.</div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="issueTypeId" class="form-label">Issue Type</label>
+                        <select
+                            [class.is-invalid]='addIssueForm.get("issueTypeId")?.errors && addIssueForm.get("issueTypeId")?.touched'
+                            formControlName='issueTypeId' class="form-select">
+                            <option *ngFor="let issueType of issueTypes;" [value]=issueType.id>{{issueType.name}}
+                            </option>
+                        </select>
+                        <div class="invalid-feedback">Please choose an issue type.</div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="description" class="form-label">Description</label>
+                        <textarea type="text"
+                            [class.is-invalid]='addIssueForm.get("description")?.errors && addIssueForm.get("description")?.touched'
+                            class="form-control" id="description" formControlName='description' rows="6"
+                            placeholder="description"></textarea>
+                            <div class="invalid-feedback">Please describe your issue.</div>
+                    </div>
+                    <div class="col-md-12 mt-3 mb-2">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" role="switch" value="" id="emergency"
+                                formControlName='emergency'>
+                            <label class="form-check-label" for="emergency">
+                                Is this issue an emergency?
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <label>Upload a photo (Optional) </label>
+                        <br>
+                        <input type="file" (change)="onFileSelected($event)" />
+                    </div>
+
+                    <div class="card ms-2 mt-5">
+                        <div class="card-header text-center">
+                            <h5 class="card-title">Contact details</h5>
+                        </div>
+                        <div class="card-body pe-0 ps-0">
+                            <h6 class="card-title">We will contact you soon.</h6>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="clientEmail" class="form-label">Email</label>
+                                    <input type="email" (keydown.space)="$event.preventDefault()" autocomplete="email"
+                                        [class.is-invalid]='addIssueForm.get("clientEmail")?.errors && addIssueForm.get("clientEmail")?.touched'
+                                        class="form-control" placeholder="Enter Email" formControlName='clientEmail'>
+                                    <div class="invalid-feedback">Please enter an email.</div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="clientPhone" class="form-label">Phone Number</label>
+                                    <input type="text" (keydown.space)="$event.preventDefault()"
+                                        [class.is-invalid]='addIssueForm.get("clientPhone")?.errors && addIssueForm.get("clientPhone")?.touched'
+                                        class="form-control" placeholder="Enter Phone Number"
+                                        formControlName='clientPhone'>
+                                        <div class="invalid-feedback"> Please enter a valid 10-digit phone number.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 mb-5 pt-5">
+                        <button type="submit" [disabled]='!addIssueForm.valid' name="submit" id="submit"
+                            class="btn btn-lg btn-success mb-5 me-2">Save Issue</button>
+
+                    </div>
+                </form>
+
+            </div>
+        </main>
+    </div>
+</div>
+
+<div *ngIf="isModalShown" [config]="{ show: true }" (onHidden)="onHidden()" bsModal #autoShownModal="bs-modal"
+     class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-auto-name">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 id="dialog-auto-name" class="modal-title pull-left">We will contact you soon</h4>
+        <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="hideModal()">
+          <span aria-hidden="true" class="visually-hidden">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Thank you for submitting your issue with us, one of our contractors will contact you soon!</p>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="hideModal()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="validateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title fs-5 text-danger" id="exampleModalLabel">Complete Required Fields</h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+           <h2 class="text-info">Please complete all required fields!</h2> 
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Ok</button>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -4,7 +4,9 @@ namespace API.Entities;
 public class Issue
 {
     public int Id { get; set; }
-    public int ClientId { get; set; }
+    public int? ClientId { get; set; }
+    public int? ClientPhone { get; set; }
+    public string ClientEmail { get; set; }
     public string Description { get; set; }
     public int IssueTypeId { get; set; }
     public string PhotoUrl { get; set; }

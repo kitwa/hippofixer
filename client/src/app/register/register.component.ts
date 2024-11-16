@@ -26,15 +26,28 @@ export class RegisterComponent implements OnInit {
 
   initializeForm(){
     this.registerForm = this.fb.group({
-      email: ['', Validators.required],
-      phone: [null, Validators.required],
+      email: ['',[
+        Validators.required,
+        Validators.email
+      ]],
+      phone: [null,         [
+        Validators.required,
+        Validators.pattern('^[0-9]{9}$')
+      ]],
       password: ['', [Validators.required]],
       confirmPassword: ['', [Validators.required]],
-      cityId: [null, Validators.required]
+      cityId: [null, Validators.required],
+      cityName: ['', Validators.required]
     },
     {
       validators: this.matchValidator('password', 'confirmPassword')
     })
+
+    this.registerForm.get('cityName')?.valueChanges.subscribe(value => {
+      const selectedCity = this.cities.find(city => city.name === value);
+      this.registerForm.patchValue({ cityId: selectedCity ? selectedCity.id : null });
+    });
+
   }
 
   register() {

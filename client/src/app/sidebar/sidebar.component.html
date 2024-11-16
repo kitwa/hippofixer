@@ -21,13 +21,13 @@
               Home
             </a>
           </li>
-          <li class="nav-item" >
+          <li class="nav-item" *ngIf="user">
             <a class="nav-link d-flex align-items-center gap-2" routerLink='/issues'>
               <i class="bi bi-file-earmark-text text-black bi-icon-font-size"></i>
               Issues
             </a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" *ngIf="user">
             <a class="nav-link d-flex align-items-center gap-2" routerLink="/invoices">
               <i class="bi bi-file-earmark-check text-black bi-icon-font-size"></i>
               Invoices
@@ -39,7 +39,7 @@
               Messages
             </a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" *ngIf="user">
             <a class="nav-link d-flex align-items-center gap-2" routerLink="/workorders">
               <i class="bi bi-list-check text-black bi-icon-font-size"></i>
               Workorders
@@ -71,13 +71,13 @@
           <li class="nav-item" *ngIf="user">
             <a class="nav-link d-flex align-items-center gap-2" (click)="logout()" href="">
               <i class="bi bi-box-arrow-right text-black bi-icon-font-size"></i>
-              Sign out 
+              Log out 
             </a>
           </li>
           <li class="nav-item" *ngIf="!user">
             <a class="nav-link d-flex align-items-center gap-2" routerLink="/login">
               <i class="bi bi-box-arrow-left text-black bi-icon-font-size"></i>
-              Sign In
+              Log In
             </a>
           </li>
         </ul>

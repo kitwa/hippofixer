@@ -18,7 +18,7 @@
 
 <div class="container-fluid">
   <div class="row">
-    
+
     <div class="border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary">
       <app-sidebar></app-sidebar>
     </div>
@@ -29,43 +29,50 @@
         <h1 class="h2">Home</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
           <div class="btn-group me-2">
-            <button type="button" class="btn btn-sm btn-outline-primary" routerLink="/issue/add"><i
-                class="bi bi-plus-circle-dotted text-blue"></i><span>&nbsp;</span> Raise Issue</button>
+            <button type="button" class="btn btn-sm btn-outline-primary" routerLink="/issue/add" *ngIf="user"><i
+                class="bi bi-plus-circle-dotted text-blue" ></i><span>&nbsp;</span> Raise Issue</button>
+
+            <button type="button" class="btn btn-sm btn-outline-primary" routerLink="/issue/noaccount/add" *ngIf="!user"><i
+                class="bi bi-plus-circle-dotted text-blue" ></i><span>&nbsp;</span> Raise Issue</button>
           </div>
         </div>
       </div>
+
+
 
       <div class="row">
-        <!-- <p class="m-4">Contractors at Your Fingertips!</p> -->
         <div class="col-1">
         </div>
-        <div class="col-10 text-center ">
-          <div *ngIf="!user" data-bs-toggle="modal" data-bs-target="#exampleModal">
-          <div class="raise-icon-size">
-            <i class="bi bi-plus-circle-dotted text-primary"></i>
-          </div>
-          <h5 class="pl-4 ml-5">Raise Issue</h5>
-        </div>
+        <div class="col-10 text-center">
 
-        <div *ngIf="user" routerLink="/issue/add">
           <div class="raise-icon-size">
-            <i class="bi bi-plus-circle-dotted text-primary"></i>
-          </div>
-          <h5 class="pl-4 ml-5">Raise Issue</h5>
-        </div>
+            <div class="typewriter">
+              <h3 [class.cursor]="isTyping" class="text-black">{{ displayedText }}</h3>
+            </div>
+            <div routerLink="/issue/add" *ngIf="user">
+              <i class="bi bi-plus-circle-dotted text-primary"></i>
+              <h5 class="pl-4 ml-5">Raise Issue</h5>
+            </div>
 
-          <p>Click on the plus icon to raise you issue</p>
+            <div routerLink="/issue/noaccount/add" *ngIf="!user">
+              <i class="bi bi-plus-circle-dotted text-primary"></i>
+              <h5 class="pl-4 ml-5">Raise Issue</h5>
+            </div>
+
+          </div>
+
+          <p>Click on the plus icon to raise your issue</p>
         </div>
         <div class="col-1">
         </div>
       </div>
-      <div class="row" *ngIf="!user">
-        <div class="col-md-4"></div>
+      <div class="row pt-5" *ngIf="!user">
+        <div class="col-md-4 pt-5"></div>
         <div class="col-md-4 col-sm-12 text-center">
           <div class="card text-center bg-success bg-opacity-25">
             <div class="card-body">
-              <h5 class="card-title text-black">You are not Logged In</h5>
-              <p class="card-text">You need to login to be able to raise an issue</p>
+              <h5 class="card-title text-black">Login or Create Account</h5>
+              <p class="card-text">An account helps you track all your issues and invoices or chat with a contrator and more ...</p>
               <button type="button" class="btn btn-outline-primary primary btn-sm" routerLink='/login'>Log In</button> or
               <button type="button" class="btn btn-outline-primary primary btn-sm" routerLink='/register'>Create Account</button>
             </div>

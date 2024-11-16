@@ -19,7 +19,7 @@
 
   .raise-icon-size {
     font-size: 100px;
-    margin-top: 180px;
+    margin-top: 160px;
   }
 
   .bi-raise {
@@ -29,5 +29,27 @@
   .bi-icon-font-size {
     font-size: 20px;
   }
+
+  .typewriter h3.cursor {
+    border-right: 3px solid;
+    animation: blinkCursor 0.7s step-end infinite;
+    font-family: monospace;
+    overflow: hidden;
+    border-right: 1px solid;
+  }
+
+  .typewriter h3 {
+    font-family: monospace;
+    overflow: hidden;
+  }
+  
+  /* Blinking cursor effect */
+  @keyframes blinkCursor {
+    50% {
+      border-color: transparent;
+    }
+  }
+  
+  
   
   

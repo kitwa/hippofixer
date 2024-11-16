@@ -299,7 +299,13 @@ namespace API.Data.Migrations
                     b.Property<int>("CityId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ClientId")
+                    b.Property<string>("ClientEmail")
+                        .HasColumnType("longtext");
+
+                    b.Property<int?>("ClientId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ClientPhone")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedDate")
@@ -800,9 +806,7 @@ namespace API.Data.Migrations
 
                     b.HasOne("API.Entities.AppUser", "Client")
                         .WithMany("Issues")
-                        .HasForeignKey("ClientId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ClientId");
 
                     b.HasOne("API.Entities.IssueType", "IssueType")
                         .WithMany()

@@ -21,7 +21,7 @@
             </div>
             <div *ngIf="workorder">
                     <div class="card mb-3">
-                        <div class="card-header text-center">
+                        <div class="card-header text-center" *appHasRole='["SuperAdmin","Admin", "Contractor"]'>
                             <button type="button" class="btn btn-sm btn-success me-2" data-bs-toggle="modal" data-bs-target="#completeJob">Complete Job</button>
                             <button type="button" class="btn btn-sm btn-danger me-2" data-bs-toggle="modal" data-bs-target="#rejectJob">Reject Job</button>
                             <button type="button" class="btn btn-sm btn-info me-2" >Add Invoice</button>
@@ -43,7 +43,7 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-12 mb-5">
+                    <div class="col-lg-12 mb-5" *appHasRole='["SuperAdmin","Admin", "Contractor"]'>
                         <div class="row mb-5">
                             <div class="col mb-5">
                                 <div class="card">
@@ -51,7 +51,8 @@
                                         <h5 class="card-title p-2">Contact Client</h5>
 
                                         <ng-container *ngIf="workorder.issue?.client">
-                                            <ng-container *appHasRole='["Admin","Member","Agent"]'>
+                                            <ng-container *appHasRole='["Admin","Contractor"]'>
+                                              <p>Name: {{workorder.issue.client.firstName}} {{workorder.issue.client.lastName}}</p>
                                                 <a routerLink="/members/{{workorder.issue?.client.email}}"
                                                     class="btn btn-outline-info btn-block btn-sm me-2"
                                                     *ngIf="workorder.issue?.client.email"><i class="bi bi-chat-dots me-2"></i>

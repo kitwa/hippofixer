@@ -43,11 +43,16 @@ export class IssueAddComponent {
       description: ['', Validators.required],
       clientId: [null, Validators.required],
       cityId: [null, Validators.required],
-      contractorId: [null, Validators.required],
       statusId: [1, Validators.required],
-      emergency: [false, Validators.required]
+      emergency: [false, Validators.required],
+      cityName: ['', Validators.required]
 
     })
+
+    this.addIssueForm.get('cityName')?.valueChanges.subscribe(value => {
+      const selectedCity = this.cities.find(city => city.name === value);
+      this.addIssueForm.patchValue({ cityId: selectedCity ? selectedCity.id : null });
+    });
   }
 
   addIssue(){

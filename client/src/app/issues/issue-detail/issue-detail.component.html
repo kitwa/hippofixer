@@ -50,13 +50,13 @@
 
                                         <ng-container *ngIf="issue.client">
                                             <ng-container *appHasRole='["Admin","Contractor"]'>
-                                                <p>Name: {{issue.client.firstName}}</p>
+                                                <p>Name: {{issue.client.firstName}} {{issue.client.lastName}}</p>
                                                 <a routerLink="/members/{{issue.client.email}}"
                                                     class="btn btn-outline-info btn-block btn-sm me-2"
                                                     *ngIf="issue.client.email"><i class="bi bi-chat-dots me-2"></i>
                                                     Live Chat</a>
                                             </ng-container>
-                                        </ng-container>
+              
 
                                         <a href="tel:{{issue.client.phone}}"
                                             class="btn btn-outline-info btn-block btn-sm me-2" *ngIf="issue.client.phone"><i
@@ -69,10 +69,25 @@
                                         <a href="https://wa.me/+27{{issue.client.phone}}/?text=I have accepted your issue on Kiboko Fixer: {{ getFullUrl() }}"
                                             class="h4 p-3 pt-3 btn btn-lg text-info" *ngIf="issue.client.phone"><i
                                                 class="bi bi-whatsapp"></i></a>
+                                    </ng-container>
+
+                                    
+                                    <a href="tel:{{issue.clientPhone}}"
+                                    class="btn btn-outline-info btn-block btn-sm me-2" *ngIf="issue.clientPhone"><i
+                                        class="bi bi-telephone-outbound me-2"></i>
+                                    +27{{issue.clientPhone}}</a>
+                                <a href="mailto:{{issue.clientEmail}}"
+                                                    class="btn btn-outline-info btn-block btn-sm"
+                                                    *ngIf="issue.clientEmail"><i class="bi bi-envelope me-2"></i>
+                                                    {{issue.clientEmail}}</a>
+                                <a href="https://wa.me/+27{{issue.clientPhone}}/?text=I have accepted your issue on Kiboko Fixer: {{ getFullUrl() }}"
+                                    class="h4 p-3 pt-3 btn btn-lg text-info" *ngIf="issue.clientPhone"><i
+                                        class="bi bi-whatsapp"></i></a>
 
                                         <button (click)="shareIssueDetails()" class="btn btn-outline-primary btn-sm">
                                             <i class="bi bi-share"></i> Share
                                         </button>
+                 
 
                                     </div>
                                 </div>

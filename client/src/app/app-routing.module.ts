@@ -36,6 +36,7 @@ import { IssueAddComponent } from './issues/issue-add/issue-add.component';
 import { IssueDetailComponent } from './issues/issue-detail/issue-detail.component';
 import { WorkorderListsComponent } from './workorders/workorder-lists/workorder-lists.component';
 import { WorkorderDetailComponent } from './workorders/workorder-detail/workorder-detail.component';
+import { IssueAddNoaccountComponent } from './issues/issue-add-noaccount/issue-add-noaccount.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -45,8 +46,7 @@ const routes: Routes = [
   {path: 'newpassword', component: NewPasswordComponent},
   {path: 'blogposts', component: BlogPostListComponent},
   {path: 'blogposts/:id', component: BlogPostDetailComponent},
-  {path: 'issues', component: IssueListsComponent},
-  {path: 'issue/detail/:id', component: IssueDetailComponent},
+  {path: 'issue/noaccount/add', component: IssueAddNoaccountComponent},
   {
     path: '',
     runGuardsAndResolvers: 'always',
@@ -56,12 +56,14 @@ const routes: Routes = [
       {path: 'members/:email', component: MemberDetailComponent},
       {path: 'member/edit', component: MemberEditComponent, canDeactivate: [preventUnsavedChangesGuard]},
       {path: 'messages', component: MessagesComponent},
-      {path: 'issue/add', component: IssueAddComponent, canActivate: [adminGuard]},
       {path: 'workorders', component: WorkorderListsComponent, canActivate: [adminGuard]},
       {path: 'workorder/detail/:id', component: WorkorderDetailComponent, canActivate: [adminGuard]},
       {path: 'admin', component: AdminPanelComponent, canActivate: [adminGuard]},
       {path: 'blogpost/edit/:id', component: BlogPostEditComponent, canDeactivate: [preventUnsavedChangesGuard], canActivate: [adminGuard]},
       {path: 'blogpost/add', component: BlogPostAddComponent, canActivate: [adminGuard]},
+      {path: 'issues', component: IssueListsComponent, canActivate: [adminGuard]},
+      {path: 'issue/detail/:id', component: IssueDetailComponent, },
+      {path: 'issue/add', component: IssueAddComponent, canActivate: [adminGuard]},
     ]
   },
   {path: 'errors', component: TestErrorsComponent},

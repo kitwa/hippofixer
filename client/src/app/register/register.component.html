@@ -43,7 +43,7 @@
           </div>
 
           <div class="form-group">
-            <label for="phone" class="text-white fs-5">Phone Number</label>
+            <label for="text" class="text-white fs-5">Phone Number</label>
             <input type="number" (keydown.space)="$event.preventDefault()"
               [class.is-invalid]='registerForm.get("phone")?.errors && registerForm.get("phone")?.touched'
               class="form-control" placeholder="Phone Number" formControlName='phone'>
@@ -82,12 +82,20 @@
           </div>
 
           <div class="form-group">
-            <label for="cityId" class="form-label text-white fs-5">What City are you living in?</label>
-            <select [class.is-invalid]='registerForm.get("cityId")?.errors && registerForm.get("cityId")?.touched'
-              formControlName='cityId' class="form-select">
-              <option *ngFor="let city of cities;" [value]=city.id>{{city.name}}</option>
-            </select>
-            <div class="invalid-feedback">Please choose a city.</div>
+            <label for="cityId" class="form-label">Where are you based?</label>
+            <input 
+                class="form-control" 
+                list="cities" 
+                id="cityId" 
+                formControlName="cityName"
+                placeholder="Type to search..." 
+                [class.is-invalid]="registerForm.get('cityName')?.errors && registerForm.get('cityName')?.touched">
+            
+            <datalist id="cities">
+                <option *ngFor="let city of cities" [value]="city.name"></option>
+            </datalist>
+            
+            <div class="invalid-feedback">Please choose where you are based.</div>
           </div>
 
           <div class="row" *ngIf="validationErrors.length > 0">
@@ -104,7 +112,7 @@
             <small class="text-white m-2">By clicking Register, you agree to the terms of use.</small>
             <h6 class="m-2">Terms and conditions</h6>
             <hr class="my-4">
-            <button type="button" class="w-100 btn btn-sm mt-2 btn-info" routerLink="/login">Sign In</button>
+            <button type="button" class="w-100 btn btn-sm mt-2 btn-info" routerLink="/login">Log In In</button>
           </div>
         </form>
       </div>

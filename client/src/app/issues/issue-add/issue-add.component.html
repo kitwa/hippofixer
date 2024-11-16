@@ -11,33 +11,41 @@
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
             <div
                 class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2">Add Issue</h1>
+                <h1 class="h2">Raise Issue</h1>
                 <div class="btn-toolbar mb-2 mb-md-0">
-                    <div class="btn-group me-2">
+                    <!-- <div class="btn-group me-2">
                       <button type="button" class="btn btn-sm btn-outline-primary" routerLink="/issue/add"><i
                           class="bi bi-plus-circle-dotted text-blue"></i><span>&nbsp;</span> Raise Issue</button>
-                    </div>
+                    </div> -->
                   </div>
             </div>
 
       <!-- same ends here -->
        
       <div class="row mb-3 pb-3 ms-1">
-        <div class="col-md-6">
+        <!-- <div class="col-md-6">
           <div class="alert alert-success m-2 text-center" *ngIf="addIssueForm.dirty" role="alert">
             <p>You have made changes. Any unsaved changes will be lost.</p>
           </div>
-        </div>
+        </div> -->
 
-        <form [formGroup]='addIssueForm' (ngSubmit)="addIssue()" autocomplete="off" class="row">
+        <form [formGroup]='addIssueForm' (ngSubmit)="addIssue()" autocomplete="off" class="row" *ngIf="addIssueForm">
 
           <div class="col-md-6">
-            <label for="cityId" class="form-label">Choose City</label>
-            <select [class.is-invalid]='addIssueForm.get("cityId")?.errors && addIssueForm.get("cityId")?.touched'
-              formControlName='cityId' class="form-select">
-              <option *ngFor="let city of cities;" [value]=city.id>{{city.name}}</option>
-            </select>
-            <div class="invalid-feedback">Please choose a city.</div>
+              <label for="cityId" class="form-label">From what City is your issue being raised?</label>
+              <input 
+                  class="form-control" 
+                  list="cities" 
+                  id="cityId" 
+                  formControlName="cityName"
+                  placeholder="Type to search..." 
+                  [class.is-invalid]="addIssueForm.get('cityName')?.errors && addIssueForm.get('cityName')?.touched">
+              
+              <datalist id="cities">
+                  <option *ngFor="let city of cities" [value]="city.name"></option>
+              </datalist>
+              
+              <div class="invalid-feedback">Please choose where you are based.</div>
           </div>
 
           <div class="col-md-6">

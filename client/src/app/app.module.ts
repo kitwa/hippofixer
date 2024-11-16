@@ -3,6 +3,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireMessagingModule } from '@angular/fire/compat/messaging';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -63,6 +66,8 @@ import { IssueAddComponent } from './issues/issue-add/issue-add.component';
 import { IssueDetailComponent } from './issues/issue-detail/issue-detail.component';
 import { WorkorderListsComponent } from './workorders/workorder-lists/workorder-lists.component';
 import { WorkorderDetailComponent } from './workorders/workorder-detail/workorder-detail.component';
+import { IssueAddNoaccountComponent } from './issues/issue-add-noaccount/issue-add-noaccount.component';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -114,6 +119,7 @@ import { WorkorderDetailComponent } from './workorders/workorder-detail/workorde
     IssueListsComponent,
     IssueAddComponent,
     IssueDetailComponent,
+    IssueAddNoaccountComponent,
     WorkorderListsComponent,
     WorkorderDetailComponent
   ],
@@ -131,7 +137,9 @@ import { WorkorderDetailComponent } from './workorders/workorder-detail/workorde
       // Register the ServiceWorker as soon as the application is stable
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
-    })
+    }),
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireMessagingModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},

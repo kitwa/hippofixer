@@ -34,6 +34,7 @@ export class WorkorderDetailComponent {
   completeWorkOrder(){
     this.workorderssService.completeWorkOrder(this.route.snapshot.params['id']).subscribe(workorders => {
       this.toastr.success("This job has been completed", "Workorder Completed");
+      window.location.reload();
     })
   }
 
