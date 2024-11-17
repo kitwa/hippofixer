@@ -32,11 +32,13 @@
 
             <p class="text-truncate">{{issue.description}}.</p>
             <div>
+              <small class="text-body-secondary mb-1 flex-grow-1 pe-2" *ngIf="issue.city?.name"><span
+                class="badge text-bg-primary">{{issue.city?.name}}</span></small>
               <small class="text-body-secondary mb-1 flex-grow-1"><span
                   class="badge text-bg-info">{{issue.status.identifier}}</span></small>
-              <small class="text-body-secondary mb-1 flex-grow-1 p-2" *ngIf="issue.emergency"><span
-                  class="badge text-bg-danger">Urgent</span></small>
-              <small class="text-body-secondary float-end">Created Date: {{issue.createdDate | date}}</small>
+              <small class="text-body-secondary mb-1 flex-grow-1 p-2" ><span
+                class="badge text-bg-danger">Urgent</span></small>
+              <small class="text-body-secondary float-end pt-2">Created Date: {{issue.createdDate | date}}</small>
             </div>
           </a>
 

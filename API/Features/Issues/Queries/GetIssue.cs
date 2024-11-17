@@ -36,6 +36,7 @@ namespace API.Features.Issues.Queries
                                                 .Include(x => x.IssueType)
                                                 .Include(x => x.Status)
                                                 .Include(x => x.Client)
+                                                .Include(x => x.City)
                                                 .SingleOrDefaultAsync();
                             
                 var result =  _mapper.Map<IssueDto>(issue);

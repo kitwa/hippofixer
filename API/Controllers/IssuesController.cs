@@ -39,7 +39,7 @@ namespace API.Controllers
 
         [Authorize(Policy = "RequireAdminAgentRole")]
         [HttpGet("{id}", Name = "GetIssue")]
-        public async Task<ActionResult<IssueDto>> GetCar(int id)
+        public async Task<ActionResult<IssueDto>> GetIssue(int id)
         {
             var issue = await _mediator.Send(new GetIssue.Query(id));
             if(issue != null) {

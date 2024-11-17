@@ -3,7 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Client } from 'src/app/_models/client';
 import { Issue } from 'src/app/_models/issue';
 import { User } from 'src/app/_models/user';
-import { AccountService } from 'src/app/_services/account.service';
 import { IssuesService } from 'src/app/_services/issues.service';
 
 @Component({
@@ -17,8 +16,7 @@ export class IssueDetailComponent {
   client: Client;
   user: User;
 
-  constructor(private issuesService: IssuesService, private route: ActivatedRoute, 
-      private accountService: AccountService, private router: Router) {;
+  constructor(private issuesService: IssuesService, private route: ActivatedRoute, private router: Router) {;
    }
 
   ngOnInit(): void {
@@ -37,6 +35,7 @@ export class IssueDetailComponent {
       this.router.navigateByUrl('/workorders');
     })
   }
+
   shareIssueDetails() {
     if (navigator.share) {
       navigator.share({

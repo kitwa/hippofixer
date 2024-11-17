@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit {
     this.accountService.currentUser$.pipe(take(1)).subscribe(user => this.user = user)
   }
 
-  fullText = 'Find Your Contractors and Fixe Your Issue, Just a Call Away!';
+  fullText = 'Find Your Contractor and Fixe Your Issue, Just a Call Away!';
   displayedText = '';
   typingSpeed = 100; // Adjust speed in milliseconds
   isTyping = true;  
