@@ -36,7 +36,6 @@ export class MemberEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadMember();
-    this.getCities();7
   }
 
   initializeForm(){
@@ -80,6 +79,7 @@ export class MemberEditComponent implements OnInit {
   loadMember(){
     this.memberService.getMember(this.user.email).subscribe(member => {
       this.member = member;
+      this.getCities();
     })
   }
 
