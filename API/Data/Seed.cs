@@ -180,6 +180,8 @@ namespace API.Data
                 UserName = "admin",
                 Email = "admin@kibokofixer.co.za",
                 GenderId = 1,
+                CityId = 1,
+                Phone = "0813516102"
             };
 
             var result = await userManager.CreateAsync(admin, "KibokoFixer1502@2024");

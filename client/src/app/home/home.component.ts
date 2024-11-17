@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { AccountService } from '../_services/account.service';
 import { take } from 'rxjs';
 import { User } from '../_models/user';
-import { MessagingService } from '../_services/messaging.service';
 
 @Component({
   selector: 'app-home',
@@ -13,7 +12,7 @@ export class HomeComponent implements OnInit {
 
   user: User;
 
-  constructor(private accountService: AccountService, private messagingService: MessagingService) { 
+  constructor(private accountService: AccountService) { 
     this.accountService.currentUser$.pipe(take(1)).subscribe(user => this.user = user)
   }
 
@@ -24,8 +23,6 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.typeWriterEffect();
-    this.messagingService.requestPermission();
-    this.messagingService.receiveMessage();
   }
 
   typeWriterEffect() {
@@ -37,7 +34,7 @@ export class HomeComponent implements OnInit {
         index++;
       } else {
         clearInterval(typeWriterInterval);
-        this.isTyping = false; // Set to false when typing is complete
+        this.isTyping = false; 
       }
     }, this.typingSpeed);
   }

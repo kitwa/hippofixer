@@ -9,7 +9,7 @@ export interface Client {
   lastName: string;
   userName: string;
   fullAddress: string;
-  phone?: number;
+  phone?: string;
   created: Date;
   lastActive: Date;
   genderId?: number;

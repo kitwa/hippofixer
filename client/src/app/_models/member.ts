@@ -10,7 +10,7 @@ export interface Member {
   lastName?: string;
   userName?: string;
   fullAddress?: string;
-  phone?: number;
+  phone?: string;
   created: Date;
   genderId?: number;
   gender: Gender;

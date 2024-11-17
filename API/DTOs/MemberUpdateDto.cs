@@ -10,7 +10,7 @@ namespace API.DTOs
         public Gender Gender { get; set; }
         public int GenderId { get; set; }
         public int CityId { get; set; }
-        public int Phone { get; set; }
+        public string Phone { get; set; }
         public string Twitter { get; set; }
         public string Youtube { get; set; }
         public string Instagram { get; set; }

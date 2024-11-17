@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Member } from '../_models/member';
 import { PaginatedResult } from '../_models/pagination';
+import { City } from '../_models/city';
 
 // const httpOptions = {
 //   headers: new HttpHeaders({
@@ -71,6 +72,10 @@ export class MembersService {
     const formData = new FormData();
     formData.append('file', image);
     return this.http.post<Member>(this.baseUrl + 'users/' + userId + '/add-photo', formData);
+  }
+
+  getCities() {
+    return this.http.get<City[]>(this.baseUrl + 'issues/cities');
   }
 
 }

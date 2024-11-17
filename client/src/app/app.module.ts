@@ -59,7 +59,6 @@ import { CarEditComponent } from './cars/car-edit/car-edit.component';
 import { CarPhotoEditorComponent } from './cars/car-photo-editor/car-photo-editor.component';
 import { CarTypeComponent } from './admin/car-type/car-type.component';
 import { CarSearchComponent } from './cars/car-search/car-search.component';
-import { ServiceWorkerModule } from '@angular/service-worker';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { IssueListsComponent } from './issues/issue-lists/issue-lists.component';
 import { IssueAddComponent } from './issues/issue-add/issue-add.component';
@@ -67,7 +66,6 @@ import { IssueDetailComponent } from './issues/issue-detail/issue-detail.compone
 import { WorkorderListsComponent } from './workorders/workorder-lists/workorder-lists.component';
 import { WorkorderDetailComponent } from './workorders/workorder-detail/workorder-detail.component';
 import { IssueAddNoaccountComponent } from './issues/issue-add-noaccount/issue-add-noaccount.component';
-import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -131,15 +129,7 @@ import { environment } from 'src/environments/environment';
     FormsModule,
     ReactiveFormsModule,
     SharedModule,
-    NgxSpinnerModule,
-    ServiceWorkerModule.register('ngsw-worker.js', {
-      enabled: !isDevMode(),
-      // Register the ServiceWorker as soon as the application is stable
-      // or after 30 seconds (whichever comes first).
-      registrationStrategy: 'registerWhenStable:30000'
-    }),
-    AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFireMessagingModule
+    NgxSpinnerModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},

@@ -9,7 +9,7 @@ namespace API.Entities
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string FullAddress { get; set; }
-        public int Phone { get; set; }
+        public string Phone { get; set; }
         public int GenderId { get; set; }
         public Gender Gender {get; set; }
         public int CityId { get; set; }

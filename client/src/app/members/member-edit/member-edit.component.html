@@ -11,21 +11,17 @@
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Issue Details</h1>
+        <h1 class="h2">Your Profile</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
-          <div class="btn-group me-2">
+          <!-- <div class="btn-group me-2">
             <button type="button" class="btn btn-sm btn-outline-primary" routerLink="/issue/add"><i
                 class="bi bi-plus-circle-dotted text-blue"></i><span>&nbsp;</span> Raise Issue</button>
-          </div>
+          </div> -->
         </div>
       </div>
 
 
       <div class="row" *ngIf="member">
-
-        <div class="alert alert-success m-2 text-center col-md-3" *ngIf="editForm.dirty" role="alert">
-          <p>You have made changes. Any unsaved changes will be lost.</p>
-        </div>
 
         <div class="col-md-3 col-lg-12">
           <img [src]="member?.photoUrl || './assets/agent.png'" class="img-fluid" alt="photo">
@@ -33,81 +29,99 @@
 
         <div class="col-md-3 col-lg-12">
           <div class="ms-3">
-            <label>Choose your photo (optional): </label>
+            <label>Choose your logo or photo (optional): </label>
             <br>
             <input type="file" (change)="onFileSelected($event)" />
           </div>
         </div>
 
         <div class="col-md-3 col-lg-12">
-          <form #editForm="ngForm" (ngSubmit)="updateMember()" class="row g-3 m-2 mb-5">
+          <form [formGroup]='editMemberForm' (ngSubmit)="editMember()" class="row g-3 m-2 mb-5" *ngIf="editMemberForm">
+
+                    <div class="alert alert-info m-2 text-center col-md-3" *ngIf="editMemberForm.dirty" role="alert">
+          <p>You have made changes. Any unsaved changes will be lost.</p>
+        </div>
+
+            <div class="col-6">
+              <label for="firstName" class="form-label">First Name *</label>
+              <input type="text" [(ngModel)]="member.firstName" class="form-control" id="firstName" formControlName="firstName"
+                placeholder="First Name"
+                [class.is-invalid]="editMemberForm.get('firstName')?.errors && editMemberForm.get('firstName')?.touched">
+                <div class="invalid-feedback">First name is required.</div>
+            </div>
 
             <div class="col-md-6">
               <label for="lastName" class="form-label">Surname</label>
-              <input type="text" [(ngModel)]="member.lastName" class="form-control" id="lastName" name="lastName"
+              <input type="text" [(ngModel)]="member.lastName" class="form-control" id="lastName" formControlName="lastName"
                 placeholder="Surname">
             </div>
             
-            <div class="col-6">
-              <label for="firstName" class="form-label">First Name</label>
-              <input type="text" [(ngModel)]="member.firstName" class="form-control" id="firstName" name="firstName"
-                placeholder="First Name">
+
+            <div class="col-md-6">
+              <label for="phone" class="form-label">Phone Number *</label>
+              <input type="text" [(ngModel)]="member.phone" class="form-control" id="phone" formControlName="phone" placeholder="phone"
+                [class.is-invalid]="editMemberForm.get('phone')?.errors && editMemberForm.get('phone')?.touched"  (keydown.space)="$event.preventDefault()">
+                <div class="invalid-feedback"> Please enter a valid 10-digit phone number.</div>
             </div>
 
             <div class="col-md-6">
-              <label for="phone" class="form-label">Phone Number</label>
-              <input type="number" [(ngModel)]="member.phone" class="form-control" id="phone" name="phone"
-                placeholder="phone">
+              <label for="cityId" class="form-label">Where are you based?</label>
+              <input 
+                  class="form-control" 
+                  list="cities" 
+                  id="cityId" 
+                  [(ngModel)]="memberCityName"
+                  formControlName="cityName"
+                  placeholder="Type to search..." 
+                  [class.is-invalid]="editMemberForm.get('cityName')?.errors && editMemberForm.get('cityName')?.touched">
+              
+              <datalist id="cities">
+                  <option *ngFor="let city of cities" [value]="city.name"></option>
+              </datalist>
+              
+              <div class="invalid-feedback">Please choose where you are based.</div>
             </div>
 
             <div class="col-md-6">
               <label for="genderId" class="form-label">Sex</label>
-              <select id="genderId" [(ngModel)]="member.gender.id" name="genderId" class="form-select">
+              <select id="genderId" [(ngModel)]="member.gender.id" formControlName="genderId" class="form-select">
                 <option value="1">Male</option>
                 <option value="2">Female</option>
               </select>
             </div>
 
             <div class="col-md-6">
-              <label for="cityId" class="form-label">City</label>
-              <select id="cityId" [(ngModel)]="member.cityId" name="cityId" class="form-select">
-                <option value="1">Cape Town</option>
-                <option value="2">Johannesburg</option>
-              </select>
-            </div>
-
-            <div class="col-md-6">
               <label for="fullAddress" class="form-label">Full Address</label>
-              <textarea id="fullAddress" name="fullAddress" class="form-control" [(ngModel)]="member.fullAddress"
+              <textarea id="fullAddress" formControlName="fullAddress" class="form-control" [(ngModel)]="member.fullAddress"
                 rows="2" placeholder="fullAddress"></textarea>
             </div>
 
-            <div class="col-6">
-              <label for="facebook" class="form-label">FaceBook</label>
-              <input type="text" [(ngModel)]="member.facebook" class="form-control" id="facebook" name="facebook"
+            <div class="col-md-6" *appHasRole='["SuperAdmin","Admin","Contractor"]'>
+              <label for="facebook" class="form-label">FaceBook link</label>
+              <input type="text" [(ngModel)]="member.facebook" class="form-control" id="facebook" formControlName="facebook"
                 placeholder="facebook">
             </div>
 
-            <div class="col-6">
-              <label for="instagram" class="form-label">Instagram</label>
-              <input type="text" [(ngModel)]="member.instagram" class="form-control" id="instagram" name="instagram"
+            <div class="col-md-6" *appHasRole='["SuperAdmin","Admin","Contractor"]'>
+              <label for="instagram" class="form-label">Instagram link</label>
+              <input type="text" [(ngModel)]="member.instagram" class="form-control" id="instagram" formControlName="instagram"
                 placeholder="instagram">
             </div>
 
-            <div class="col-6">
-              <label for="twitter" class="form-label">Twitter (X)</label>
-              <input type="text" [(ngModel)]="member.twitter" class="form-control" id="twitter" name="twitter"
+            <div class="col-md-6" *appHasRole='["SuperAdmin","Admin","Contractor"]'>
+              <label for="twitter" class="form-label">X (twitter) link</label>
+              <input type="text" [(ngModel)]="member.twitter" class="form-control" id="twitter" formControlName="twitter"
                 placeholder="twitter">
             </div>
 
-            <div class="col-6">
-              <label for="youtube" class="form-label">Youtube</label>
-              <input type="text" [(ngModel)]="member.youtube" class="form-control" id="youtube" name="youtube"
+            <div class="col-md-6" *appHasRole='["SuperAdmin","Admin","Contractor"]'>
+              <label for="youtube" class="form-label">Youtube Chanel link</label>
+              <input type="text" [(ngModel)]="member.youtube" class="form-control" id="youtube" formControlName="youtube"
                 placeholder="youtube">
             </div>
 
             <div class="col-12 mb-5 mb-5">
-              <button type="submit" [disabled]="!editForm.dirty" name="submit" id="submit"
+              <button type="submit" [disabled]='!editMemberForm.valid' name="submit" id="submit"
                 class="btn btn-success ">Update Profile</button>
             </div>
           </form>
