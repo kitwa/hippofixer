@@ -40,7 +40,7 @@
             </a>
           </li>
           <li class="nav-item" *ngIf="user">
-            <a class="nav-link d-flex align-items-center gap-2" routerLink="/workorders">
+            <a class="nav-link d-flex align-items-center gap-2" routerLink="/workorders"  *appHasRole='["SuperAdmin","Admin", "Contractor"]'>
               <i class="bi bi-list-check text-black bi-icon-font-size"></i>
               Workorders
             </a>
