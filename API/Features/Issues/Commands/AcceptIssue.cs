@@ -45,6 +45,7 @@ namespace API.Features.Issues.Commands
                 }
 
                 issue.StatusId = Constants.Status.InProgress;
+                issue.UpdatedDate = DateTime.Now;
 
                 var contractor = _context.Users.FirstOrDefault(x => x.Email == command.Email);
 
@@ -53,6 +54,7 @@ namespace API.Features.Issues.Commands
                 workOrder.IssueId = issue.Id;
                 workOrder.StatusId = Constants.Status.InProgress;
                 workOrder.CreatedDate = DateTime.Now;
+                workOrder.UpdatedDate = DateTime.Now;
 
                 _context.WorkOrders.Add(workOrder);
 

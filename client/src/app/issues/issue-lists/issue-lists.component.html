@@ -12,7 +12,7 @@
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-2 border-bottom">
         <h1 class="h2">List of Issues</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
-          <div class="btn-group me-2">
+          <div class="btn-group me-2" *appHasRole='["SuperAdmin","Admin","Client"]'>
             <button type="button" class="btn btn-sm btn-outline-primary" routerLink="/issue/add"><i
                 class="bi bi-plus-circle-dotted text-blue"></i><span>&nbsp;</span> Raise Issue</button>
           </div>
@@ -33,11 +33,11 @@
             <p class="text-truncate">{{issue.description}}.</p>
             <div>
               <small class="text-body-secondary mb-1 flex-grow-1 pe-2" *ngIf="issue.city?.name"><span
-                class="badge text-bg-primary">{{issue.city?.name}}</span></small>
+                  class="badge text-bg-primary">{{issue.city?.name}}</span></small>
               <small class="text-body-secondary mb-1 flex-grow-1"><span
                   class="badge text-bg-info">{{issue.status.identifier}}</span></small>
-              <small class="text-body-secondary mb-1 flex-grow-1 p-2" ><span
-                class="badge text-bg-danger">Urgent</span></small>
+              <small class="text-body-secondary mb-1 flex-grow-1 p-2" *ngIf="issue.emergency"><span
+                  class="badge text-bg-danger">Urgent</span></small>
               <small class="text-body-secondary float-end pt-2">Created Date: {{issue.createdDate | date}}</small>
             </div>
           </a>
@@ -58,16 +58,19 @@
               <h5 class="pl-4 ml-5">Raise Issue</h5>
             </div>
 
-            <div *ngIf="user" routerLink="/issue/add">
-              <div class="raise-icon-size">
-                <i class="bi bi-plus-circle-dotted text-primary"></i>
+            <div *appHasRole='["SuperAdmin","Admin", "Client"]'>
+              <div *ngIf="user" routerLink="/issue/add">
+                <div class="raise-icon-size">
+                  <i class="bi bi-plus-circle-dotted text-primary"></i>
+                </div>
+                <h5 class="pl-4 ml-5">Raise Issue</h5>
               </div>
-              <h5 class="pl-4 ml-5">Raise Issue</h5>
             </div>
             <div class="card text-center bg-success bg-opacity-25">
               <div class="card-body">
-                <p>You haven't raise an issue yet.</p>
-                <p>Click on the plus icon to raise you issue.</p>
+                <h5 class="card-title text-black">No Issues yet.</h5>
+                <p>There is no issues to display at the moment.</p>
+                <p *appHasRole='["SuperAdmin","Admin", "Client"]'>Click on the plus icon to raise an issue.</p>
               </div>
             </div>
 

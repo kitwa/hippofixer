@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20241117083158_InitialCreate")]
+    [Migration("20241118202909_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -332,6 +332,9 @@ namespace API.Data.Migrations
                     b.Property<int>("StatusId")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("UpdatedDate")
+                        .HasColumnType("datetime(6)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CityId");
@@ -613,6 +616,9 @@ namespace API.Data.Migrations
 
                     b.Property<int?>("UnitId")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("UpdatedDate")
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
 

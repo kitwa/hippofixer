@@ -2,68 +2,188 @@
 
 <div class="container-fluid">
   <div class="row">
-
     <div class="border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary">
       <app-sidebar></app-sidebar>
     </div>
 
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-      <div
-        class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-2 border-bottom">
+      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-2 border-bottom">
         <h1 class="h2">List of WorkOrders</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
-          <div class="btn-group me-2">
-            <button type="button" class="btn btn-sm btn-outline-primary" routerLink="/issue/add"><i
-                class="bi bi-plus-circle-dotted text-blue"></i><span>&nbsp;</span> Raise Issue</button>
+          <div class="btn-group me-2" *appHasRole='["SuperAdmin","Admin","Client"]'>
+            <button type="button" class="btn btn-sm btn-outline-primary" routerLink="/issue/add">
+              <i class="bi bi-plus-circle-dotted text-blue"></i><span>&nbsp;</span> Raise Issue
+            </button>
           </div>
         </div>
       </div>
 
+      <!-- Tabs Navigation -->
+      <ul class="nav nav-tabs mb-5 ms-2" id="workOrderTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link active btn-info text-white"
+            id="in-progress-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#in-progress"
+            type="button"
+            role="tab"
+            aria-controls="in-progress"
+            aria-selected="true">
+            In Progress
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link btn-success text-white"
+            id="completed-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#completed"
+            type="button"
+            role="tab"
+            aria-controls="completed"
+            aria-selected="false">
+            Completed
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link btn-warning text-white"
+            id="rejected-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#rejected"
+            type="button"
+            role="tab"
+            aria-controls="rejected"
+            aria-selected="false">
+            Rejected
+          </button>
+        </li>
+      </ul>
 
-      <!-- all content start here -->
-      <ng-container *ngIf="workorders">
-        <div class="list-group" *ngFor="let workorder of workorders">
-          <a class="list-group-item list-group-item-action mb-1" routerLink="/workorder/detail/{{workorder.id}}">
-            <div class="d-flex w-100 justify-content-between">
-              <h5 class="mb-1 text-black">{{workorder.issue.issueType.name}}</h5>
-              <i class="bi bi-arrow-right-short text-primary bi-icon-font-size"></i>
+      <!-- Tabs Content -->
+      <div class="tab-content" id="workOrderTabsContent">
+        <!-- In Progress Tab -->
+        <div class="tab-pane fade show active" id="in-progress" role="tabpanel" aria-labelledby="in-progress-tab">
+          <ng-container *ngFor="let workorder of workorders">
+            <div class="list-group" *ngIf="workorder.status.identifier === 'InProgress'">
+              <a class="list-group-item list-group-item-action mb-1" routerLink="/workorder/detail/{{workorder.id}}">
+                <div class="d-flex w-100 justify-content-between">
+                  <h5 class="mb-1 text-black">{{ workorder.issue.issueType.name }}</h5>
+                  <i class="bi bi-arrow-right-short text-primary bi-icon-font-size"></i>
+                </div>
+                <p class="text-truncate">{{ workorder.issue.description }}.</p>
+                <div>
+                  <small class="badge text-bg-primary me-2" *ngIf="workorder.issue.city?.name">{{ workorder.issue.city?.name }}</small>
+                  <small class="badge text-bg-info me-2">{{ workorder.status.identifier }}</small>
+                  <small class="badge text-bg-danger me-2" *ngIf="workorder.issue.emergency">Urgent</small>
+                  <small class="text-body-secondary float-end">Created Date: {{ workorder.createdDate | date }}</small>
+                </div>
+              </a>
             </div>
+          </ng-container>
 
-            <p class="text-truncate">{{workorder.issue.description}}.</p>
-            <div>
-              <small class="text-body-secondary mb-1 flex-grow-1"><span
-                  class="badge text-bg-info">{{workorder.status.identifier}}</span></small>
-              <small class="text-body-secondary mb-1 flex-grow-1 p-2" *ngIf="workorder.issue.emergency"><span
-                  class="badge text-bg-danger">Urgent</span></small>
-              <small class="text-body-secondary float-end">Created Date: {{workorder.createdDate | date}}</small>
+          <div class="row" *ngIf="!hasInProgressWorkorders">
+            <div class="col-md-4"></div>
+            <div class="col-md-4 col-sm-12 text-center">
+              <div class="card text-center bg-success bg-opacity-25">
+                <div class="card-body">
+                  <h5 class="card-title text-black">No Workorders</h5>
+                  <p class="card-text">You haven't accepted any workorder.</p>
+                </div>
+              </div>
             </div>
-          </a>
-        </div>
-      </ng-container>
-
-      <div class="row" *ngIf="workorders && workorders.length == 0">
-        <div class="col-md-4"></div>
-        <div class="col-md-4 col-sm-12 text-center">
-          <div class="card text-center bg-success bg-opacity-25">
-            <div class="card-body">
-              <h5 class="card-title text-black">No Workorder</h5>
-              <p class="card-text">You haven't accept an issue yet.</p>
-            </div>
+            <div class="col-md-4"></div>
           </div>
+
         </div>
-        <div class="col-md-4"></div>
+
+        <!-- Completed Tab -->
+        <div class="tab-pane fade" id="completed" role="tabpanel" aria-labelledby="completed-tab">
+          <ng-container *ngFor="let workorder of workorders">
+            <div class="list-group" *ngIf="workorder.status.identifier === 'Completed'">
+              <a class="list-group-item list-group-item-action mb-1" routerLink="/workorder/detail/{{workorder.id}}">
+                <div class="d-flex w-100 justify-content-between">
+                  <h5 class="mb-1 text-black">{{ workorder.issue.issueType.name }}</h5>
+                  <i class="bi bi-arrow-right-short text-primary bi-icon-font-size"></i>
+                </div>
+                <p class="text-truncate">{{ workorder.issue.description }}.</p>
+                <div>
+                  <small class="badge text-bg-primary me-2" *ngIf="workorder.issue.city?.name">{{ workorder.issue.city?.name }}</small>
+                  <small class="badge text-bg-success me-2">{{ workorder.status.identifier }}</small>
+                  <small class="badge text-bg-danger me-2" *ngIf="workorder.issue.emergency">Urgent</small>
+                  <small class="text-body-secondary float-end">Created Date: {{ workorder.createdDate | date }}</small>
+                </div>
+              </a>
+            </div>
+          </ng-container>
+
+          <div class="row" *ngIf="!hasCompletedWorkorders">
+            <div class="col-md-4"></div>
+            <div class="col-md-4 col-sm-12 text-center">
+              <div class="card text-center bg-success bg-opacity-25">
+                <div class="card-body">
+                  <h5 class="card-title text-black">No Workorders</h5>
+                  <p class="card-text">You haven't completed any workorder.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4"></div>
+          </div>
+
+        </div>
+
+        <!-- Rejected Tab -->
+        <div class="tab-pane fade" id="rejected" role="tabpanel" aria-labelledby="rejected-tab">
+          <ng-container *ngFor="let workorder of workorders">
+            <div class="list-group" *ngIf="workorder.status.identifier === 'Rejected'">
+              <a class="list-group-item list-group-item-action mb-1" routerLink="/workorder/detail/{{workorder.id}}">
+                <div class="d-flex w-100 justify-content-between">
+                  <h5 class="mb-1 text-black">{{ workorder.issue.issueType.name }}</h5>
+                  <i class="bi bi-arrow-right-short text-primary bi-icon-font-size"></i>
+                </div>
+                <p class="text-truncate">{{ workorder.issue.description }}.</p>
+                <div>
+                  <small class="badge text-bg-primary me-2" *ngIf="workorder.issue.city?.name">{{ workorder.issue.city?.name }}</small>
+                  <small class="badge text-bg-warning me-2">{{ workorder.status.identifier }}</small>
+                  <small class="badge text-bg-danger me-2" *ngIf="workorder.issue.emergency">Urgent</small>
+                  <small class="text-body-secondary float-end">Created Date: {{ workorder.createdDate | date }}</small>
+                </div>
+              </a>
+            </div>
+          </ng-container>
+
+          <div class="row" *ngIf="!hasRejectedWorkorders">
+            <div class="col-md-4"></div>
+            <div class="col-md-4 col-sm-12 text-center">
+              <div class="card text-center bg-success bg-opacity-25">
+                <div class="card-body">
+                  <h5 class="card-title text-black">No Workorders</h5>
+                  <p class="card-text">You haven't rejected any workorder.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4"></div>
+          </div>
+
+        </div>
       </div>
-
-      <!-- all content end here -->
-
     </main>
   </div>
 </div>
-<div class="d-flex justify-content-center pt-5 pb-5" *ngIf="pagination && workorders && workorders.length > 0">
-  <pagination class="pb-4" [boundaryLinks]="true" [itemsPerPage]="pagination.itemsPerPage"
-    [totalItems]="pagination.totalItems" [(ngModel)]="pagination.currentPage" (pageChanged)="pageChanged($event)"
-    previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
 
+<div class="d-flex justify-content-center pt-5 pb-5" *ngIf="pagination && workorders && workorders.length > 0">
+  <pagination
+    class="pb-4"
+    [boundaryLinks]="true"
+    [itemsPerPage]="pagination.itemsPerPage"
+    [totalItems]="pagination.totalItems"
+    [(ngModel)]="pagination.currentPage"
+    (pageChanged)="pageChanged($event)"
+    previousText="&lsaquo;"
+    nextText="&rsaquo;"
+    firstText="&laquo;"
+    lastText="&raquo;">
   </pagination>
 </div>
 <app-footer></app-footer>

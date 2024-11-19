@@ -12,7 +12,7 @@ namespace API.DTOs
         public string Password { get; set; }
         public int CityId { get; set; }
         public int GenderId { get; set; }
-        public int? Phone { get; set; }
+        public string Phone { get; set; }
 
     }
 }

@@ -13,7 +13,7 @@
                 class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                 <h1 class="h2">Raise Issue</h1>
                 <div class="btn-toolbar mb-2 mb-md-0">
-                    <!-- <div class="btn-group me-2">
+                    <!-- <div class="btn-group me-2" *appHasRole='["SuperAdmin","Admin","Client"]'>
                         <button type="button" class="btn btn-sm btn-outline-primary" routerLink="/issue/add"><i
                                 class="bi bi-plus-circle-dotted text-blue"></i><span>&nbsp;</span> Raise Issue</button>
                     </div> -->
@@ -93,20 +93,19 @@
                             <h6 class="card-title">We will contact you soon.</h6>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <label for="clientEmail" class="form-label">Email</label>
-                                    <input type="email" (keydown.space)="$event.preventDefault()" autocomplete="email"
-                                        [class.is-invalid]='addIssueForm.get("clientEmail")?.errors && addIssueForm.get("clientEmail")?.touched'
-                                        class="form-control" placeholder="Enter Email" formControlName='clientEmail'>
-                                    <div class="invalid-feedback">Please enter an email.</div>
-                                </div>
-
-                                <div class="col-md-6">
                                     <label for="clientPhone" class="form-label">Phone Number</label>
                                     <input type="text" (keydown.space)="$event.preventDefault()"
                                         [class.is-invalid]='addIssueForm.get("clientPhone")?.errors && addIssueForm.get("clientPhone")?.touched'
                                         class="form-control" placeholder="Enter Phone Number"
                                         formControlName='clientPhone'>
-                                        <div class="invalid-feedback"> Please enter a valid 10-digit phone number.</div>
+                                        <div class="invalid-feedback">Please enter a valid 10-digit phone number.</div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="clientEmail" class="form-label">Email</label>
+                                    <input type="email" (keydown.space)="$event.preventDefault()" autocomplete="email"
+                                        [class.is-invalid]='addIssueForm.get("clientEmail")?.errors && addIssueForm.get("clientEmail")?.touched'
+                                        class="form-control" placeholder="Enter Email" formControlName='clientEmail'>
+                                    <div class="invalid-feedback">Please enter an email.</div>
                                 </div>
                             </div>
                         </div>

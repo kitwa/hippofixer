@@ -42,14 +42,13 @@ namespace API.Features.Issues.Commands
                     throw new ArgumentNullException("WorkOrder Not Found");
                 }
 
-                // workOrder.StatusId = Constants.Status.Rejected;
+                workOrder.StatusId = Constants.Status.Rejected;
+                workOrder.UpdatedDate = DateTime.Now;
 
                 var issueForWorkOrder = await _context.Issues.Where(x => x.Id == workOrder.IssueId)
                                                 .SingleOrDefaultAsync();
 
                 issueForWorkOrder.StatusId = Constants.Status.Pending;
-
-                _context.WorkOrders.Remove(workOrder);
 
                 await _context.SaveChangesAsync();
 

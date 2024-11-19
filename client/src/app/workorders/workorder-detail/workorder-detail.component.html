@@ -2,125 +2,147 @@
 <app-nav></app-nav>
 
 <div class="container-fluid">
-    <div class="row">
+  <div class="row">
 
-        <div class="border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary">
-            <app-sidebar></app-sidebar>
-        </div>
+    <div class="border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary">
+      <app-sidebar></app-sidebar>
+    </div>
 
-        <main class="col-md-9 ms-sm-auto col-lg-8 px-md-4">
-            <div
-                class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2">Workorder Details</h1>
-                <!-- <div class="btn-toolbar mb-2 mb-md-0">
-                    <div class="btn-group me-2">
+    <main class="col-md-9 ms-sm-auto col-lg-8 px-md-4">
+      <div
+        class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Workorder Details</h1>
+        <!-- <div class="btn-toolbar mb-2 mb-md-0">
+                    <div class="btn-group me-2" *appHasRole='["SuperAdmin","Admin","Client"]'>
                       <button type="button" class="btn btn-sm btn-outline-primary" routerLink="/issue/add"><i
                           class="bi bi-plus-circle-dotted text-blue"></i><span>&nbsp;</span> Raise Issue</button>
                     </div>
                   </div> -->
+      </div>
+      <div *ngIf="workorder">
+        <div class="card mb-3">
+          <div class="card-header text-center" *appHasRole='["SuperAdmin","Admin", "Contractor"]'>
+            <button type="button" class="btn btn-sm btn-success me-2" data-bs-toggle="modal"
+              data-bs-target="#completeJob">Complete Job</button>
+            <button type="button" class="btn btn-sm btn-danger me-2" data-bs-toggle="modal"
+              data-bs-target="#rejectJob">Reject Job</button>
+            <button type="button" class="btn btn-sm btn-info me-2">Add Invoice</button>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">{{workorder.issue.issueType.name}}</h5>
+            <p class="card-text">{{workorder.issue.description}}.</p>
+            <div class="d-flex w-100 justify-content-between">
+              <small class="text-body-secondary mb-1 flex-grow-1"><span
+                  class="badge text-bg-info">{{workorder.status.identifier}}</span></small>
+              <p class="card-text"><small class="text-body-secondary">Created Date: {{workorder.createdDate |
+                  date}}</small></p>
             </div>
-            <div *ngIf="workorder">
-                    <div class="card mb-3">
-                        <div class="card-header text-center" *appHasRole='["SuperAdmin","Admin", "Contractor"]'>
-                            <button type="button" class="btn btn-sm btn-success me-2" data-bs-toggle="modal" data-bs-target="#completeJob">Complete Job</button>
-                            <button type="button" class="btn btn-sm btn-danger me-2" data-bs-toggle="modal" data-bs-target="#rejectJob">Reject Job</button>
-                            <button type="button" class="btn btn-sm btn-info me-2" >Add Invoice</button>
-                          </div>
-                        <div class="card-body">
-                            <h5 class="card-title">{{workorder.issue.issueType.name}}</h5>
-                            <p class="card-text">{{workorder.issue.description}}.</p>
-                            <div class="d-flex w-100 justify-content-between">
-                              <small class="text-body-secondary mb-1 flex-grow-1"><span class="badge text-bg-info">{{workorder.status.identifier}}</span></small>
-                              <p class="card-text"><small class="text-body-secondary">Created Date: {{workorder.createdDate | date}}</small></p>
-                            </div>
-                        </div>
-                    </div>
+          </div>
+        </div>
 
-                    <div class="card mb-3" *ngIf="workorder.issue?.photoUrl">
-                        <div class="card-body">
-                        <h5 class="card-title">Image</h5>
-                        <img src="{{workorder.issue?.photoUrl}}" class="card-img-bottom" alt="...">
-                        </div>
-                    </div>
+        <div class="card mb-3" *ngIf="workorder.issue?.photoUrl">
+          <div class="card-body">
+            <h5 class="card-title">Image</h5>
+            <img src="{{workorder.issue?.photoUrl}}" class="card-img-bottom" alt="...">
+          </div>
+        </div>
 
-                    <div class="col-lg-12 mb-5" *appHasRole='["SuperAdmin","Admin", "Contractor"]'>
-                        <div class="row mb-5">
-                            <div class="col mb-5">
-                                <div class="card">
-                                    <div class="card-body p-3 ps-2">
-                                        <h5 class="card-title p-2">Contact Client</h5>
+        <div class="col-lg-12 mb-5" *appHasRole='["SuperAdmin","Admin", "Contractor"]'>
+          <div class="row mb-5">
+            <div class="col mb-5">
+              <div class="card">
+                <div class="card-body p-3 ps-2">
+                  <h5 class="card-title p-2">Contact Client</h5>
 
-                                        <ng-container *ngIf="workorder.issue?.client">
-                                            <ng-container *appHasRole='["Admin","Contractor"]'>
-                                              <p>Name: {{workorder.issue.client.firstName}} {{workorder.issue.client.lastName}}</p>
-                                                <a routerLink="/members/{{workorder.issue?.client.email}}"
-                                                    class="btn btn-outline-info btn-block btn-sm me-2"
-                                                    *ngIf="workorder.issue?.client.email"><i class="bi bi-chat-dots me-2"></i>
-                                                    Live Chat</a>
-                                            </ng-container>
-                                        </ng-container>
+                  <ng-container *ngIf="workorder.issue?.client">
+                    <ng-container *appHasRole='["Admin","Contractor"]'>
+                      <p>Name: {{workorder.issue.client.firstName}} {{workorder.issue.client.lastName}}</p>
+                      <a routerLink="/members/{{workorder.issue?.client.email}}"
+                        class="btn btn-outline-info btn-block btn-sm me-2" *ngIf="workorder.issue?.client.email"><i
+                          class="bi bi-chat-dots me-2"></i>
+                        Live Chat</a>
+                    </ng-container>
+                  </ng-container>
 
-                                        <a href="tel:{{workorder.issue?.client?.phone}}"
-                                            class="btn btn-outline-info btn-block btn-sm me-2" *ngIf="workorder.issue?.client.phone"><i
-                                                class="bi bi-telephone-outbound me-2"></i>
-                                            +27{{workorder.issue?.client.phone}}</a>
-                                        <a href="mailto:{{workorder.issue?.client?.email}}"
-                                                            class="btn btn-outline-info btn-block btn-sm"
-                                                            *ngIf="workorder.issue?.client.email"><i class="bi bi-envelope me-2"></i>
-                                                            {{workorder.issue?.client.email}}</a>
-                                        <a href="https://wa.me/+27{{workorder.issue?.client?.phone}}/?text=I have accepted your issue on Kiboko Fixer: {{ getFullUrl() }}"
-                                            class="h4 p-3 pt-3 btn btn-lg text-info" *ngIf="workorder.issue?.client.phone"><i
-                                                class="bi bi-whatsapp"></i></a>
+                  <ng-container *ngIf="workorder.issue?.client">
 
-                                        <button (click)="shareIssueDetails()" class="btn btn-outline-primary btn-sm">
-                                            <i class="bi bi-share"></i> Share
-                                        </button>
+                    <a href="tel:{{workorder.issue?.client?.phone}}" class="btn btn-outline-info btn-block btn-sm me-2"
+                      *ngIf="workorder.issue?.client?.phone"><i class="bi bi-telephone-outbound me-2"></i>
+                      +27{{workorder.issue?.client?.phone}}</a>
 
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <a href="mailto:{{workorder.issue?.client?.email}}" class="btn btn-outline-info btn-block btn-sm"
+                      *ngIf="workorder.issue?.client?.email"><i class="bi bi-envelope me-2"></i>
+                      {{workorder.issue?.client.email}}</a>
+
+                    <a href="https://wa.me/+27{{workorder.issue?.client?.phone}}/?text=I have accepted your issue on Kiboko Fixer: {{ getFullUrl() }}"
+                      class="h4 p-3 pt-3 btn btn-lg text-info" *ngIf="workorder.issue?.client?.phone"><i
+                        class="bi bi-whatsapp"></i></a>
+
+                  </ng-container>
+
+                  <a href="tel:{{workorder.issue.clientPhone}}" class="btn btn-outline-info btn-block btn-sm me-2"
+                    *ngIf="workorder.issue.clientPhone"><i class="bi bi-telephone-outbound me-2"></i>
+                    +27{{workorder.issue.clientPhone}}</a>
+
+                  <a href="mailto:{{workorder.issue.clientEmail}}" class="btn btn-outline-info btn-block btn-sm"
+                    *ngIf="workorder.issue.clientEmail"><i
+                      class="bi bi-envelope me-2"></i>{{workorder.issue.clientEmail}}</a>
+
+                  <a href="https://wa.me/+27{{workorder.issue.clientPhone}}/?text=I have accepted your issue on Kiboko Fixer: {{ getFullUrl() }}"
+                    class="h4 p-3 pt-3 btn btn-lg text-info" *ngIf="workorder.issue.clientPhone"><i
+                      class="bi bi-whatsapp"></i></a>
+
+                  <button (click)="shareIssueDetails()" class="btn btn-outline-primary btn-sm">
+                    <i class="bi bi-share"></i> Share
+                  </button>
+
+                </div>
+              </div>
             </div>
-        </main>
-        <div class="col-lg-2 mt-5"></div>
-    </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <div class="col-lg-2 mt-5"></div>
+  </div>
 </div>
 
 <div class="modal fade" id="completeJob" tabindex="-1" aria-labelledby="completeJobLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="completeJobLabel">Complete Job</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-            Have you completed this job? 
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">No</button>
-          <button type="button" class="btn btn-sm btn-success" data-bs-dismiss="modal" (click)="completeWorkOrder()">Yes</button>
-        </div>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="completeJobLabel">Complete Job</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Have you completed this job?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">No</button>
+        <button type="button" class="btn btn-sm btn-success" data-bs-dismiss="modal"
+          (click)="completeWorkOrder()">Yes</button>
       </div>
     </div>
   </div>
+</div>
 
-  <div class="modal fade" id="rejectJob" tabindex="-1" aria-labelledby="rejectJobLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="rejectJobLabel">Reject Job</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-            Would you like to reject this job? 
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">No</button>
-          <button type="button" class="btn btn-sm btn-danger" data-bs-dismiss="modal" (click)="rejectWorkOrder()">Yes</button>
-        </div>
+<div class="modal fade" id="rejectJob" tabindex="-1" aria-labelledby="rejectJobLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="rejectJobLabel">Reject Job</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Would you like to reject this job?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">No</button>
+        <button type="button" class="btn btn-sm btn-danger" data-bs-dismiss="modal"
+          (click)="rejectWorkOrder()">Yes</button>
       </div>
     </div>
   </div>
+</div>
 
 <app-footer></app-footer>

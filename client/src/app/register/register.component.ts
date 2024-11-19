@@ -32,7 +32,7 @@ export class RegisterComponent implements OnInit {
       ]],
       phone: [null,         [
         Validators.required,
-        Validators.pattern('^[0-9]{9}$')
+        Validators.pattern('^[0-9]{10}$')
       ]],
       password: ['', [Validators.required]],
       confirmPassword: ['', [Validators.required]],

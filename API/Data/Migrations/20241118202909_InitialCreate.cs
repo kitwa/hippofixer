@@ -352,7 +352,8 @@ namespace API.Data.Migrations
                     Emergency = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     CityId = table.Column<int>(type: "int", nullable: false),
                     StatusId = table.Column<int>(type: "int", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime(6)", nullable: false)
+                    CreatedDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    UpdatedDate = table.Column<DateTime>(type: "datetime(6)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -532,6 +533,7 @@ namespace API.Data.Migrations
                     CreatedDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     DateCompleted = table.Column<DateTime>(type: "datetime(6)", nullable: true),
                     Deleted = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    UpdatedDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     UnitId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>

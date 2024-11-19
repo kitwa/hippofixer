@@ -22,5 +22,6 @@ namespace API.DTOs
         public int StatusId { get; set; }
         public WorkOrderStatusDto Status { get; set; }
         public DateTime CreatedDate { get; set; } = DateTime.Now;
+        public DateTime UpdatedDate { get; set; }
     }
 }

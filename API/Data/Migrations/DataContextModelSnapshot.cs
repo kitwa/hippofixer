@@ -329,6 +329,9 @@ namespace API.Data.Migrations
                     b.Property<int>("StatusId")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("UpdatedDate")
+                        .HasColumnType("datetime(6)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CityId");
@@ -610,6 +613,9 @@ namespace API.Data.Migrations
 
                     b.Property<int?>("UnitId")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("UpdatedDate")
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
 

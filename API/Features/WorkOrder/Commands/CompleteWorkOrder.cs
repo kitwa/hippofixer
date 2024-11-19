@@ -43,6 +43,7 @@ namespace API.Features.Issues.Commands
                 }
 
                 workOrder.StatusId = Constants.Status.Completed;
+                workOrder.UpdatedDate = DateTime.Now;
 
                 var issueForWorkOrder = await _context.Issues.Where(x => x.Id == workOrder.IssueId)
                                                 .SingleOrDefaultAsync();

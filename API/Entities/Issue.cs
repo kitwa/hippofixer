@@ -19,4 +19,5 @@ public class Issue
     public int StatusId { get; set; }
     public WorkOrderStatus Status { get; set; } 
     public DateTime CreatedDate { get; set; } = DateTime.Now;
+    public DateTime UpdatedDate { get; set; }
 }

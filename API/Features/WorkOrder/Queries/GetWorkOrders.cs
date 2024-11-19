@@ -32,9 +32,7 @@ namespace API.Features.WorkOrders.Queries
             public async Task<PagedList<WorkOrderDto>> Handle(Query query, CancellationToken cancellationToken)
             {
 
-                var workOrders = _context.WorkOrders.Where(x => x.StatusId == Constants.Status.InProgress 
-                                                            || x.StatusId == Constants.Status.Completed)
-                                        .Include(x => x.Status)
+                var workOrders = _context.WorkOrders.Include(x => x.Status)
                                         .Include(x => x.Issue)
                                         .ThenInclude(x => x.IssueType)
                                         .ProjectTo<WorkOrderDto>(_mapper.ConfigurationProvider)

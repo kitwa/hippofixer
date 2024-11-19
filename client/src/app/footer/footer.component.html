@@ -1,20 +1,24 @@
 <nav class="navbar fixed-bottom navbar-expand-sm navbar-dark bg-dark mobile-only" *ngIf="user">
   <div class="container-fluid ">
 
+    <div class="text-center text-white" routerLink="/" *appHasRole='["Client"]'>
+      <i class="bi bi-house"></i>
+      <p>Home</p>
+    </div>
 
     <div class="text-center text-white" routerLink="/issues">
       <i class="bi bi-file-earmark-text"></i>
       <p>Issues</p>
     </div>
 
-    <div class="text-center text-white" routerLink="/workorders">
+    <div class="text-center text-white" routerLink="/workorders" *appHasRole='["SuperAdmin","Admin","Contractor"]'>
       <i class="bi bi-list-check"></i>
       <p>Workorders</p>
     </div>
 
-    <div class="text-center " routerLink="/issue/add">
+    <div class="text-center " routerLink="/issue/add" *appHasRole='["SuperAdmin","Admin","Client"]'>
       <i class="bi bi-plus-circle-dotted large-icon text-primary icon-background"></i>
-      <p class="mt-4 pe-3 text-white">Raise Issue</p>
+      <p class="mt-4 pe-2 ps-3 text-white">Raise Issue</p>
     </div>
 
     <div class="text-center text-white" routerLink="/messages">

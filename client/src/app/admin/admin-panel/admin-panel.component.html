@@ -1,129 +1,142 @@
-<h5 class="mb-4">Admin Dashboard</h5>
-<ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
-    <li class="nav-item" role="presentation" *appHasRole='["Admin", "Agent"]'>
-      <button class="nav-link active" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Statistiques</button>
-    </li>
-    <li class="nav-item" role="presentation" *appHasRole='["Admin"]'>
-      <button class="nav-link " id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Gestion des utilisateurs</button>
-    </li>
-    <li class="nav-item" role="presentation" *appHasRole='["Admin"]'>
-      <button class="nav-link " id="cities-tab" data-bs-toggle="tab" data-bs-target="#cities" type="button" role="tab" aria-controls="cities" aria-selected="true">Ville</button>
-    </li>
-    <li class="nav-item" role="presentation" *appHasRole='["Admin"]'>
-      <button class="nav-link " id="propertyTypes-tab" data-bs-toggle="tab" data-bs-target="#propertyTypes" type="button" role="tab" aria-controls="propertyTypes" aria-selected="true">Type de biens</button>
-    </li>
-    <li class="nav-item" role="presentation" *appHasRole='["Admin"]'>
-      <button class="nav-link " id="carTypes-tab" data-bs-toggle="tab" data-bs-target="#carTypes" type="button" role="tab" aria-controls="carTypes" aria-selected="true">Type de voiture</button>
-    </li>
-  </ul>
+<!-- same starts here -->
+<app-nav></app-nav>
 
-  <div class="tab-content" id="myTabContent">
-    <div class="tab-pane fade " id="home" role="tabpanel" aria-labelledby="home-tab" *appHasRole='["Admin"]'>
-        <app-user-management></app-user-management>
+<div class="container-fluid">
+  <div class="row">
+
+    <div class="border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary">
+      <app-sidebar></app-sidebar>
     </div>
 
-    <div class="tab-pane fade " id="cities" role="tabpanel" aria-labelledby="cities-tab" *appHasRole='["Admin"]'>
-      <app-city></app-city>
-    </div>
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+      <div
+        class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Template</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+          <div class="btn-group me-2" *appHasRole='["SuperAdmin","Admin","Client"]'>
+            <button type="button" class="btn btn-sm btn-outline-primary" routerLink="/issue/add"><i
+                class="bi bi-plus-circle-dotted text-blue"></i><span>&nbsp;</span> Raise Issue</button>
+          </div>
+        </div>
+      </div>
 
-    <div class="tab-pane fade " id="propertyTypes" role="tabpanel" aria-labelledby="propertyTypes-tab" *appHasRole='["Admin"]'>
-      <app-property-type></app-property-type>
-    </div>
+      <h5 class="mb-4">Admin Dashboard</h5>
+      <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation" *appHasRole='["Admin", "Agent"]'>
+          <button class="nav-link active" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button"
+            role="tab" aria-controls="profile" aria-selected="false">Statistiques</button>
+        </li>
+        <li class="nav-item" role="presentation" *appHasRole='["Admin"]'>
+          <button class="nav-link " id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab"
+            aria-controls="home" aria-selected="true">Gestion des utilisateurs</button>
+        </li>
+      </ul>
 
-    <div class="tab-pane fade " id="carTypes" role="tabpanel" aria-labelledby="carTypes-tab" *appHasRole='["Admin"]'>
-      <app-car-type></app-car-type>
-    </div>
+      <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade " id="home" role="tabpanel" aria-labelledby="home-tab" *appHasRole='["Admin"]'>
+          <app-user-management></app-user-management>
+        </div>
 
-    <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+        <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
 
-        <section class="py-3 py-md-5">
-          <div class="container">
-            <div class="row justify-content-left">
-              <div class="col-12 col-lg-10 col-xl-8 col-xxl-7">
-                <div class="row gy-4">
-                  <div class="col-12 col-sm-6">
-                    <div class="card widget-card border-light shadow-sm">
-                      <div class="card-body p-4">
-                        <div class="row">
-                          <div class="col-8">
-                            <h5 class="card-title widget-card-title mb-3 text-dark">Utilisateurs</h5>
-                            <h4 class="card-subtitle text-body-secondary m-0 text-dark">{{stats.numberOfUsers}}</h4>
-                          </div>
-                          <div class="col-4">
-                            <div class="d-flex justify-content-end">
-                              <div class="lh-1 text-white bg-primary rounded-circle p-3 d-flex align-items-center justify-content-center">
-                                <i class="bi bi-person fs-4"></i>
+          <section class="py-3 py-md-5">
+            <div class="container">
+              <div class="row justify-content-left">
+                <div class="col-12 col-lg-10 col-xl-8 col-xxl-7">
+                  <div class="row gy-4">
+                    <div class="col-12 col-sm-6">
+                      <div class="card widget-card border-light shadow-sm">
+                        <div class="card-body p-4">
+                          <div class="row">
+                            <div class="col-8">
+                              <h5 class="card-title widget-card-title mb-3 text-dark">Utilisateurs</h5>
+                              <h4 class="card-subtitle text-body-secondary m-0 text-dark">{{stats.numberOfUsers}}</h4>
+                            </div>
+                            <div class="col-4">
+                              <div class="d-flex justify-content-end">
+                                <div
+                                  class="lh-1 text-white bg-primary rounded-circle p-3 d-flex align-items-center justify-content-center">
+                                  <i class="bi bi-person fs-4"></i>
+                                </div>
                               </div>
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                  <div class="col-12 col-sm-6">
-                    <div class="card widget-card border-light shadow-sm">
-                      <div class="card-body p-4">
-                        <div class="row">
-                          <div class="col-8">
-                            <h5 class="card-title widget-card-title mb-3 text-dark">Nombre de biens</h5>
-                            <h4 class="card-subtitle text-body-secondary m-0 text-dark">{{stats.numberOfProperties}}</h4>
-                          </div>
-                          <div class="col-4">
-                            <div class="d-flex justify-content-end">
-                              <div class="lh-1 text-white bg-warning rounded-circle p-3 d-flex align-items-center justify-content-center">
-                                <i class="bi bi-truck fs-4"></i>
+                    <div class="col-12 col-sm-6">
+                      <div class="card widget-card border-light shadow-sm">
+                        <div class="card-body p-4">
+                          <div class="row">
+                            <div class="col-8">
+                              <h5 class="card-title widget-card-title mb-3 text-dark">Nombre de biens</h5>
+                              <h4 class="card-subtitle text-body-secondary m-0 text-dark">{{stats.numberOfProperties}}
+                              </h4>
+                            </div>
+                            <div class="col-4">
+                              <div class="d-flex justify-content-end">
+                                <div
+                                  class="lh-1 text-white bg-warning rounded-circle p-3 d-flex align-items-center justify-content-center">
+                                  <i class="bi bi-truck fs-4"></i>
+                                </div>
                               </div>
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                  <div class="col-12 col-sm-6">
-                    <div class="card widget-card border-light shadow-sm">
-                      <div class="card-body p-4">
-                        <div class="row">
-                          <div class="col-8">
-                            <h5 class="card-title widget-card-title mb-3 text-dark">Nombre de photos</h5>
-                            <h4 class="card-subtitle text-body-secondary m-0 text-dark">{{stats.numberOfPhotos}}</h4>
-                          </div>
-                          <div class="col-4">
-                            <div class="d-flex justify-content-end">
-                              <div class="lh-1 text-white bg-info rounded-circle p-3 d-flex align-items-center justify-content-center">
-                                <i class="bi bi-currency-dollar fs-4"></i>
+                    <div class="col-12 col-sm-6">
+                      <div class="card widget-card border-light shadow-sm">
+                        <div class="card-body p-4">
+                          <div class="row">
+                            <div class="col-8">
+                              <h5 class="card-title widget-card-title mb-3 text-dark">Nombre de photos</h5>
+                              <h4 class="card-subtitle text-body-secondary m-0 text-dark">{{stats.numberOfPhotos}}</h4>
+                            </div>
+                            <div class="col-4">
+                              <div class="d-flex justify-content-end">
+                                <div
+                                  class="lh-1 text-white bg-info rounded-circle p-3 d-flex align-items-center justify-content-center">
+                                  <i class="bi bi-currency-dollar fs-4"></i>
+                                </div>
                               </div>
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                  <div class="col-12 col-sm-6">
-                    <div class="card widget-card border-light shadow-sm">
-                      <div class="card-body p-4">
-                        <div class="row">
-                          <div class="col-8">
-                            <h5 class="card-title widget-card-title mb-3 text-dark">Prix Total</h5>
-                            <h4 class="card-subtitle text-body-secondary m-0 text-dark">{{stats.totalPrice}}</h4>
-                          </div>
-                          <div class="col-4">
-                            <div class="d-flex justify-content-end">
-                              <div class="lh-1 text-white bg-success rounded-circle p-3 d-flex align-items-center justify-content-center">
-                                <i class="bi bi-cart fs-4"></i>
+                    <div class="col-12 col-sm-6">
+                      <div class="card widget-card border-light shadow-sm">
+                        <div class="card-body p-4">
+                          <div class="row">
+                            <div class="col-8">
+                              <h5 class="card-title widget-card-title mb-3 text-dark">Prix Total</h5>
+                              <h4 class="card-subtitle text-body-secondary m-0 text-dark">{{stats.totalPrice}}</h4>
+                            </div>
+                            <div class="col-4">
+                              <div class="d-flex justify-content-end">
+                                <div
+                                  class="lh-1 text-white bg-success rounded-circle p-3 d-flex align-items-center justify-content-center">
+                                  <i class="bi bi-cart fs-4"></i>
+                                </div>
                               </div>
                             </div>
                           </div>
-                        </div>
 
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-    </div>
+        </div>
+      </div>
+
+    </main>
   </div>
+</div>
 
+<app-footer></app-footer>
