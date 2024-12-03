@@ -52,16 +52,22 @@
 
           <div class="form-group">
             <label for="password" class="text-white fs-5">Password</label>
-            <input [class.is-invalid]='registerForm.get("password")?.errors && registerForm.get("password")?.touched'
-              type="password" class="form-control" formControlName='password' placeholder="Password">
-            <div *ngIf="registerForm.get('password')?.hasError('required')" class="invalid-feedback">Please enter a
-              password.
-            </div>
-            <div *ngIf="registerForm.get('password')?.hasError('minlength')" class="invalid-feedback">The password must
-              be at least 6 characters long and must contain at least 1 uppercase letter and 1 lowercase letter.</div>
-            <!-- <div *ngIf="registerForm.get('password')?.hasError('maxlength')" class="invalid-feedback">Please must be at
+            <div class="input-group">
+              <input [class.is-invalid]='registerForm.get("password")?.errors && registerForm.get("password")?.touched' [type]="showPassword ? 'text' : 'password'"
+              class="form-control" formControlName='password' placeholder="Password">
+              <i class="input-group-text bi" [ngClass]="showPassword ? 'bi-eye-slash-fill' : 'bi-eye-fill'"
+                (click)="togglePasswordVisibility()">
+              </i>
+                <div *ngIf="registerForm.get('password')?.hasError('required')" class="invalid-feedback">
+                  Please enter a password.
+                </div>
+                <div *ngIf="registerForm.get('password')?.hasError('minlength')" class="invalid-feedback">
+                  The password must be at least 6 characters long and must contain at least 1 uppercase letter and 1 lowercase letter.
+                </div>
+                <!-- <div *ngIf="registerForm.get('password')?.hasError('maxlength')" class="invalid-feedback">Please must be at
               most 12
               characters.</div> -->
+            </div>
           </div>
 
           <div class="form-group">
@@ -83,18 +89,14 @@
 
           <div class="form-group">
             <label for="cityId" class="text-white fs-5">Where are you based?</label>
-            <input 
-                class="form-control" 
-                list="cities" 
-                id="cityId" 
-                formControlName="cityName"
-                placeholder="Type to search..." 
-                [class.is-invalid]="registerForm.get('cityName')?.errors && registerForm.get('cityName')?.touched">
-            
+            <input class="form-control" list="cities" id="cityId" formControlName="cityName"
+              placeholder="Type to search..."
+              [class.is-invalid]="registerForm.get('cityName')?.errors && registerForm.get('cityName')?.touched">
+
             <datalist id="cities">
-                <option *ngFor="let city of cities" [value]="city.name"></option>
+              <option *ngFor="let city of cities" [value]="city.name"></option>
             </datalist>
-            
+
             <div class="invalid-feedback">Please choose where you are based.</div>
           </div>
 

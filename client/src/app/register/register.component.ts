@@ -16,7 +16,7 @@ export class RegisterComponent implements OnInit {
   registerForm: UntypedFormGroup;
   validationErrors: any[] = [];
   cities: City[];
-
+  showPassword = false;
 
   constructor(private accountService: AccountService,  private toastr: ToastrService, private fb: UntypedFormBuilder, private router: Router) { }
 
@@ -87,5 +87,9 @@ export class RegisterComponent implements OnInit {
           return null;
         }
     }
+  }
+
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
   }
 }

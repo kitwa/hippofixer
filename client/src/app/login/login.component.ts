@@ -15,7 +15,8 @@ export class LoginComponent implements OnInit {
   @Output() cancelRegister = new EventEmitter();
   loginForm: UntypedFormGroup;
   validationErrors: string[] = [];
-
+  showPassword = false;
+  
   constructor(public accountService: AccountService,  private toastr: ToastrService, private fb: UntypedFormBuilder, private router: Router) { }
 
   ngOnInit(): void {
@@ -36,6 +37,10 @@ export class LoginComponent implements OnInit {
     }, error => {
       this.validationErrors = error.error;
     });
+  }
+
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
   }
 
 }
