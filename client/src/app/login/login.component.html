@@ -35,7 +35,7 @@
             <div class="form-group">
               <label for="email" class="text-white fs-5">Email</label>
               <input type="text" [class.is-invalid]='loginForm.get("email")?.errors && loginForm.get("email")?.touched' class="form-control" placeholder="Enter Email" formControlName='email'>
-              <div class="invalid-feedback">Please enter an email.</div>
+              <div class="invalid-feedback bg-white fs-6">Please enter an email.</div>
             </div>
 
             <div class="form-group">
@@ -47,7 +47,7 @@
                     [ngClass]="showPassword ? 'bi-eye-slash-fill' : 'bi-eye-fill'" 
                     (click)="togglePasswordVisibility()">
                   </i>
-                  <div *ngIf="loginForm.get('password')?.hasError('required')" class="invalid-feedback fs-5">Please enter a password.</div>
+                  <div *ngIf="loginForm.get('password')?.hasError('required')" class="invalid-feedback bg-white fs-6">Please enter a password.</div>
                     <!-- <div *ngIf="loginForm.get('password')?.hasError('minlength')" class="invalid-feedback">The password must be at least 6 characters long.</div> -->
               </div>
             </div>

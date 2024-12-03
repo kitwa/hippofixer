@@ -39,7 +39,7 @@
             <input type="text" (keydown.space)="$event.preventDefault()"
               [class.is-invalid]='registerForm.get("email")?.errors && registerForm.get("email")?.touched'
               class="form-control" placeholder="Email Address" formControlName='email'>
-            <div class="invalid-feedback">Please enter an email</div>
+            <div class="invalid-feedback bg-white fs-6">Please enter an email</div>
           </div>
 
           <div class="form-group">
@@ -47,43 +47,46 @@
             <input type="text" (keydown.space)="$event.preventDefault()"
               [class.is-invalid]='registerForm.get("phone")?.errors && registerForm.get("phone")?.touched'
               class="form-control" placeholder="Phone Number" formControlName='phone'>
-            <div class="invalid-feedback">Please enter a valid 10-digit phone number.</div>
+            <div class="invalid-feedback bg-white fs-6">Please enter a valid 10-digit phone number.</div>
           </div>
 
           <div class="form-group">
             <label for="password" class="text-white fs-5">Password</label>
             <div class="input-group">
-              <input [class.is-invalid]='registerForm.get("password")?.errors && registerForm.get("password")?.touched' [type]="showPassword ? 'text' : 'password'"
-              class="form-control" formControlName='password' placeholder="Password">
+              <input [class.is-invalid]='registerForm.get("password")?.errors && registerForm.get("password")?.touched'
+                [type]="showPassword ? 'text' : 'password'" class="form-control" formControlName='password'
+                placeholder="Password">
               <i class="input-group-text bi" [ngClass]="showPassword ? 'bi-eye-slash-fill' : 'bi-eye-fill'"
                 (click)="togglePasswordVisibility()">
               </i>
-                <div *ngIf="registerForm.get('password')?.hasError('required')" class="invalid-feedback">
-                  Please enter a password.
-                </div>
-                <div *ngIf="registerForm.get('password')?.hasError('minlength')" class="invalid-feedback">
-                  The password must be at least 6 characters long and must contain at least 1 uppercase letter and 1 lowercase letter.
-                </div>
-                <!-- <div *ngIf="registerForm.get('password')?.hasError('maxlength')" class="invalid-feedback">Please must be at
-              most 12
-              characters.</div> -->
+              <div *ngIf="registerForm.get('password')?.hasError('required')" class="invalid-feedback">
+                Please enter a password.
+              </div>
+              <div *ngIf="registerForm.get('password')?.hasError('minlength')" class="invalid-feedback bg-white fs-6">
+                The password must be at least 6 characters long and must contain at least 1 uppercase letter and 1
+                lowercase letter.
+              </div>
             </div>
           </div>
 
           <div class="form-group">
             <label for="password" class="text-white fs-5">Confirm Password</label>
-            <input
-              [class.is-invalid]='registerForm.get("confirmPassword")?.errors && registerForm.get("confirmPassword")?.touched'
-              type="password" class="form-control" formControlName='confirmPassword' placeholder="Confirm Password">
-            <div *ngIf="registerForm.get('confirmPassword')?.hasError('required')" class="invalid-feedback">Please
-              confirm the password.</div>
-            <!-- <div *ngIf="registerForm.get('confirmPassword')?.hasError('minlength')" class="invalid-feedback"></div> -->
-            <!-- <div *ngIf="registerForm.get('confirmPassword')?.hasError('maxlength')" class="invalid-feedback">Please must
-              be at
-              most 12 characters.</div> -->
-            <div class="invalid-feedback"
-              *ngIf="(registerForm.get('password').value !== registerForm.get('confirmPassword').value)">
-              The 2 Passwords must match.
+            <div class="input-group">
+              <input
+                [class.is-invalid]='registerForm.get("confirmPassword")?.errors && registerForm.get("confirmPassword")?.touched'
+                [type]="showConfirmPassword ? 'text' : 'password'" class="form-control"
+                formControlName='confirmPassword' placeholder="Confirm Password">
+              <i class="input-group-text bi" [ngClass]="showConfirmPassword ? 'bi-eye-slash-fill' : 'bi-eye-fill'"
+                (click)="toggleConfirmPasswordVisibility()">
+              </i>
+
+              <div *ngIf="registerForm.get('confirmPassword')?.hasError('required')" class="invalid-feedback">Please
+                confirm the password.</div>
+
+              <div class="invalid-feedback bg-white fs-6"
+                *ngIf="(registerForm.get('password').value !== registerForm.get('confirmPassword').value)">
+                The 2 Passwords must match.
+              </div>
             </div>
           </div>
 
@@ -97,11 +100,11 @@
               <option *ngFor="let city of cities" [value]="city.name"></option>
             </datalist>
 
-            <div class="invalid-feedback">Please choose where you are based.</div>
+            <div class="invalid-feedback bg-white fs-6">Please choose where you are based.</div>
           </div>
 
           <div class="row" *ngIf="validationErrors.length > 0">
-            <ul class="text-danger">
+            <ul class="text-danger bg-white fs-6">
               <li *ngFor="let error of validationErrors">
                 {{error.description}}
               </li>
@@ -114,7 +117,7 @@
             <small class="text-white m-2">By clicking Register, you agree to the terms of use.</small>
             <h6 class="m-2">Terms and conditions</h6>
             <hr class="my-4">
-            <button type="button" class="w-100 btn btn-sm mt-2 btn-info" routerLink="/login">Log In In</button>
+            <button type="button" class="w-100 btn btn-sm mt-2 btn-info" routerLink="/login">Log In</button>
           </div>
         </form>
       </div>
