@@ -26,7 +26,7 @@
               data-bs-target="#completeJob">Complete Job</button>
             <button type="button" class="btn btn-sm btn-danger me-2" data-bs-toggle="modal"
               data-bs-target="#rejectJob">Reject Job</button>
-            <button type="button" class="btn btn-sm btn-info me-2">Add Invoice</button>
+            <button type="button" class="btn btn-sm btn-info me-2" routerLink="/workorder/{{workorder.id}}/invoice/add/1">Add Invoice</button>
           </div>
           <div class="card-body">
             <h5 class="card-title">{{workorder.issue.issueType.name}}</h5>

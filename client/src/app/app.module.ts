@@ -48,6 +48,9 @@ import { IssueDetailComponent } from './issues/issue-detail/issue-detail.compone
 import { WorkorderListsComponent } from './workorders/workorder-lists/workorder-lists.component';
 import { WorkorderDetailComponent } from './workorders/workorder-detail/workorder-detail.component';
 import { IssueAddNoaccountComponent } from './issues/issue-add-noaccount/issue-add-noaccount.component';
+import { InvoiceDetailComponent } from './invoices/invoice-detail/invoice-detail.component';
+import { InvoiceListsComponent } from './invoices/invoice-lists/invoice-lists.component';
+import { InvoiceAddComponent } from './invoices/invoice-add/invoice-add.component';
 
 @NgModule({
   declarations: [
@@ -86,7 +89,10 @@ import { IssueAddNoaccountComponent } from './issues/issue-add-noaccount/issue-a
     IssueDetailComponent,
     IssueAddNoaccountComponent,
     WorkorderListsComponent,
-    WorkorderDetailComponent
+    WorkorderDetailComponent,
+    InvoiceDetailComponent,
+    InvoiceListsComponent,
+    InvoiceAddComponent
   ],
   imports: [
     BrowserModule,

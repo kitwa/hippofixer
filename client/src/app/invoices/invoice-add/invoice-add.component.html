@@ -1,0 +1,159 @@
+<app-nav></app-nav>
+
+<div class="container-fluid">
+    <div class="row">
+
+        <div class="border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary">
+            <app-sidebar></app-sidebar>
+        </div>
+
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            <div
+                class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h2">Add Invoice</h1>
+            </div>
+            <section class="py-3 py-md-5 mb-5 pb-5">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-12">
+                            <div class="row gy-3 mb-3">
+                                <div class="col-6">
+                                    <h2 class="text-uppercase text-endx m-0">Invoice</h2>
+                                </div>
+                                <div class="col-6">
+                                    <a class="d-block text-end" href="#!">
+                                        <img src="./assets/logo.png" class="img-fluid" alt="Logo" width="135"
+                                            height="44">
+                                    </a>
+                                </div>
+                                <div class="col-12">
+                                    <h4>From</h4>
+                                    <address>
+                                        <strong>Contrator Name</strong><br>
+                                        875 N Coast Hwybr<br>
+                                        Laguna Beach, California, 92651<br>
+                                        United States<br>
+                                        Phone: (949) 494-7695<br>
+                                        <!-- Email: email@domain.com -->
+                                    </address>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-12 col-sm-6 col-md-8">
+                                    <h4>Bill To</h4>
+                                    <address>
+                                        <strong>Client Name</strong><br>
+                                        7657 NW Prairie View Rd<br>
+                                        Kansas City, Mississippi, 64151<br>
+                                        United States<br>
+                                        Phone: (816) 741-5790<br>
+                                        <!-- Email: email@client.com -->
+                                    </address>
+                                </div>
+                                <div class="col-12 col-sm-6 col-md-4">
+                                    <h4 class="row">
+                                        <span class="col-6">Invoice #</span>
+                                        <span class="col-6 text-sm-end">INT-1</span>
+                                    </h4>
+                                    <div class="row">
+                                        <span class="col-6">Total Account</span>
+                                        <span class="col-6 text-sm-end h4 text-black">R0.00</span>
+                                        <span class="col-6">Issue ID</span>
+                                        <span class="col-6 text-sm-end">#1</span>
+                                        <span class="col-6">Invoice Date</span>
+                                        <span class="col-6 text-sm-end"><input type="date"></span>
+                                        <span class="col-6">Due Date</span>
+                                        <span class="col-6 text-sm-end"> <input type="date"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-12">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col" class="text-uppercase">Product</th>
+                                                    <th scope="col" class="text-uppercase text-end">Qty</th>
+                                                    <th scope="col" class="text-uppercase text-end">Unit Price</th>
+                                                    <th scope="col" class="text-uppercase text-end">Amount</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="table-group-divider">
+                                                <tr>
+                                                    <th scope="row">Paint Paint Paint Paint</th>
+                                                    <td class="text-end">1</td>
+                                                    <td class="text-end">29</td>
+                                                    <td class="text-end">29</td>
+                                                </tr>
+                                                <tr>
+                                                    <!-- <td></td> -->
+                                                    <div class="btn-group m-2 ms-0">
+                                                        <button type="button" class="btn btn-sm btn-outline-primary"
+                                                            data-bs-toggle="modal" data-bs-target="#addItemModal"><i
+                                                                class="bi bi-plus-circle-dotted text-blue"></i><span>&nbsp;</span>
+                                                            Add Item</button>
+                                                    </div>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="3" class="text-end">Subtotal</td>
+                                                    <td class="text-end">362</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row" colspan="3" class="text-uppercase text-end">Total
+                                                    </th>
+                                                    <td class="text-end">R00.0</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 text-end">
+                                    <button type="submit" class="btn btn-sm btn-primary mb-3 me-2"
+                                        routerLink="/workorder/1/invoice/detail/1"><i class="bi-eye pe-2"></i>View
+                                        Invoice</button>
+                                    <button type="submit" class="btn btn-sm btn-info mb-3"><i
+                                            class="bi-cloud-download pe-2"></i> Download Invoice</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+</div>
+
+<app-footer></app-footer>
+
+<div class="modal fade" id="addItemModal" tabindex="-1" aria-labelledby="addItemModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Add Invoice Item</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label for="product" class="form-label">Product Name/Type </label>
+                    <textarea class="form-control" formControlName='product' rows="3"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="quantity" class="form-label">Quantity</label>
+                    <input type="number" class="form-control" formControlName='quantity' placeholder="Quantity">
+                </div>
+                <div class="mb-3">
+                    <label for="price" class="form-label">Unit Price</label>
+                    <input type="text" class="form-control" formControlName='price' placeholder="price">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">Add Item</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>

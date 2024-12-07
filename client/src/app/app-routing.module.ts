@@ -26,6 +26,9 @@ import { IssueDetailComponent } from './issues/issue-detail/issue-detail.compone
 import { WorkorderListsComponent } from './workorders/workorder-lists/workorder-lists.component';
 import { WorkorderDetailComponent } from './workorders/workorder-detail/workorder-detail.component';
 import { IssueAddNoaccountComponent } from './issues/issue-add-noaccount/issue-add-noaccount.component';
+import { InvoiceDetailComponent } from './invoices/invoice-detail/invoice-detail.component';
+import { InvoiceListsComponent } from './invoices/invoice-lists/invoice-lists.component';
+import { InvoiceAddComponent } from './invoices/invoice-add/invoice-add.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -51,8 +54,11 @@ const routes: Routes = [
       {path: 'blogpost/edit/:id', component: BlogPostEditComponent, canDeactivate: [preventUnsavedChangesGuard], canActivate: [adminGuard]},
       {path: 'blogpost/add', component: BlogPostAddComponent, canActivate: [adminGuard]},
       {path: 'issues', component: IssueListsComponent, canActivate: [adminGuard]},
-      {path: 'issue/detail/:id', component: IssueDetailComponent, },
+      {path: 'issue/detail/:id', component: IssueDetailComponent },
       {path: 'issue/add', component: IssueAddComponent, canActivate: [adminGuard]},
+      {path: 'invoices', component: InvoiceListsComponent },
+      {path: 'workorder/:id/invoice/add/:id', component: InvoiceAddComponent },
+      {path: 'workorder/:id/invoice/detail/:id', component: InvoiceDetailComponent },
     ]
   },
   {path: 'errors', component: TestErrorsComponent},
