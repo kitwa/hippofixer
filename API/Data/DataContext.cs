@@ -16,7 +16,6 @@ namespace API.Data
         public DbSet<Message> Messages { get; set; }
         public DbSet<PropertyType> PropertyTypes { get; set; }
         public DbSet<BlogPost> BlogPosts { get; set; }
-        public DbSet<Unit> Units { get; set; }
         public DbSet<WorkOrder> WorkOrders { get; set; }
         public DbSet<Issue> Issues { get; set; }
         public DbSet<IssueType> IssueTypes { get; set; }
@@ -24,6 +23,8 @@ namespace API.Data
         public DbSet<WorkOrderStatus> WorkOrderStatuses { get; set; }
         public DbSet<Quote> Quotes { get; set; }
         public DbSet<QuoteItem> QuoteItems { get; set; }
+        public DbSet<Invoice> Invoices { get; set; }
+        public DbSet<InvoiceItem> InvoiceItems { get; set; }
         public DbSet<City> Cities { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {

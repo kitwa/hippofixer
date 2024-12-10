@@ -11,4 +11,5 @@ public class Invoice
     public DateTime? DatePaid { get; set; }
     public WorkOrder WorkOrder { get; set; }
     public AppUser Contractor { get; set; }
+    public bool Deleted { get; set; }
 }

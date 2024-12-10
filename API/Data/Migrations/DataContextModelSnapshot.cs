@@ -250,6 +250,9 @@ namespace API.Data.Migrations
                     b.Property<DateTime>("DateSubmitted")
                         .HasColumnType("datetime(6)");
 
+                    b.Property<bool>("Deleted")
+                        .HasColumnType("tinyint(1)");
+
                     b.Property<decimal>("TotalAmount")
                         .HasColumnType("decimal(65,30)");
 
@@ -262,7 +265,7 @@ namespace API.Data.Migrations
 
                     b.HasIndex("WorkOrderId");
 
-                    b.ToTable("Invoice");
+                    b.ToTable("Invoices");
                 });
 
             modelBuilder.Entity("API.Entities.InvoiceItem", b =>
@@ -270,6 +273,9 @@ namespace API.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    b.Property<bool>("Deleted")
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("Description")
                         .HasColumnType("longtext");
@@ -287,7 +293,7 @@ namespace API.Data.Migrations
 
                     b.HasIndex("InvoiceId");
 
-                    b.ToTable("InvoiceItem");
+                    b.ToTable("InvoiceItems");
                 });
 
             modelBuilder.Entity("API.Entities.Issue", b =>
@@ -410,36 +416,6 @@ namespace API.Data.Migrations
                     b.ToTable("Messages");
                 });
 
-            modelBuilder.Entity("API.Entities.Photo", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsMain")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<int>("PropertyId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("PublicId")
-                        .HasColumnType("longtext");
-
-                    b.Property<int?>("UnitId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Url")
-                        .HasColumnType("longtext");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PropertyId");
-
-                    b.HasIndex("UnitId");
-
-                    b.ToTable("Photos");
-                });
-
             modelBuilder.Entity("API.Entities.Property", b =>
                 {
                     b.Property<int>("Id")
@@ -497,6 +473,9 @@ namespace API.Data.Migrations
                     b.Property<DateTime>("DateIssued")
                         .HasColumnType("datetime(6)");
 
+                    b.Property<bool>("Deleted")
+                        .HasColumnType("tinyint(1)");
+
                     b.Property<int?>("InvoiceId")
                         .HasColumnType("int");
 
@@ -523,6 +502,9 @@ namespace API.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<bool>("Deleted")
+                        .HasColumnType("tinyint(1)");
+
                     b.Property<string>("Description")
                         .HasColumnType("longtext");
 
@@ -540,45 +522,6 @@ namespace API.Data.Migrations
                     b.HasIndex("QuoteId");
 
                     b.ToTable("QuoteItems");
-                });
-
-            modelBuilder.Entity("API.Entities.Unit", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<DateTime?>("LeaseEndDate")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<DateTime?>("LeaseStartDate")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<decimal>("MonthlyRent")
-                        .HasColumnType("decimal(65,30)");
-
-                    b.Property<int>("PropertyId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("TenantId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UnitNumber")
-                        .HasColumnType("longtext");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PropertyId");
-
-                    b.HasIndex("TenantId");
-
-                    b.ToTable("Units");
                 });
 
             modelBuilder.Entity("API.Entities.WorkOrder", b =>
@@ -611,9 +554,6 @@ namespace API.Data.Migrations
                     b.Property<int>("StatusId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("UnitId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("UpdatedDate")
                         .HasColumnType("datetime(6)");
 
@@ -624,8 +564,6 @@ namespace API.Data.Migrations
                     b.HasIndex("IssueId");
 
                     b.HasIndex("StatusId");
-
-                    b.HasIndex("UnitId");
 
                     b.ToTable("WorkOrders");
                 });
@@ -854,23 +792,6 @@ namespace API.Data.Migrations
                     b.Navigation("Sender");
                 });
 
-            modelBuilder.Entity("API.Entities.Photo", b =>
-                {
-                    b.HasOne("API.Entities.Property", "Property")
-                        .WithMany()
-                        .HasForeignKey("PropertyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("API.Entities.Unit", "Unit")
-                        .WithMany("Photos")
-                        .HasForeignKey("UnitId");
-
-                    b.Navigation("Property");
-
-                    b.Navigation("Unit");
-                });
-
             modelBuilder.Entity("API.Entities.Property", b =>
                 {
                     b.HasOne("API.Entities.AppUser", "PropertyManager")
@@ -918,23 +839,6 @@ namespace API.Data.Migrations
                     b.Navigation("Quote");
                 });
 
-            modelBuilder.Entity("API.Entities.Unit", b =>
-                {
-                    b.HasOne("API.Entities.Property", "Property")
-                        .WithMany("Units")
-                        .HasForeignKey("PropertyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("API.Entities.AppUser", "Tenant")
-                        .WithMany()
-                        .HasForeignKey("TenantId");
-
-                    b.Navigation("Property");
-
-                    b.Navigation("Tenant");
-                });
-
             modelBuilder.Entity("API.Entities.WorkOrder", b =>
                 {
                     b.HasOne("API.Entities.AppUser", "Contractor")
@@ -954,10 +858,6 @@ namespace API.Data.Migrations
                         .HasForeignKey("StatusId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("API.Entities.Unit", null)
-                        .WithMany("WorkOrders")
-                        .HasForeignKey("UnitId");
 
                     b.Navigation("Contractor");
 
@@ -1025,21 +925,9 @@ namespace API.Data.Migrations
                     b.Navigation("InvoiceItems");
                 });
 
-            modelBuilder.Entity("API.Entities.Property", b =>
-                {
-                    b.Navigation("Units");
-                });
-
             modelBuilder.Entity("API.Entities.Quote", b =>
                 {
                     b.Navigation("QuoteItems");
-                });
-
-            modelBuilder.Entity("API.Entities.Unit", b =>
-                {
-                    b.Navigation("Photos");
-
-                    b.Navigation("WorkOrders");
                 });
 
             modelBuilder.Entity("API.Entities.WorkOrder", b =>

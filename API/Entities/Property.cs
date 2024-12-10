@@ -14,7 +14,6 @@ namespace API.Entities
         public string ZipCode { get; set; }
         public int PropertyManagerId { get; set; }
         public AppUser PropertyManager { get; set; }
-        public ICollection<Unit> Units { get; set; }
         public bool Deleted { get; set; }
 
     }

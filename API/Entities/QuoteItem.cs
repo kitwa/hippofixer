@@ -8,4 +8,5 @@ public class QuoteItem
     public decimal Price { get; set; } 
     public int Quantity { get; set; } 
     public Quote Quote { get; set; }
+    public bool Deleted { get; set; }
 }

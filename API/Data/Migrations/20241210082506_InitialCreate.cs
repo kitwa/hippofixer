@@ -455,70 +455,6 @@ namespace API.Data.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "Units",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    PropertyId = table.Column<int>(type: "int", nullable: false),
-                    UnitNumber = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    TenantId = table.Column<int>(type: "int", nullable: true),
-                    MonthlyRent = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
-                    LeaseStartDate = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    LeaseEndDate = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    Created = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    Deleted = table.Column<bool>(type: "tinyint(1)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Units", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Units_AspNetUsers_TenantId",
-                        column: x => x.TenantId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Units_Properties_PropertyId",
-                        column: x => x.PropertyId,
-                        principalTable: "Properties",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
-                name: "Photos",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Url = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    IsMain = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    PublicId = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    PropertyId = table.Column<int>(type: "int", nullable: false),
-                    UnitId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Photos", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Photos_Properties_PropertyId",
-                        column: x => x.PropertyId,
-                        principalTable: "Properties",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Photos_Units_UnitId",
-                        column: x => x.UnitId,
-                        principalTable: "Units",
-                        principalColumn: "Id");
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
                 name: "WorkOrders",
                 columns: table => new
                 {
@@ -533,8 +469,7 @@ namespace API.Data.Migrations
                     CreatedDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     DateCompleted = table.Column<DateTime>(type: "datetime(6)", nullable: true),
                     Deleted = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    UpdatedDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    UnitId = table.Column<int>(type: "int", nullable: true)
+                    UpdatedDate = table.Column<DateTime>(type: "datetime(6)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -552,11 +487,6 @@ namespace API.Data.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_WorkOrders_Units_UnitId",
-                        column: x => x.UnitId,
-                        principalTable: "Units",
-                        principalColumn: "Id");
-                    table.ForeignKey(
                         name: "FK_WorkOrders_WorkOrderStatuses_StatusId",
                         column: x => x.StatusId,
                         principalTable: "WorkOrderStatuses",
@@ -566,7 +496,7 @@ namespace API.Data.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "Invoice",
+                name: "Invoices",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -575,19 +505,20 @@ namespace API.Data.Migrations
                     ContractorId = table.Column<int>(type: "int", nullable: false),
                     TotalAmount = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
                     DateSubmitted = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    DatePaid = table.Column<DateTime>(type: "datetime(6)", nullable: true)
+                    DatePaid = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    Deleted = table.Column<bool>(type: "tinyint(1)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Invoice", x => x.Id);
+                    table.PrimaryKey("PK_Invoices", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Invoice_AspNetUsers_ContractorId",
+                        name: "FK_Invoices_AspNetUsers_ContractorId",
                         column: x => x.ContractorId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Invoice_WorkOrders_WorkOrderId",
+                        name: "FK_Invoices_WorkOrders_WorkOrderId",
                         column: x => x.WorkOrderId,
                         principalTable: "WorkOrders",
                         principalColumn: "Id",
@@ -596,7 +527,7 @@ namespace API.Data.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "InvoiceItem",
+                name: "InvoiceItems",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -605,15 +536,16 @@ namespace API.Data.Migrations
                     Description = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Price = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
-                    Quantity = table.Column<int>(type: "int", nullable: false)
+                    Quantity = table.Column<int>(type: "int", nullable: false),
+                    Deleted = table.Column<bool>(type: "tinyint(1)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_InvoiceItem", x => x.Id);
+                    table.PrimaryKey("PK_InvoiceItems", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_InvoiceItem_Invoice_InvoiceId",
+                        name: "FK_InvoiceItems_Invoices_InvoiceId",
                         column: x => x.InvoiceId,
-                        principalTable: "Invoice",
+                        principalTable: "Invoices",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 })
@@ -628,15 +560,16 @@ namespace API.Data.Migrations
                     WorkOrderId = table.Column<int>(type: "int", nullable: false),
                     DateIssued = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     StatusId = table.Column<int>(type: "int", nullable: false),
-                    InvoiceId = table.Column<int>(type: "int", nullable: true)
+                    InvoiceId = table.Column<int>(type: "int", nullable: true),
+                    Deleted = table.Column<bool>(type: "tinyint(1)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Quotes", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Quotes_Invoice_InvoiceId",
+                        name: "FK_Quotes_Invoices_InvoiceId",
                         column: x => x.InvoiceId,
-                        principalTable: "Invoice",
+                        principalTable: "Invoices",
                         principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Quotes_WorkOrderStatuses_StatusId",
@@ -663,7 +596,8 @@ namespace API.Data.Migrations
                     Description = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Price = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
-                    Quantity = table.Column<int>(type: "int", nullable: false)
+                    Quantity = table.Column<int>(type: "int", nullable: false),
+                    Deleted = table.Column<bool>(type: "tinyint(1)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -725,19 +659,19 @@ namespace API.Data.Migrations
                 column: "AppUserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Invoice_ContractorId",
-                table: "Invoice",
+                name: "IX_InvoiceItems_InvoiceId",
+                table: "InvoiceItems",
+                column: "InvoiceId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Invoices_ContractorId",
+                table: "Invoices",
                 column: "ContractorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Invoice_WorkOrderId",
-                table: "Invoice",
+                name: "IX_Invoices_WorkOrderId",
+                table: "Invoices",
                 column: "WorkOrderId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_InvoiceItem_InvoiceId",
-                table: "InvoiceItem",
-                column: "InvoiceId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Issues_CityId",
@@ -770,16 +704,6 @@ namespace API.Data.Migrations
                 column: "SenderId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Photos_PropertyId",
-                table: "Photos",
-                column: "PropertyId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Photos_UnitId",
-                table: "Photos",
-                column: "UnitId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Properties_PropertyManagerId",
                 table: "Properties",
                 column: "PropertyManagerId");
@@ -805,16 +729,6 @@ namespace API.Data.Migrations
                 column: "WorkOrderId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Units_PropertyId",
-                table: "Units",
-                column: "PropertyId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Units_TenantId",
-                table: "Units",
-                column: "TenantId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_WorkOrders_ContractorId",
                 table: "WorkOrders",
                 column: "ContractorId");
@@ -828,11 +742,6 @@ namespace API.Data.Migrations
                 name: "IX_WorkOrders_StatusId",
                 table: "WorkOrders",
                 column: "StatusId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_WorkOrders_UnitId",
-                table: "WorkOrders",
-                column: "UnitId");
         }
 
         /// <inheritdoc />
@@ -857,13 +766,13 @@ namespace API.Data.Migrations
                 name: "BlogPosts");
 
             migrationBuilder.DropTable(
-                name: "InvoiceItem");
+                name: "InvoiceItems");
 
             migrationBuilder.DropTable(
                 name: "Messages");
 
             migrationBuilder.DropTable(
-                name: "Photos");
+                name: "Properties");
 
             migrationBuilder.DropTable(
                 name: "PropertyTypes");
@@ -878,7 +787,7 @@ namespace API.Data.Migrations
                 name: "Quotes");
 
             migrationBuilder.DropTable(
-                name: "Invoice");
+                name: "Invoices");
 
             migrationBuilder.DropTable(
                 name: "WorkOrders");
@@ -887,7 +796,7 @@ namespace API.Data.Migrations
                 name: "Issues");
 
             migrationBuilder.DropTable(
-                name: "Units");
+                name: "AspNetUsers");
 
             migrationBuilder.DropTable(
                 name: "Cities");
@@ -897,12 +806,6 @@ namespace API.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "WorkOrderStatuses");
-
-            migrationBuilder.DropTable(
-                name: "Properties");
-
-            migrationBuilder.DropTable(
-                name: "AspNetUsers");
 
             migrationBuilder.DropTable(
                 name: "Genders");

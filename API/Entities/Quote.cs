@@ -12,4 +12,5 @@ public class Quote
     public WorkOrderStatus Status { get; set; }
     public ICollection<QuoteItem> QuoteItems { get; set; }
     public Invoice Invoice { get; set; }
+    public bool Deleted { get; set; }
 }

@@ -8,4 +8,5 @@ public class InvoiceItem
     public decimal Price { get; set; } 
     public int Quantity { get; set; } 
     public Invoice Invoice { get; set; }
+    public bool Deleted { get; set; }
 }

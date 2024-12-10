@@ -13,7 +13,6 @@ namespace API.DTOs
         public string ZipCode { get; set; }
         public int PropertyManagerId { get; set; }
         public MemberDto PropertyManager { get; set; } 
-        public List<UnitDto> Units { get; set; }
         public bool Deleted { get; set; }
     }
 }

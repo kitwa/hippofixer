@@ -11,7 +11,6 @@ namespace API.Entities
         public string PublicId { get; set; }
         public Property Property { get; set; }
         public int PropertyId { get; set; }
-        public Unit Unit { get; set; }
         public int? UnitId { get; set; }
 
     }

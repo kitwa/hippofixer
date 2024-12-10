@@ -6,11 +6,11 @@ using AutoMapper.QueryableExtensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace API.Features.BlogPosts.Queries
+namespace API.Features.Invoices.Queries
 {
-    public abstract class GetUnits
+    public abstract class GetInvoices
     {
-        public class Query : IRequest<PagedList<UnitDto>>
+        public class Query : IRequest<PagedList<InvoiceDto>>
         {
             public Query(UserParams userParams)
             {
@@ -19,7 +19,7 @@ namespace API.Features.BlogPosts.Queries
             public UserParams UserParams { get; set; }
         }
 
-        public class Handler : IRequestHandler<Query, PagedList<UnitDto>>
+        public class Handler : IRequestHandler<Query, PagedList<InvoiceDto>>
         {
             private readonly DataContext _context;
             private readonly IMapper _mapper;
@@ -29,16 +29,15 @@ namespace API.Features.BlogPosts.Queries
                 _mapper = mapper;
             }
 
-            public async Task<PagedList<UnitDto>> Handle(Query query, CancellationToken cancellationToken)
+            public async Task<PagedList<InvoiceDto>> Handle(Query query, CancellationToken cancellationToken)
             {
 
-                var units = _context.Units.Include(x => x.Property)
-                                        .ProjectTo<UnitDto>(_mapper.ConfigurationProvider)
+                var invoices = _context.Invoices.ProjectTo<InvoiceDto>(_mapper.ConfigurationProvider)
                                         .AsNoTracking()
                                         .OrderByDescending(x => x.Id)
                                         .AsSingleQuery();
 
-                return await PagedList<UnitDto>.CreateAsync(units, query.UserParams.PageNumber, query.UserParams.PageSize);
+                return await PagedList<InvoiceDto>.CreateAsync(invoices, query.UserParams.PageNumber, query.UserParams.PageSize);
             }
 
         }
