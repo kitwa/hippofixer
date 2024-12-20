@@ -8,38 +8,55 @@ namespace API.Features.Invoices.Queries
 {
     public class CreateInvoice
     {
-        public class Command : IRequest<InvoiceDto> {
-            public Command(InvoiceDto invoiceDto)
+        public class Command : IRequest<InvoiceDto>
+        {
+            public Command(int workorderId, string email)
             {
-                InvoiceDto = invoiceDto;
+                WorkorderId = workorderId;
+                Email = email;
             }
-            public InvoiceDto InvoiceDto { get; set; }
+            public int WorkorderId { get; set; }            
+            public string Email {get; set;}
         }
 
         public class Handler : IRequestHandler<Command, InvoiceDto>
         {
             private readonly DataContext _context;
             private readonly IMapper _mapper;
-            public  Handler(DataContext context, IMapper mapper)
+            public Handler(DataContext context, IMapper mapper)
             {
                 _context = context;
                 _mapper = mapper;
             }
             public async Task<InvoiceDto> Handle(Command command, CancellationToken cancellationToken)
             {
-                if(command.InvoiceDto == null)
+                if (command.WorkorderId == 0)
                 {
-                    throw new ArgumentNullException(nameof(command.InvoiceDto));
+                    throw new ArgumentNullException(nameof(command.WorkorderId));
                 }
 
-                var invoice = _mapper.Map<Invoice>(command.InvoiceDto);
-                _context.Invoices.Add(invoice);
+                var existingInvoice = _context.Invoices.SingleOrDefault(x => x.WorkOrderId == command.WorkorderId);
+
+                if (existingInvoice != null)
+                {
+                    return _mapper.Map<InvoiceDto>(existingInvoice);
+                }
+                
+                var contractor = _context.Users.FirstOrDefault(x => x.Email == command.Email);
+
+                var newInvoice = new Invoice()
+                {
+                    WorkOrderId = command.WorkorderId,
+                    ContractorId =  contractor.Id
+                };
+
+                _context.Invoices.Add(newInvoice);
 
                 await _context.SaveChangesAsync();
-                           
-                var result = _mapper.Map<InvoiceDto>(invoice);
 
-                return result;
+                var invoice = _context.Invoices.SingleOrDefault(x => x.WorkOrderId == command.WorkorderId);
+
+                return _mapper.Map<InvoiceDto>(invoice);
             }
         }
     }

@@ -12,9 +12,9 @@ namespace API.Features.WorkOrders.Queries
     {
         public class Query : IRequest<WorkOrderDto> 
         {
-            public Query (int issueId) 
+            public Query (int workOrderId) 
             {
-                WorkOrderId = issueId;
+                WorkOrderId = workOrderId;
             }
 
             public int WorkOrderId {get; set;}
@@ -32,17 +32,17 @@ namespace API.Features.WorkOrders.Queries
 
             public async Task<WorkOrderDto> Handle(Query query, CancellationToken cancellationToken)
             {
-                var issue = await _context.WorkOrders.Where(x => x.Id == query.WorkOrderId)
+                var workOrder = await _context.WorkOrders.Where(x => x.Id == query.WorkOrderId)
                                                 .Include(x => x.Contractor)
                                                 .Include(x => x.Status)
-                                                .Include(x => x.Invoices)
+                                                .Include(x => x.Invoice)
                                                 .Include(x => x.Issue)
                                                 .ThenInclude(x => x.Client)
                                                 .Include(x => x.Issue)
                                                 .ThenInclude(x => x.IssueType)
                                                 .SingleOrDefaultAsync();
                             
-                var result =  _mapper.Map<WorkOrderDto>(issue);
+                var result =  _mapper.Map<WorkOrderDto>(workOrder);
 
                 return result;
             }

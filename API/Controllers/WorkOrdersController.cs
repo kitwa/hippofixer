@@ -43,7 +43,7 @@ namespace API.Controllers
         {
             var workOrder = await _mediator.Send(new GetWorkOrder.Query(id));
             if(workOrder != null) {
-                return workOrder;
+                return Ok(workOrder);
             }
             return NotFound();
         }

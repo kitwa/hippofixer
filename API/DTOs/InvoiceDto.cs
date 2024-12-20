@@ -8,7 +8,7 @@ namespace API.DTOs
         public int ContractorId { get; set; }
         public MemberDto Contrator { get; set; }
         public decimal Amount { get; set; }
-        public DateTime DateSubmitted { get; set; }
+        public DateTime CreatedDate { get; set; }
         public DateTime? DueDate { get; set; }
         public DateTime? DatePaid { get; set; }
     }

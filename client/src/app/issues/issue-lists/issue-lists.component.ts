@@ -23,20 +23,21 @@ export class IssueListsComponent {
   constructor(private accountService: AccountService, private issuesService: IssuesService) {     
     this.accountService.currentUser$.pipe(take(1)).subscribe(user => this.user = user)
   }
+
   ngOnInit(): void {
-    this.loadIssues();
+    this.getIssues();
   }
 
-  loadIssues(){
+  getIssues(){
     this.issuesService.getIssues(this.pageNumber, this.pageSize).subscribe(response => {
       this.issues = response.result;
       this.pagination = response.pagination;
-
     })
   }
+
   pageChanged(event: any){
     this.pageNumber = event.page;
-    this.loadIssues();
+    this.getIssues();
   }
 
 }

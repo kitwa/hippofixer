@@ -21,12 +21,13 @@ export class WorkorderDetailComponent {
    }
 
   ngOnInit(): void {
-    this.loadIssue();
+    this.getWorkOrder();
   }
 
 
-  loadIssue(){
+  getWorkOrder(){
     this.workorderssService.getWorkOrder(this.route.snapshot.params['id']).subscribe(workorder => {
+      debugger
       this.workorder = workorder;
     })
   }

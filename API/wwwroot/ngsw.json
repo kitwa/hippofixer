@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1733221553938,
+  "timestamp": 1733821804837,
   "index": "/index.html",
   "assetGroups": [
     {
@@ -13,7 +13,7 @@
       "urls": [
         "/favicon.ico",
         "/index.html",
-        "/main.1c21c5504f97e4b9.js",
+        "/main.79de6f0327e300d8.js",
         "/manifest.webmanifest",
         "/polyfills.77251648888294a2.js",
         "/runtime.1e70f244cc06fa31.js",
@@ -30,7 +30,6 @@
         "ignoreVary": true
       },
       "urls": [
-        "/assets/Blue Illustrative Luxury Real Estate Logo (1).png",
         "/assets/advice.jpg",
         "/assets/agent.png",
         "/assets/aircon.jpg",
@@ -65,6 +64,7 @@
         "/assets/img1.jpg",
         "/assets/img2.jpg",
         "/assets/img3.jpg",
+        "/assets/logo.png",
         "/assets/logokiboko.png",
         "/assets/logoname.PNG",
         "/assets/logono.png",
@@ -86,7 +86,6 @@
   ],
   "dataGroups": [],
   "hashTable": {
-    "/assets/Blue Illustrative Luxury Real Estate Logo (1).png": "dbc750459e88b52e32b7f83e0b23ebe97f209595",
     "/assets/advice.jpg": "8aea8d23eea2a4b0dfeec3f2488a53a62f0cbe1e",
     "/assets/agent.png": "537b1e25e53cf636fdf7736e9ba4e6699ab523b5",
     "/assets/aircon.jpg": "4b10dabd37f4d7a0899304127d06e6909c432a04",
@@ -121,6 +120,7 @@
     "/assets/img1.jpg": "3f080a3f31e3d61a4dd7740a3d272fb9c48d21e5",
     "/assets/img2.jpg": "df3258c0f3a115478a14a80b82dd3b78474cc114",
     "/assets/img3.jpg": "f052a1cdb12b8d4a608fa681b24cde924cc29b14",
+    "/assets/logo.png": "dbc750459e88b52e32b7f83e0b23ebe97f209595",
     "/assets/logokiboko.png": "dbc750459e88b52e32b7f83e0b23ebe97f209595",
     "/assets/logoname.PNG": "004d9fd1a0f5612ae181e941267bfb25e10d47cc",
     "/assets/logono.png": "f646a3371eb7c5dadc7633f43781781fae602e95",
@@ -137,8 +137,8 @@
     "/bootstrap-icons.70a9dee9e5ab72aa.woff": "d5831fd39baf13aff7626e483b9a089730f18604",
     "/bootstrap-icons.bfa90bda92a84a6a.woff2": "020c3c6f9280a315e8425d7f92e15bcd0cdda1b2",
     "/favicon.ico": "bbf3dcfdaeb57470408b10c26cd3c2e73a551a7f",
-    "/index.html": "fe9e4ae3866157be37e60d22e36e1f1d2a1e58e7",
-    "/main.1c21c5504f97e4b9.js": "23ccbb9ceb86582ce8d6f93df3bcee971d6fd0e3",
+    "/index.html": "ef9d3ea22b034e21b647b898a33ffe691dd3abf3",
+    "/main.79de6f0327e300d8.js": "c7059fefbf9f84ac1ddbb7f4d8d09df2f11199f4",
     "/manifest.webmanifest": "ca1c206899baaf5bcd67ab86c676f8dcbdc432e1",
     "/polyfills.77251648888294a2.js": "2f70361c3c89df51af1c14b8c52edb64963ba650",
     "/runtime.1e70f244cc06fa31.js": "c7d926b2cf694e3d597bb7dc6c8c3298ffebf6c5",

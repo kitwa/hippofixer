@@ -61,9 +61,13 @@
                                         <span class="col-6">Issue ID</span>
                                         <span class="col-6 text-sm-end">#1</span>
                                         <span class="col-6">Invoice Date</span>
-                                        <span class="col-6 text-sm-end"><input type="date"></span>
+                                        <span class="col-6 text-sm-end">
+                                            <input type="date" [(ngModel)]="invoiceDate" (change)="updateInvoiceDate()" />
+                                        </span>
                                         <span class="col-6">Due Date</span>
-                                        <span class="col-6 text-sm-end"> <input type="date"></span>
+                                        <span class="col-6 text-sm-end">
+                                            <input type="date" [(ngModel)]="dueDate" (change)="updateDueDate()" />
+                                        </span>
                                     </div>
                                 </div>
                             </div>

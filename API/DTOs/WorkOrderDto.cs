@@ -13,7 +13,8 @@ namespace API.DTOs
         public MemberDto Contractor { get; set; }
         public int StatusId { get; set; }
         public WorkOrderStatusDto Status { get; set; }
-        public ICollection<InvoiceDto> Invoices { get; set; }
+        public int InvoiceId { get; set; }
+        public InvoiceDto Invoice { get; set; }
         public DateTime? DateCompleted { get; set; }
         public DateTime CreatedDate { get; set; } = DateTime.Now;
         public DateTime UpdatedDate { get; set; }

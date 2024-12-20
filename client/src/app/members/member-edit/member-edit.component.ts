@@ -94,7 +94,7 @@ export class MemberEditComponent implements OnInit {
 
   editMember() {
     this.memberService.updateMember(this.editMemberForm.value).subscribe(() => {
-      this.toastr.success("Changes saved successfully 2");
+      this.toastr.success("Changes saved successfully");
     });
   }
 

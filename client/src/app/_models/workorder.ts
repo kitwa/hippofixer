@@ -1,6 +1,7 @@
 
 // import { Invoice } from './invoice';
 
+import { Invoice } from "./invoice";
 import { Issue } from "./issue";
 import { Member } from "./member";
 import { WorkOrderStatus } from "./workOrderStatus";
@@ -15,7 +16,7 @@ export interface WorkOrder {
     contractor: Member;
     statusId: number;
     status: WorkOrderStatus;
-    // invoices: Invoice[];
+    invoices: Invoice;
     createdDate: Date;
     dateCompleted?: Date;
     deleted: boolean;

@@ -44,8 +44,9 @@ export class WorkOrdersService {
   }
 
   getWorkOrder(id: number) {
-    const issue = this.workorders.find(x => x.id === id);
-    if(issue !== undefined) return of(issue);
+    // debugger
+    // const workorder = this.workorders.find(x => x.id === id);
+    // if(workorder !== undefined) return of(workorder);
     return this.http.get<WorkOrder>(this.baseUrl + 'workorders/' + id);
   }
 

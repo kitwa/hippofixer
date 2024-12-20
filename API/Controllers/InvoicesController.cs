@@ -19,7 +19,7 @@ namespace API.Controllers
             _context = context;
         }
 
-        [HttpGet]
+        [HttpGet("get-invoices")]
         public async Task<ActionResult<IEnumerable<InvoiceDto>>> GetInvoices([FromQuery]UserParams userParams)
         {
             var invoices = await _mediator.Send(new GetInvoices.Query(userParams));
@@ -28,7 +28,7 @@ namespace API.Controllers
             return Ok(invoices);
         }
 
-        [HttpGet("{id}", Name = "GetInvoice")]
+        [HttpGet("{id}/get-invoice")]
         public async Task<ActionResult<InvoiceDto>> GetInvoice(int id)
         {
             var invoice = await _mediator.Send(new GetInvoice.Query(id));
@@ -39,10 +39,10 @@ namespace API.Controllers
         }
 
         [Authorize(Policy = "RequireAdminAgentRole")]
-        [HttpPost]
-        public async Task<ActionResult<InvoiceDto>> CreateInvoice(InvoiceDto unitDto)
+        [HttpPost("{workorderId}/add-invoice")]
+        public async Task<ActionResult<InvoiceDto>> CreateInvoice(int workorderId)
         {
-            var invoice = await _mediator.Send(new CreateInvoice.Command(unitDto));
+            var invoice = await _mediator.Send(new CreateInvoice.Command(workorderId, User.GetEmail()));
 
             if(invoice != null){
                 return Ok(invoice);
@@ -59,6 +59,28 @@ namespace API.Controllers
                 return Ok(invoice);
             }
             return BadRequest("Failed to create invoice");
+        }
+
+        [HttpPut("{id}/update-invoice-date/{invoiceDate}")]
+        public async Task<ActionResult> UpdateInvoiceDate(int id, string invoiceDate)
+        {
+            var result = await _mediator.Send(new UpdateInvoiceDate.Command(id, invoiceDate));
+
+            if(result == true){
+                return Ok(result);
+            }
+            return BadRequest("Failed to update due date");
+        }
+
+        [HttpPut("{id}/update-due-date/{dueDate}")]
+        public async Task<ActionResult> UpdateDueDate(int id, string dueDate)
+        {
+            var result = await _mediator.Send(new UpdateDueDate.Command(id, dueDate));
+
+            if(result == true){
+                return Ok(result);
+            }
+            return BadRequest("Failed to update due date");
         }
 
         [Authorize(Policy = "RequireAdminAgentRole")]

@@ -11,7 +11,8 @@ public class WorkOrder
     public AppUser Contractor { get; set; }
     public int StatusId { get; set; }
     public WorkOrderStatus Status { get; set; }
-    public ICollection<Invoice> Invoices { get; set; }
+    public int InvoiceId { get; set; }
+    public Invoice Invoice { get; set; }
     public DateTime CreatedDate { get; set; }
     public DateTime? DateCompleted { get; set; }
     public bool Deleted { get; set; }

@@ -504,8 +504,9 @@ namespace API.Data.Migrations
                     WorkOrderId = table.Column<int>(type: "int", nullable: false),
                     ContractorId = table.Column<int>(type: "int", nullable: false),
                     TotalAmount = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
-                    DateSubmitted = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    DueDate = table.Column<DateTime>(type: "datetime(6)", nullable: true),
                     DatePaid = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    CreatedDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     Deleted = table.Column<bool>(type: "tinyint(1)", nullable: false)
                 },
                 constraints: table =>
@@ -671,7 +672,8 @@ namespace API.Data.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Invoices_WorkOrderId",
                 table: "Invoices",
-                column: "WorkOrderId");
+                column: "WorkOrderId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Issues_CityId",
