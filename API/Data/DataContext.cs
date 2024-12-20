@@ -51,6 +51,13 @@ namespace API.Data
                 .HasOne(u => u.Sender)
                 .WithMany(m => m.MessagesSent)
                 .OnDelete(DeleteBehavior.Restrict);
+            
+            // // One-to-One relationship between WorkOrder and Invoice
+            // builder.Entity<WorkOrder>()
+            //     .HasOne(w => w.Invoice)                   // WorkOrder has one Invoice
+            //     .WithOne(i => i.WorkOrder)                // Invoice has one WorkOrder
+            //     .HasForeignKey<Invoice>(i => i.WorkOrderId) // Set WorkOrderId as the FK
+            //     .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

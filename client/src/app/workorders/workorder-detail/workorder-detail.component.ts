@@ -27,7 +27,6 @@ export class WorkorderDetailComponent {
 
   getWorkOrder(){
     this.workorderssService.getWorkOrder(this.route.snapshot.params['id']).subscribe(workorder => {
-      debugger
       this.workorder = workorder;
     })
   }

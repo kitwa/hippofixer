@@ -281,9 +281,6 @@ namespace API.Data.Migrations
 
                     b.HasIndex("ContractorId");
 
-                    b.HasIndex("WorkOrderId")
-                        .IsUnique();
-
                     b.ToTable("Invoices");
                 });
 
@@ -585,6 +582,12 @@ namespace API.Data.Migrations
                     b.Property<bool>("Deleted")
                         .HasColumnType("tinyint(1)");
 
+                    b.Property<int>("InvoiceId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("InvoiceId1")
+                        .HasColumnType("int");
+
                     b.Property<int>("IssueId")
                         .HasColumnType("int");
 
@@ -597,6 +600,8 @@ namespace API.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ContractorId");
+
+                    b.HasIndex("InvoiceId1");
 
                     b.HasIndex("IssueId");
 
@@ -761,15 +766,7 @@ namespace API.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("API.Entities.WorkOrder", "WorkOrder")
-                        .WithOne("Invoice")
-                        .HasForeignKey("API.Entities.Invoice", "WorkOrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Contractor");
-
-                    b.Navigation("WorkOrder");
                 });
 
             modelBuilder.Entity("API.Entities.InvoiceItem", b =>
@@ -890,6 +887,10 @@ namespace API.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("API.Entities.Invoice", "Invoice")
+                        .WithMany()
+                        .HasForeignKey("InvoiceId1");
+
                     b.HasOne("API.Entities.Issue", "Issue")
                         .WithMany()
                         .HasForeignKey("IssueId")
@@ -903,6 +904,8 @@ namespace API.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Contractor");
+
+                    b.Navigation("Invoice");
 
                     b.Navigation("Issue");
 
@@ -971,11 +974,6 @@ namespace API.Data.Migrations
             modelBuilder.Entity("API.Entities.Quote", b =>
                 {
                     b.Navigation("QuoteItems");
-                });
-
-            modelBuilder.Entity("API.Entities.WorkOrder", b =>
-                {
-                    b.Navigation("Invoice");
                 });
 
             modelBuilder.Entity("API.Entities.WorkOrderStatus", b =>
