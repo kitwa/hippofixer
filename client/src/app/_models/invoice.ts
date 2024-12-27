@@ -1,3 +1,4 @@
+import { InvoiceItem } from "./invoiceItem";
 import { Member } from "./member";
 import { WorkOrder } from "./workorder";
 
@@ -11,5 +12,6 @@ export interface Invoice {
   createdDate: Date;
   dueDate?: Date;
   datePaid?: Date;
+  invoiceItems: InvoiceItem[];
 }
 

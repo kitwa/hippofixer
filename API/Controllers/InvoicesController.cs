@@ -1,6 +1,7 @@
 using API.Data;
 using API.DTOs;
 using API.Extensions;
+using API.Features.Invoices.Commands;
 using API.Features.Invoices.Queries;
 using API.Helpers;
 using MediatR;
@@ -39,10 +40,10 @@ namespace API.Controllers
         }
 
         [Authorize(Policy = "RequireAdminAgentRole")]
-        [HttpPost("{workorderId}/add-invoice")]
+        [HttpPost("{workorderId}/add-get-invoice")]
         public async Task<ActionResult<InvoiceDto>> CreateInvoice(int workorderId)
         {
-            var invoice = await _mediator.Send(new CreateInvoice.Command(workorderId, User.GetEmail()));
+            var invoice = await _mediator.Send(new AddOrGetInvoice.Command(workorderId, User.GetEmail()));
 
             if(invoice != null){
                 return Ok(invoice);
@@ -97,6 +98,18 @@ namespace API.Controllers
             await _context.SaveChangesAsync();
 
             return NoContent();
+        }
+
+        [HttpPost("{invoiceId:int}/add-invoice-item")]
+        public async Task<ActionResult<InvoiceItemDto>> AddInvoiceItem(int invoiceId, InvoiceItemDto invoiceItemDto)
+        {
+            var invoiceItem = await _mediator.Send(new AddInvoiceItem.Command(invoiceId, invoiceItemDto));
+
+            if(invoiceItem != null){
+                return Ok(invoiceItem);
+            }
+            return BadRequest("Failed to add item");
+
         }
     }
 

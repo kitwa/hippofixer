@@ -4,6 +4,7 @@ import { PaginatedResult } from '../_models/pagination';
 import { Invoice } from '../_models/invoice';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { map, of } from 'rxjs';
+import { InvoiceItem } from '../_models/invoiceItem';
 
 @Injectable({
   providedIn: 'root'
@@ -55,7 +56,7 @@ export class InvoicesService {
   }
 
   addOrGetInvoice(workorderId: number) {
-    return this.http.post<Invoice>(this.baseUrl + `invoices/${workorderId}/add-invoice`, {});
+    return this.http.post<Invoice>(this.baseUrl + `invoices/${workorderId}/add-get-invoice`, {});
   }
 
   deleteInvoice(invoiceId: Number) {
@@ -68,6 +69,10 @@ export class InvoicesService {
 
   updateDueDate(invoiceId: number, dueDate: string){
     return this.http.put(this.baseUrl + 'invoices/' + invoiceId + '/update-due-date/' + dueDate, {}).pipe();
+  }
+
+  addInvoiceItem(invoiceId: number, invoiceItem: InvoiceItem) {
+    return this.http.post<InvoiceItem>(this.baseUrl + 'invoices/' + invoiceId + '/add-invoice-item', invoiceItem).pipe();
   }
 
 }

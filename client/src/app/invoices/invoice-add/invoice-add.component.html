@@ -10,7 +10,7 @@
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
             <div
                 class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2">Add Invoice</h1>
+                <h1 class="h2">Edit Invoice</h1>
             </div>
             <section class="py-3 py-md-5 mb-5 pb-5">
                 <div class="container">
@@ -29,11 +29,10 @@
                                 <div class="col-12">
                                     <h4>From</h4>
                                     <address>
-                                        <strong>Contrator Name</strong><br>
-                                        875 N Coast Hwybr<br>
-                                        Laguna Beach, California, 92651<br>
-                                        United States<br>
-                                        Phone: (949) 494-7695<br>
+                                        <strong>{{invoice.contractor.firstName}} {{ invoice.contractor.lastName}}</strong><br>
+                                        {{ invoice.contractor.fullAddress}}
+                                        <br>
+                                        Phone: {{invoice.contractor.phone}}<br>
                                         <!-- Email: email@domain.com -->
                                     </address>
                                 </div>
@@ -62,7 +61,8 @@
                                         <span class="col-6 text-sm-end">#1</span>
                                         <span class="col-6">Invoice Date</span>
                                         <span class="col-6 text-sm-end">
-                                            <input type="date" [(ngModel)]="invoiceDate" (change)="updateInvoiceDate()" />
+                                            <input type="date" [(ngModel)]="invoiceDate"
+                                                (change)="updateInvoiceDate()" />
                                         </span>
                                         <span class="col-6">Due Date</span>
                                         <span class="col-6 text-sm-end">
@@ -84,12 +84,14 @@
                                                 </tr>
                                             </thead>
                                             <tbody class="table-group-divider">
-                                                <tr>
-                                                    <th scope="row">Paint Paint Paint Paint</th>
-                                                    <td class="text-end">1</td>
-                                                    <td class="text-end">29</td>
-                                                    <td class="text-end">29</td>
-                                                </tr>
+                                                <ng-container *ngIf="invoice && invoice.invoiceItems.length > 0">
+                                                    <tr *ngFor="let invoiceItem of invoice.invoiceItems">
+                                                        <th scope="row">{{invoiceItem.description}}</th>
+                                                        <td class="text-end">{{invoiceItem.quantity}}</td>
+                                                        <td class="text-end">{{invoiceItem.price}}</td>
+                                                        <td class="text-end">{{invoiceItem.quantity * invoiceItem.price}}</td>
+                                                    </tr>
+                                                </ng-container>
                                                 <tr>
                                                     <!-- <td></td> -->
                                                     <div class="btn-group m-2 ms-0">
@@ -116,7 +118,7 @@
                             <div class="row">
                                 <div class="col-12 text-end">
                                     <button type="submit" class="btn btn-sm btn-primary mb-3 me-2"
-                                        routerLink="/workorder/1/invoice/detail/1"><i class="bi-eye pe-2"></i>View
+                                        routerLink="/workorder/1/invoice/detail/1"><i class="bi-eye pe-2"></i>View Final
                                         Invoice</button>
                                     <button type="submit" class="btn btn-sm btn-info mb-3"><i
                                             class="bi-cloud-download pe-2"></i> Download Invoice</button>
@@ -136,28 +138,32 @@
 <div class="modal fade" id="addItemModal" tabindex="-1" aria-labelledby="addItemModal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Add Invoice Item</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="mb-3">
-                    <label for="product" class="form-label">Description </label>
-                    <textarea class="form-control" formControlName='product' rows="3"></textarea>
+            <form [formGroup]='addInvoiceItemForm' (ngSubmit)="addInvoiceItem()" autocomplete="off"
+                *ngIf="addInvoiceItemForm">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Add Invoice Item</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="mb-3">
-                    <label for="quantity" class="form-label">Quantity</label>
-                    <input type="number" class="form-control" formControlName='quantity' placeholder="Quantity">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Description </label>
+                        <textarea class="form-control" formControlName='description' rows="3"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="quantity" class="form-label">Quantity</label>
+                        <input type="text" class="form-control" formControlName='quantity' placeholder="Quantity">
+                    </div>
+                    <div class="mb-3">
+                        <label for="price" class="form-label">Unit Price</label>
+                        <input type="text" class="form-control" formControlName='price' placeholder="price">
+                    </div>
+
                 </div>
-                <div class="mb-3">
-                    <label for="price" class="form-label">Unit Price</label>
-                    <input type="text" class="form-control" formControlName='price' placeholder="price">
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" name="submit" id="submit">Add Item</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary">Add Item</button>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-            </div>
+            </form>
         </div>
     </div>
 </div>

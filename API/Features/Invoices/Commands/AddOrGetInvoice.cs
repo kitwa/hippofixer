@@ -3,10 +3,11 @@ using API.DTOs;
 using API.Entities;
 using AutoMapper;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.Features.Invoices.Queries
 {
-    public class CreateInvoice
+    public class AddOrGetInvoice
     {
         public class Command : IRequest<InvoiceDto>
         {
@@ -35,7 +36,10 @@ namespace API.Features.Invoices.Queries
                     throw new ArgumentNullException(nameof(command.WorkorderId));
                 }
 
-                var existingInvoice = _context.Invoices.SingleOrDefault(x => x.WorkOrderId == command.WorkorderId);
+                var existingInvoice = _context.Invoices  
+                                                .Include(x => x.Contractor)                                      
+                                                .Include(x => x.InvoiceItems)
+                                                .SingleOrDefault(x => x.WorkOrderId == command.WorkorderId);
 
                 if (existingInvoice != null)
                 {
@@ -54,7 +58,10 @@ namespace API.Features.Invoices.Queries
 
                 await _context.SaveChangesAsync();
 
-                var invoice = _context.Invoices.SingleOrDefault(x => x.WorkOrderId == command.WorkorderId);
+                var invoice = _context.Invoices
+                                        .Include(x => x.Contractor)  
+                                        .Include(x => x.InvoiceItems)
+                                        .SingleOrDefault(x => x.WorkOrderId == command.WorkorderId);
 
                 return _mapper.Map<InvoiceDto>(invoice);
             }
