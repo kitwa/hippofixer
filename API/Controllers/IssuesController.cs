@@ -105,7 +105,6 @@ namespace API.Controllers
                 return Ok(result);
             }
             return BadRequest("Failed uplaod photo");
-
         }
 
         [Authorize(Policy = "RequireAdminAgentRole")]

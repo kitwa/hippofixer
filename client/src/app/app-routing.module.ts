@@ -39,6 +39,7 @@ const routes: Routes = [
   {path: 'blogposts', component: BlogPostListComponent},
   {path: 'blogposts/:id', component: BlogPostDetailComponent},
   {path: 'issue/noaccount/add', component: IssueAddNoaccountComponent},
+  {path: 'workorder/:id/invoice/detail/:id', component: InvoiceDetailComponent },
   {
     path: '',
     runGuardsAndResolvers: 'always',
@@ -58,7 +59,6 @@ const routes: Routes = [
       {path: 'issue/add', component: IssueAddComponent, canActivate: [adminGuard]},
       {path: 'invoices', component: InvoiceListsComponent },
       {path: 'workorder/:id/invoice/add/:id', component: InvoiceAddComponent },
-      {path: 'workorder/:id/invoice/detail/:id', component: InvoiceDetailComponent },
     ]
   },
   {path: 'errors', component: TestErrorsComponent},

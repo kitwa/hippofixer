@@ -3,6 +3,7 @@ using API.DTOs;
 using API.Extensions;
 using API.Features.Invoices.Commands;
 using API.Features.Invoices.Queries;
+using API.Features.Users.Commands;
 using API.Helpers;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -14,10 +15,13 @@ namespace API.Controllers
     {
         public readonly IMediator _mediator;
         private readonly DataContext _context;
-        public InvoicesController(DataContext context, IMediator mediator)
+        private readonly IWebHostEnvironment _env;
+
+        public InvoicesController(DataContext context, IMediator mediator, IWebHostEnvironment env)
         {
             _mediator = mediator;
             _context = context;
+            _env = env;
         }
 
         [HttpGet("get-invoices")]
@@ -109,7 +113,32 @@ namespace API.Controllers
                 return Ok(invoiceItem);
             }
             return BadRequest("Failed to add item");
+        }
 
+        [HttpPost("send-email-invoice")]
+        public async Task<ActionResult<IssueDto>> UploadPhotoForIssue(EmailInvoiceDto emailInvoiceDto)
+        {
+            if (emailInvoiceDto.File == null || emailInvoiceDto.File.Length == 0)
+                return BadRequest("No file atatched.");
+
+            var tempDir = Path.Combine(_env.ContentRootPath, "Temp");
+            if (!Directory.Exists(tempDir))
+            {
+                Directory.CreateDirectory(tempDir);
+            }
+            var filePath = Path.Combine(tempDir, emailInvoiceDto.FileName);
+
+            var sendEmail = new SendEmail();
+            var result = await sendEmail.SendEmailWithAttachment(emailInvoiceDto, filePath);
+            
+            // Delete the temporary file
+            System.IO.File.Delete(filePath);
+
+            if(result){
+                return Ok(result);
+            }
+            
+            return BadRequest("An error occur");
         }
     }
 

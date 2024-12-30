@@ -37,7 +37,7 @@ namespace API.Features.Users.Commands
                 Subject = subject,
                 IsBodyHtml = true,
                 Body = htmlTemplate
-            }; 
+            };
 
             mailMessage.Body = mailMessage.Body.Replace("[username]", username);
 
@@ -77,7 +77,7 @@ namespace API.Features.Users.Commands
                 Subject = subject,
                 IsBodyHtml = true,
                 Body = htmlTemplate
-            }; 
+            };
 
 
             mailMessage.Body = mailMessage.Body.Replace("[callbackUrl]", link);
@@ -94,7 +94,59 @@ namespace API.Features.Users.Commands
                 return false;
             }
         }
+
+        public async Task<bool> SendEmailWithAttachment(EmailInvoiceDto emailInvoiceDto, string filePath)
+        {
+            try
+            {
+                // Save the file temporarily
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await emailInvoiceDto.File.CopyToAsync(stream);
+                }
+
+                string subject = "Invoice!";
+                string htmlTemplate;
+                using (var reader = File.OpenText("./EmailTemplates/InvoiceEmailTemplate.html"))
+                {
+                    htmlTemplate = await reader.ReadToEndAsync();
+                }
+
+                SmtpClient smtpClient = new SmtpClient(MailClientConfigurations.Server)
+                {
+                    Port = MailClientConfigurations.Port,
+                    Credentials = new NetworkCredential(MailClientConfigurations.SenderEmail, MailClientConfigurations.Password),
+                    EnableSsl = false,
+                    UseDefaultCredentials = false
+                };
+
+                MailMessage mailMessage = new MailMessage(MailClientConfigurations.SenderEmail, emailInvoiceDto.Email)
+                {
+                    Subject = subject,
+                    IsBodyHtml = true,
+                    Body = htmlTemplate
+                };
+
+                
+                mailMessage.Body = mailMessage.Body.Replace("[InvoiceNumber]", emailInvoiceDto.InvoiceId);
+                mailMessage.Body = mailMessage.Body.Replace("[InvoiceDate]", emailInvoiceDto.CreatedDate.ToString("dd/MM/yyyy"));
+                mailMessage.Body = mailMessage.Body.Replace("[DueDate]", emailInvoiceDto.DueDate?.ToString("dd/MM/yyyy"));
+                mailMessage.Body = mailMessage.Body.Replace("[InvoiceLink]", emailInvoiceDto.InvoiceLink);
+
+                var attachment = new Attachment(filePath);
+                mailMessage.Attachments.Add(attachment);
+
+                smtpClient.Send(mailMessage);
+
+                attachment.Dispose();
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error sending email: {ex.Message}");
+                return false;
+            }
+        }
     }
-
-
 }

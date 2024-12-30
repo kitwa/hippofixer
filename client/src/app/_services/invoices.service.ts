@@ -75,5 +75,19 @@ export class InvoicesService {
     return this.http.post<InvoiceItem>(this.baseUrl + 'invoices/' + invoiceId + '/add-invoice-item', invoiceItem).pipe();
   }
 
+  sendInvoiceEmail(file, fileName: string, email: string, invoiceLink: string, invoice: Invoice){
+
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('fileName', fileName);
+    formData.append('email', email);
+    formData.append('invoiceLink', invoiceLink);
+    formData.append('invoiceId', invoice.id.toString());
+    formData.append('invoiceLink', invoiceLink);
+    formData.append('dueDate', invoice.dueDate?.toString());
+    formData.append('createdDate', invoice.createdDate.toString());
+
+    return this.http.post<any>(this.baseUrl + 'invoices/send-email-invoice', formData).pipe();
+  }
 }
 
