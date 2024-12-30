@@ -1,6 +1,6 @@
 <app-nav></app-nav>
 
-<div class="container-fluid">
+<div class="container-fluid pb-5">
     <div class="row">
 
         <div class="border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary">
@@ -28,37 +28,35 @@
                                 </div>
                                 <div class="col-12">
                                     <h4>From</h4>
-                                    <address>
+                                    <address *ngIf="invoice">
                                         <strong>{{invoice.contractor.firstName}} {{ invoice.contractor.lastName}}</strong><br>
                                         {{ invoice.contractor.fullAddress}}
                                         <br>
                                         Phone: {{invoice.contractor.phone}}<br>
-                                        <!-- Email: email@domain.com -->
+                                        Email: {{invoice.contractor.email}}
                                     </address>
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <div class="col-12 col-sm-6 col-md-8">
                                     <h4>Bill To</h4>
-                                    <address>
-                                        <strong>Client Name</strong><br>
-                                        7657 NW Prairie View Rd<br>
-                                        Kansas City, Mississippi, 64151<br>
-                                        United States<br>
-                                        Phone: (816) 741-5790<br>
-                                        <!-- Email: email@client.com -->
+                                    <address *ngIf="workorder">
+                                        <strong>{{workorder.issue.client.firstName}}</strong><br>
+                                        {{workorder.issue.city.name}}<br>
+                                        Phone: {{workorder.issue.client.phone}}<br>
+                                        Email: {{workorder.issue.client.email}}
                                     </address>
                                 </div>
-                                <div class="col-12 col-sm-6 col-md-4">
+                                <div class="col-12 col-sm-6 col-md-4" *ngIf="invoice && workorder">
                                     <h4 class="row">
                                         <span class="col-6">Invoice #</span>
-                                        <span class="col-6 text-sm-end">INT-1</span>
+                                        <span class="col-6 text-sm-end">INT-00{{invoice.id}}</span>
                                     </h4>
                                     <div class="row">
                                         <span class="col-6">Total Account</span>
-                                        <span class="col-6 text-sm-end h4 text-black">R0.00</span>
+                                        <span class="col-6 text-sm-end h4 text-black">R{{totalAmount}}</span>
                                         <span class="col-6">Issue ID</span>
-                                        <span class="col-6 text-sm-end">#1</span>
+                                        <span class="col-6 text-sm-end">#{{workorder.issue.id}}</span>
                                         <span class="col-6">Invoice Date</span>
                                         <span class="col-6 text-sm-end">
                                             <input type="date" [(ngModel)]="invoiceDate"
@@ -102,13 +100,17 @@
                                                     </div>
                                                 </tr>
                                                 <tr>
-                                                    <td colspan="3" class="text-end">Subtotal</td>
-                                                    <td class="text-end">362</td>
+                                                    <td colspan="3" class="text-end">Vat(0%)</td>
+                                                    <td class="text-end">0</td>
                                                 </tr>
                                                 <tr>
-                                                    <th scope="row" colspan="3" class="text-uppercase text-end">Total
-                                                    </th>
-                                                    <td class="text-end">R00.0</td>
+                                                    <td colspan="3" class="text-end">Subtotal</td>
+                                                    <td class="text-end">R{{subTotal}}</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <th scope="row" colspan="3" class="text-uppercase text-end">Total</th>
+                                                    <td class="text-end">R{{totalAmount}}</td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -120,8 +122,8 @@
                                     <button type="submit" class="btn btn-sm btn-primary mb-3 me-2"
                                         routerLink="/workorder/1/invoice/detail/1"><i class="bi-eye pe-2"></i>View Final
                                         Invoice</button>
-                                    <button type="submit" class="btn btn-sm btn-info mb-3"><i
-                                            class="bi-cloud-download pe-2"></i> Download Invoice</button>
+                                    <!-- <button type="submit" class="btn btn-sm btn-info mb-3"><i
+                                            class="bi-cloud-download pe-2"></i> Download Invoice</button> -->
                                 </div>
                             </div>
                         </div>

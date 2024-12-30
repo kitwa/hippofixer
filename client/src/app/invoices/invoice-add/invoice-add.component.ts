@@ -4,7 +4,9 @@ import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Invoice } from 'src/app/_models/invoice';
 import { InvoiceItem } from 'src/app/_models/invoiceItem';
+import { WorkOrder } from 'src/app/_models/workorder';
 import { InvoicesService } from 'src/app/_services/invoices.service';
+import { WorkOrdersService } from 'src/app/_services/workorders.service';
 
 @Component({
   selector: 'app-invoice-add',
@@ -21,20 +23,27 @@ export class InvoiceAddComponent {
   invoiceDate: string;
   dueDate: string; 
   invoiceItem: InvoiceItem[] = [];
+  workorder: WorkOrder;
+  totalAmount: number = 0;
+  subTotal: number = 0;
 
   constructor(private invoicesService: InvoicesService, private route: ActivatedRoute,   
-    private fb: UntypedFormBuilder, private toastr: ToastrService) {  
+    private fb: UntypedFormBuilder, private toastr: ToastrService, private workordersService: WorkOrdersService ) {  
     this.initializeAddInvoiceItemForm();
     this.addOrGetInvoice();   
+    this.getWorkOrder();
   }
 
   addOrGetInvoice(){
     this.workorderId = this.route.snapshot.params['id'];
     this.invoicesService.addOrGetInvoice(this.workorderId).subscribe(res => {
       this.invoice = res;
-      debugger
       this.invoiceDate = this.formatDate(res.createdDate);
       this.dueDate = this.formatDate(res.dueDate);
+      this.invoice.invoiceItems.forEach(x => {
+        this.totalAmount = this.totalAmount + x.price;
+        this.subTotal += x.price;
+      })
       }, error => {
     });
   }
@@ -76,6 +85,12 @@ export class InvoiceAddComponent {
       this.validationErrors = error;
     });
 
+  }
+
+  getWorkOrder(){
+    this.workordersService.getWorkOrder(this.route.snapshot.params['id']).subscribe(workorder => {
+      this.workorder = workorder;
+    })
   }
 
   private formatDate(date: Date): string {

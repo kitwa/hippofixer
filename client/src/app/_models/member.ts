@@ -25,6 +25,7 @@ export interface Member {
   youtube?: string;
   instagram?: string;
   facebook?: string;
+  vatAmount?: number;
 
 }
 

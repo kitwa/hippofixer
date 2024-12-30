@@ -40,6 +40,8 @@ namespace API.Features.WorkOrders.Queries
                                                 .ThenInclude(x => x.Client)
                                                 .Include(x => x.Issue)
                                                 .ThenInclude(x => x.IssueType)
+                                                .Include(x => x.Issue)
+                                                .ThenInclude(x => x.City)
                                                 .SingleOrDefaultAsync();
                             
                 var result =  _mapper.Map<WorkOrderDto>(workOrder);

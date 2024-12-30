@@ -15,6 +15,7 @@ namespace API.DTOs
         public int GenderId { get; set; }
         public int CityId { get; set; }
         public City City { get; set; }
+        public decimal? Vat { get; set; }
         public string PhotoUrl { get; set; }
         public string PhotoPublicId { get; set; }
         public string Twitter { get; set; }
