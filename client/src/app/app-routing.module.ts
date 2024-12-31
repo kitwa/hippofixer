@@ -29,6 +29,7 @@ import { IssueAddNoaccountComponent } from './issues/issue-add-noaccount/issue-a
 import { InvoiceDetailComponent } from './invoices/invoice-detail/invoice-detail.component';
 import { InvoiceListsComponent } from './invoices/invoice-lists/invoice-lists.component';
 import { InvoiceAddComponent } from './invoices/invoice-add/invoice-add.component';
+import { SupportComponent } from './support/support.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -40,6 +41,7 @@ const routes: Routes = [
   {path: 'blogposts/:id', component: BlogPostDetailComponent},
   {path: 'issue/noaccount/add', component: IssueAddNoaccountComponent},
   {path: 'workorder/:id/invoice/detail/:id', component: InvoiceDetailComponent },
+  {path: 'support', component: SupportComponent},
   {
     path: '',
     runGuardsAndResolvers: 'always',

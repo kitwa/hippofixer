@@ -1,0 +1,48 @@
+<!-- same starts here -->
+<app-nav></app-nav>
+
+<div class="container-fluid">
+    <div class="row">
+
+        <div class="border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary">
+            <app-sidebar></app-sidebar>
+        </div>
+
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            <div
+                class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h2">Support</h1>
+                <div class="btn-toolbar mb-2 mb-md-0">
+                    <div class="btn-group me-2" *appHasRole='["SuperAdmin","Admin","Client"]'>
+                        
+                    </div>
+                  </div>
+            </div>
+
+              <div class="container my-5">
+                <div class="p-5 text-center bg-body-tertiary rounded-3">
+                  <h1 class="text-body-emphasis">Contact Us</h1>
+                  <p class="col-lg-8 mx-auto fs-5 text-muted">
+                    Feel free to reach out to us using the method that's most convenient for you.
+                  </p>
+                  <div class="d-inline-flex gap-2 mb-5">
+                    <button class="d-inline-flex align-items-center btn btn-primary btn-lg px-4 rounded-pill" type="button">
+                        <i class="bi bi-envelope"></i>
+                        <a href="mailto:info@example.com" class="text-decoration-none d-block text-white ps-2">{{email}}</a>
+                    </button>
+                    <button class="d-inline-flex align-items-center btn btn-success btn-lg px-4 rounded-pill" type="button">
+                        <i class="bi bi-whatsapp"></i>
+                        <a href="https://wa.me/27813516102?text=Hello%20there,%20I%20would%20like%20to%20inquire%20about..." class="text-decoration-none d-block text-white ps-2" target="_blank">+27813516102</a>
+                    </button>
+                    <button class="d-inline-flex align-items-center btn btn-info btn-lg px-4 rounded-pill" type="button">
+                        <i class="bi bi-telephone"></i>
+                        <a href="tel:+27813516102" class="text-decoration-none d-block text-white ps-2">+27813516102</a>
+                    </button>
+                  </div>
+                </div>
+              </div>
+        </main>
+    </div>
+</div>
+
+<app-footer></app-footer>

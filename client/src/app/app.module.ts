@@ -51,6 +51,7 @@ import { IssueAddNoaccountComponent } from './issues/issue-add-noaccount/issue-a
 import { InvoiceDetailComponent } from './invoices/invoice-detail/invoice-detail.component';
 import { InvoiceListsComponent } from './invoices/invoice-lists/invoice-lists.component';
 import { InvoiceAddComponent } from './invoices/invoice-add/invoice-add.component';
+import { SupportComponent } from './support/support.component';
 
 @NgModule({
   declarations: [
@@ -92,7 +93,8 @@ import { InvoiceAddComponent } from './invoices/invoice-add/invoice-add.componen
     WorkorderDetailComponent,
     InvoiceDetailComponent,
     InvoiceListsComponent,
-    InvoiceAddComponent
+    InvoiceAddComponent,
+    SupportComponent
   ],
   imports: [
     BrowserModule,
