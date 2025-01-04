@@ -19,16 +19,17 @@
                 </div>
             </div>
 
-            <ol class="list-group list-group-numbered">
-                <a class="list-group-item d-flex justify-content-between align-items-start" routerLink="/workorder/1/invoice/detail/1">
+            <ul class="list-group" >
+                <a class="list-group-item d-flex justify-content-between align-items-start" *ngFor="let invoice of invoices" routerLink="/workorder/{{invoice.workorderId}}/invoice/detail/{{invoice.id}}">
                     <div class="ms-2 me-auto" >
-                        <div class="fw-bold">Subheading</div>
-                        Content for list item
+                        <div class="fw-bold">Invoice Id: #{{invoice.id}}</div>
+                        Created Date: {{invoice.createdDate | date}}<br>
+                        Due Date: {{invoice.dueDate | date}}
                     </div>
-                    <span class="badge text-bg-primary rounded-pill">14</span>
+                    <span class="badge rounded-pill"><i class="bi bi-arrow-right-short text-primary bi-icon-font-size"></i></span>
                 </a>
 
-            </ol>
+            </ul>
 
         </main>
     </div>

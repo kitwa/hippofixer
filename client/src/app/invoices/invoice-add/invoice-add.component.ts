@@ -35,11 +35,11 @@ export class InvoiceAddComponent {
   }
 
   addOrGetInvoice(){
-    this.workorderId = this.route.snapshot.params['id'];
+    this.workorderId = this.route.snapshot.params['workorderId'];
     this.invoicesService.addOrGetInvoice(this.workorderId).subscribe(res => {
       this.invoice = res;
-      this.invoiceDate = this.formatDate(res.createdDate);
-      this.dueDate = this.formatDate(res.dueDate);
+      res.createdDate ? this.invoiceDate = this.formatDate(res.createdDate) : this.invoiceDate = null;
+      res.dueDate ? this.dueDate = this.formatDate(res.dueDate) : this.dueDate = null;
       this.invoice.invoiceItems.forEach(x => {
         this.totalAmount = this.totalAmount + x.price;
         this.subTotal += x.price;
@@ -88,7 +88,7 @@ export class InvoiceAddComponent {
   }
 
   getWorkOrder(){
-    this.workordersService.getWorkOrder(this.route.snapshot.params['id']).subscribe(workorder => {
+    this.workordersService.getWorkOrder(this.route.snapshot.params['workorderId']).subscribe(workorder => {
       this.workorder = workorder;
     })
   }

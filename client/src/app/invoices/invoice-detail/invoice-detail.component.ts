@@ -31,7 +31,7 @@ export class InvoiceDetailComponent {
   }
 
   addOrGetInvoice(){
-    this.workorderId = this.route.snapshot.params['id'];
+    this.workorderId = this.route.snapshot.params['workorderId'];
     this.invoicesService.addOrGetInvoice(this.workorderId).subscribe(res => {
       this.invoice = res;
       this.invoiceDate = this.formatDate(res.createdDate);

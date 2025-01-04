@@ -14,7 +14,7 @@ import { InvoicesService } from 'src/app/_services/invoices.service';
 export class InvoiceListsComponent {
 
   user: User;
-  issues: Invoice[];
+  invoices: Invoice[];
   pagination: Pagination;
   pageNumber = 1;
   pageSize = 10;
@@ -29,7 +29,7 @@ export class InvoiceListsComponent {
 
   getInvoices(){
     this.invoicesService.getInvoices(this.pageNumber, this.pageSize).subscribe(response => {
-      this.issues = response.result;
+      this.invoices = response.result;
       this.pagination = response.pagination;
     })
   }
@@ -38,5 +38,6 @@ export class InvoiceListsComponent {
     this.pageNumber = event.page;
     this.getInvoices();
   }
+  
 
 }

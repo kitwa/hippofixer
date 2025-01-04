@@ -16,7 +16,7 @@ namespace API.Features.Users.Commands
 
             // var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT"); 
 
-            string subject = "Merci d'avoir créé un compte!";
+            string subject = "Thank you for creating an account!";
 
             string htmlTemplate;
             using (var reader = File.OpenText("./EmailTemplates/RegisterEmailTemplate.html"))

@@ -4,7 +4,7 @@ import { WorkOrder } from "./workorder";
 
 export interface Invoice {
   id: number;
-  workOrderId: number;
+  workorderId: number;
   workorder: WorkOrder;
   contractorId: number;
   contractor: Member;

@@ -60,7 +60,7 @@ const routes: Routes = [
       {path: 'issue/detail/:id', component: IssueDetailComponent },
       {path: 'issue/add', component: IssueAddComponent, canActivate: [adminGuard]},
       {path: 'invoices', component: InvoiceListsComponent },
-      {path: 'workorder/:id/invoice/add/:id', component: InvoiceAddComponent },
+      {path: 'workorder/:workorderId/invoice/add/:id', component: InvoiceAddComponent },
     ]
   },
   {path: 'errors', component: TestErrorsComponent},

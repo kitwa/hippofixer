@@ -7,6 +7,6 @@ import { Component } from '@angular/core';
 })
 export class SupportComponent {
 
-  email: string = 'info@hippofixer.co.za';
+  email: string = 'support@hippofixer.co.za';
 
 }
