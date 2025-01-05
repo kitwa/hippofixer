@@ -48,7 +48,6 @@ namespace API.Controllers
             var user = _mapper.Map<AppUser>(registerDto);
 
             user.Email = registerDto.Email.ToLower();
-            user.FullAddress = 
 
             var result = await _userManager.CreateAsync(user, registerDto.Password);
 

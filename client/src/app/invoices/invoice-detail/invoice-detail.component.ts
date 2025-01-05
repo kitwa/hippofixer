@@ -89,6 +89,7 @@ export class InvoiceDetailComponent {
         // Adjust the image to include padding
         pdf.addImage(imgData, 'PNG', padding, padding, contentWidth, contentHeight);
         pdf.save(`Invoice_${this.workorder?.id || 'unknown'}.pdf`);
+        this.toastr.success("Invoice downloaded!");
       }).catch(err => {
         // Ensure hidden elements are restored in case of an error
         if (removeOnDownload) removeOnDownload.removeAttribute('style');

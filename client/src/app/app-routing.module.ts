@@ -40,7 +40,7 @@ const routes: Routes = [
   {path: 'blogposts', component: BlogPostListComponent},
   {path: 'blogposts/:id', component: BlogPostDetailComponent},
   {path: 'issue/noaccount/add', component: IssueAddNoaccountComponent},
-  {path: 'workorder/:id/invoice/detail/:id', component: InvoiceDetailComponent },
+  {path: 'workorder/:workorderId/invoice/detail/:id', component: InvoiceDetailComponent },
   {path: 'support', component: SupportComponent},
   {
     path: '',

@@ -40,11 +40,17 @@
                             <div class="row mb-3">
                                 <div class="col-12 col-sm-6 col-md-8">
                                     <h4>Bill To</h4>
-                                    <address *ngIf="workorder">
-                                        <strong>{{workorder.issue.client.firstName}}</strong><br>
+                                    <address *ngIf="workorder && !workorder.issue.clientPhone && !workorder.issue.clientEmail">
+                                        <strong>{{workorder.issue.client?.firstName}}</strong><br>
                                         {{workorder.issue.city.name}}<br>
-                                        Phone: {{workorder.issue.client.phone}}<br>
-                                        Email: {{workorder.issue.client.email}}
+                                        Phone: {{workorder.issue.client?.phone}}<br>
+                                        Email: {{workorder.issue.client?.email}}
+                                    </address>
+                                    <address *ngIf="workorder && workorder.issue.clientPhone && workorder.issue.clientEmail">
+                                        <strong>{{workorder.issue.client?.firstName}}</strong><br>
+                                        {{workorder.issue.city.name}}<br>
+                                        Phone: {{workorder.issue.clientPhone}}<br>
+                                        Email: {{workorder.issue.clientEmail}}
                                     </address>
                                 </div>
                                 <div class="col-12 col-sm-6 col-md-4" *ngIf="invoice && workorder">
