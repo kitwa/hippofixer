@@ -57,6 +57,7 @@ export class IssueAddNoaccountComponent {
           Validators.email // Validator for email format
         ]
       ],
+      clientName: ['', Validators.required],
       cityName: ['', Validators.required]
     });
 

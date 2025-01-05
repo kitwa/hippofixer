@@ -9,7 +9,8 @@ namespace API.DTOs
         public int Id { get; set; }
         public int? ClientId { get; set; }
         public string ClientPhone { get; set; }
-        public string ClientEmail { get; set; }
+        public string ClientEmail { get; set; }    
+        public string ClientName { get; set; }
         public string Description { get; set; }
         public string PhotoUrl { get; set; }
         public string PhotoPublicId { get; set; }

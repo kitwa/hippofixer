@@ -23,7 +23,6 @@ export class IssueDetailComponent {
     this.loadIssue();
   }
 
-
   loadIssue(){
     this.issuesService.getIssue(this.route.snapshot.params['id']).subscribe(issue => {
       this.issue = issue;

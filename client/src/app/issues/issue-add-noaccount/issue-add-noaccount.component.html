@@ -34,7 +34,7 @@
                     *ngIf="addIssueForm">
 
                     <div class="col-md-6">
-                        <label for="cityId" class="form-label">Where are you based?</label>
+                        <label for="cityId" class="form-label">Where are you based? *</label>
                         <input 
                             class="form-control" 
                             list="cities" 
@@ -51,7 +51,7 @@
                     </div>
 
                     <div class="col-md-6">
-                        <label for="issueTypeId" class="form-label">Issue Type</label>
+                        <label for="issueTypeId" class="form-label">Issue Type *</label>
                         <select
                             [class.is-invalid]='addIssueForm.get("issueTypeId")?.errors && addIssueForm.get("issueTypeId")?.touched'
                             formControlName='issueTypeId' class="form-select">
@@ -62,7 +62,7 @@
                     </div>
 
                     <div class="col-md-6">
-                        <label for="description" class="form-label">Description</label>
+                        <label for="description" class="form-label">Describe your issue *</label>
                         <textarea type="text"
                             [class.is-invalid]='addIssueForm.get("description")?.errors && addIssueForm.get("description")?.touched'
                             class="form-control" id="description" formControlName='description' rows="6"
@@ -80,7 +80,7 @@
                     </div>
 
                     <div class="col-md-12">
-                        <label>Upload a photo (Optional) </label>
+                        <label>Upload a photo (optional) </label>
                         <br>
                         <input type="file" (change)="onFileSelected($event)" />
                     </div>
@@ -92,6 +92,13 @@
                         <div class="card-body pe-0 ps-0">
                             <h6 class="card-title">We will contact you soon.</h6>
                             <div class="row">
+                                <div class="col-md-6">
+                                    <label for="clientName" class="form-label">Name</label>
+                                    <input type="text" autocomplete="clientName"
+                                        [class.is-invalid]='addIssueForm.get("clientName")?.errors && addIssueForm.get("clientName")?.touched'
+                                        class="form-control" placeholder="Enter Your Name" formControlName='clientName'>
+                                    <div class="invalid-feedback">Please enter your name.</div>
+                                </div>
                                 <div class="col-md-6">
                                     <label for="clientPhone" class="form-label">Phone Number</label>
                                     <input type="text" (keydown.space)="$event.preventDefault()"

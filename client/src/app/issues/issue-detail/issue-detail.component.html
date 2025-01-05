@@ -67,20 +67,25 @@
                                                 Live Chat</a>
                                         </ng-container>
 
-
                                         <a href="tel:{{issue.client.phone}}"
                                             class="btn btn-outline-info btn-block btn-sm me-2"
                                             *ngIf="issue.client.phone"><i class="bi bi-telephone-outbound me-2"></i>
                                             +27{{issue.client.phone}}</a>
+
                                         <a href="mailto:{{issue.client.email}}"
                                             class="btn btn-outline-info btn-block btn-sm" *ngIf="issue.client.email"><i
                                                 class="bi bi-envelope me-2"></i>
                                             {{issue.client.email}}</a>
+
                                         <a href="https://wa.me/+27{{issue.client.phone}}/?text=I have accepted your issue on Kiboko Fixer: {{ getFullUrl() }}"
                                             class="h4 p-3 pt-3 btn btn-lg text-info" *ngIf="issue.client.phone"><i
                                                 class="bi bi-whatsapp"></i></a>
+
                                     </ng-container>
                                     <ng-container *ngIf="!issue.client">
+
+                                        <p>Name: {{issue.clientName}}</p>
+
                                         <a href="tel:{{issue.clientPhone}}"
                                             class="btn btn-outline-info btn-block btn-sm me-2" *ngIf="issue.clientPhone"><i
                                                 class="bi bi-telephone-outbound me-2"></i> +27{{issue.clientPhone}}</a>

@@ -368,6 +368,8 @@ namespace API.Data.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     ClientEmail = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
+                    ClientName = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     Description = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     IssueTypeId = table.Column<int>(type: "int", nullable: false),

@@ -32,7 +32,7 @@
         <form [formGroup]='addIssueForm' (ngSubmit)="addIssue()" autocomplete="off" class="row" *ngIf="addIssueForm">
 
           <div class="col-md-6">
-              <label for="cityId" class="form-label">From what City is your issue being raised?</label>
+              <label for="cityId" class="form-label">From what City is your issue being raised? *</label>
               <input 
                   class="form-control" 
                   list="cities" 
@@ -49,7 +49,7 @@
           </div>
 
           <div class="col-md-6">
-            <label for="issueTypeId" class="form-label">Issue Type</label>
+            <label for="issueTypeId" class="form-label">Issue Type *</label>
             <select
               [class.is-invalid]='addIssueForm.get("issueTypeId")?.errors && addIssueForm.get("issueTypeId")?.touched'
               formControlName='issueTypeId' class="form-select">
@@ -59,7 +59,7 @@
           </div>
 
           <div class="col-md-6">
-            <label for="description" class="form-label">Description</label>
+            <label for="description" class="form-label">Describe your issue *</label>
             <textarea type="text"
               [class.is-invalid]='addIssueForm.get("description")?.errors && addIssueForm.get("description")?.touched'
               class="form-control" id="description" formControlName='description' rows="10"
@@ -76,7 +76,7 @@
           </div>
 
           <div class="col-md-12">
-            <label>Upload a photo: </label>
+            <label>Upload a photo (optional): </label>
             <br>
             <input type="file" (change)="onFileSelected($event)" />
           </div>

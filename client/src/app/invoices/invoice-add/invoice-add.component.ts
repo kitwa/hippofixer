@@ -48,11 +48,11 @@ export class InvoiceAddComponent {
     });
   }
 
-  getInvoice(invoiceId: number){ 
-    this.invoicesService.getInvoice(invoiceId).subscribe(invoice => {
-      this.invoice = invoice;
-    })
-  }
+  // getInvoice(invoiceId: number){ 
+  //   this.invoicesService.getInvoice(invoiceId).subscribe(invoice => {
+  //     this.invoice = invoice;
+  //   })
+  // }
 
   updateInvoiceDate() {
     this.invoicesService.updateInvoiceDate(this.invoice.id, this.invoiceDate).subscribe(res => {

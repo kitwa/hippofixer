@@ -331,6 +331,9 @@ namespace API.Data.Migrations
                     b.Property<int?>("ClientId")
                         .HasColumnType("int");
 
+                    b.Property<string>("ClientName")
+                        .HasColumnType("longtext");
+
                     b.Property<string>("ClientPhone")
                         .HasColumnType("longtext");
 

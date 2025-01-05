@@ -8,6 +8,7 @@ export interface Issue {
   clientId?: number;
   clientPhone: string;
   clientEmail: string;
+  clientName: string;
   description: string;
   issueTypeId: number;
   photoUrl: string;

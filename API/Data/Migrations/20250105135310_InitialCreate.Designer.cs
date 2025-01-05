@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20241223152553_InitialCreate")]
+    [Migration("20250105135310_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -333,6 +333,9 @@ namespace API.Data.Migrations
 
                     b.Property<int?>("ClientId")
                         .HasColumnType("int");
+
+                    b.Property<string>("ClientName")
+                        .HasColumnType("longtext");
 
                     b.Property<string>("ClientPhone")
                         .HasColumnType("longtext");
