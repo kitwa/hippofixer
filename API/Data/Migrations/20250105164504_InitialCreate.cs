@@ -196,6 +196,12 @@ namespace API.Data.Migrations
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
                     table.ForeignKey(
+                        name: "FK_AspNetUsers_Cities_CityId",
+                        column: x => x.CityId,
+                        principalTable: "Cities",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
                         name: "FK_AspNetUsers_Genders_GenderId",
                         column: x => x.GenderId,
                         principalTable: "Genders",
@@ -647,6 +653,11 @@ namespace API.Data.Migrations
                 column: "NormalizedEmail");
 
             migrationBuilder.CreateIndex(
+                name: "IX_AspNetUsers_CityId",
+                table: "AspNetUsers",
+                column: "CityId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_AspNetUsers_GenderId",
                 table: "AspNetUsers",
                 column: "GenderId");
@@ -803,13 +814,13 @@ namespace API.Data.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "Cities");
-
-            migrationBuilder.DropTable(
                 name: "IssueTypes");
 
             migrationBuilder.DropTable(
                 name: "WorkOrderStatuses");
+
+            migrationBuilder.DropTable(
+                name: "Cities");
 
             migrationBuilder.DropTable(
                 name: "Genders");

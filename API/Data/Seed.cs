@@ -178,6 +178,7 @@ namespace API.Data
             var admin = new AppUser
             {
                 UserName = "admin",
+                FirstName = "Admin",
                 Email = "admin@kibokofixer.co.za",
                 GenderId = 1,
                 CityId = 1,

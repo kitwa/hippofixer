@@ -30,7 +30,7 @@
                                     <h4>From</h4>
                                     <address *ngIf="invoice">
                                         <strong>{{invoice.contractor.firstName}} {{ invoice.contractor.lastName}}</strong><br>
-                                        {{ invoice.contractor.fullAddress}}
+                                        {{ invoice.contractor.city.name}}
                                         <br>
                                         Phone: {{invoice.contractor.phone}}<br>
                                         Email: {{invoice.contractor.email}}

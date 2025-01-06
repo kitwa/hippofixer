@@ -37,7 +37,8 @@ namespace API.Features.Invoices.Queries
                 }
 
                 var existingInvoice = _context.Invoices  
-                                                .Include(x => x.Contractor)                                      
+                                                .Include(x => x.Contractor)
+                                                .ThenInclude(x => x.City)                                      
                                                 .Include(x => x.InvoiceItems)
                                                 .SingleOrDefault(x => x.WorkOrderId == command.WorkorderId);
 
