@@ -1,0 +1,103 @@
+<app-nav></app-nav>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary">
+      <app-sidebar></app-sidebar>
+    </div>
+
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+      <div
+        class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">List of cards</h1>
+        <div class="btn-toolbar mb-2 mb-md-0"></div>
+      </div>
+
+      <div
+        class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h4 text-black">Pay with saved card</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+          <div class="btn-group me-2" *appHasRole='["SuperAdmin","Admin","Contractor"]'>
+            <button type="button" class="btn btn-sm btn-primary" routerLink="/payment/card/add">
+              <i class="bi bi-plus-circle-dotted text-blue"></i><span>&nbsp;</span> Add New Card
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <ul class="list-group">
+        <a class="list-group-item d-flex justify-content-between align-items-start mb-2 pb-2">
+            <div class="form-check align-self-center">
+                <input class="form-check-input" type="radio" name="selectedCard" id="card1" value="35045">
+                <!-- <label class="form-check-label" for="card1">Select</label> -->
+              </div>
+          <div class="ms-2 me-auto mb-2 pb-2">
+            <div class="fw-bold">Card Ending with 35045</div>
+            Bank: FNB - Visa<br>
+            Expires 03/2029
+          </div>
+          <span class="badge rounded-pill text-primary">
+            <i class="bi bi-trash bi-icon-font-size"></i> <span class="h6 ps-2">Delete</span>
+          </span>
+        </a>
+
+        <a class="list-group-item d-flex justify-content-between align-items-start">
+        <div class="form-check align-self-center">
+            <input class="form-check-input" type="radio" name="selectedCard" id="card2" value="12345">
+            <!-- <label class="form-check-label" for="card2">Select</label> -->
+            </div>
+          <div class="ms-2 me-auto">
+            <div class="fw-bold">Card Ending with 12345</div>
+            Bank: ABC - MasterCard<br>
+            Expires 07/2028
+          </div>
+          <span class="badge rounded-pill text-primary" (click)="showModal()">
+            <i class="bi bi-trash bi-icon-font-size"></i> <span class="h6 ps-2">Delete</span>
+          </span>
+        </a>
+      </ul>
+
+      <div class="row mt-4">
+        <div class="col-md-4"></div>
+        <div class="col-md-4 col-sm-12 text-center">
+          <div class="card text-center bg-success bg-opacity-25">
+            <div class="card-body">
+              <h5 class="card-title text-black">No Card Added Yet</h5>
+              <p class="card-text">You haven't saved any card yet.</p>
+              <button type="button" class="btn btn-sm btn-primary" routerLink="/payment/card/add">
+                <i class="bi bi-plus-circle-dotted text-blue"></i><span>&nbsp;</span> Add New Card
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4"></div>
+      </div>
+      <div class="col-12 mb-5 pt-5 text-center">
+        <button type="submit" class="btn btn-success">Pay Now (R 99.99)</button>
+      </div>
+    </main>
+  </div>
+</div>
+
+<app-footer></app-footer>
+
+<div *ngIf="isModalShown" [config]="{ show: true }" (onHidden)="onHidden()" bsModal #autoShownModal="bs-modal"
+     class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-auto-name">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 id="dialog-auto-name" class="modal-title pull-left">Delete Card</h4>
+        <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="hideModal()">
+          <span aria-hidden="true" class="visually-hidden">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delte this card?</p>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="hideModal()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -30,6 +30,8 @@ import { InvoiceDetailComponent } from './invoices/invoice-detail/invoice-detail
 import { InvoiceListsComponent } from './invoices/invoice-lists/invoice-lists.component';
 import { InvoiceAddComponent } from './invoices/invoice-add/invoice-add.component';
 import { SupportComponent } from './support/support.component';
+import { CardAddComponent } from './payment/card/card-add/card-add.component';
+import { CardListComponent } from './payment/card/card-list/card-list.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -61,6 +63,8 @@ const routes: Routes = [
       {path: 'issue/add', component: IssueAddComponent, canActivate: [adminGuard]},
       {path: 'invoices', component: InvoiceListsComponent },
       {path: 'workorder/:workorderId/invoice/add/:id', component: InvoiceAddComponent },
+      {path: 'payment/cards', component: CardListComponent },
+      {path: 'payment/card/add', component: CardAddComponent },
     ]
   },
   {path: 'errors', component: TestErrorsComponent},

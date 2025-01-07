@@ -1,0 +1,67 @@
+<app-nav></app-nav>
+
+<div class="container-fluid">
+  <div class="row">
+
+    <div class="border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary">
+      <app-sidebar></app-sidebar>
+    </div>
+
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+      <div
+        class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Add New Card</h1>
+      </div>
+
+      <div class="row">
+        <!-- Payment Form Section -->
+        <div class="col-md-3 col-lg-12">
+          <p class="h5 text-black ps-3">Card Details</p>
+          <form [formGroup]="paymentForm"  class="row g-3 m-2" *ngIf="paymentForm">
+            <div class="col-md-6">
+              <label for="cardHolderName" class="form-label">Cardholder's Name</label>
+              <input type="text" id="cardHolderName" formControlName="cardHolderName" class="form-control"
+                placeholder="Full Name" [class.is-invalid]="paymentForm.get('cardHolderName')?.errors && paymentForm.get('cardHolderName')?.touched">
+              <div class="invalid-feedback">Cardholder's name is required.</div>
+            </div>
+
+            <div class="col-md-6">
+              <label for="cardNumber" class="form-label">Card Number</label>
+              <input type="text" id="cardNumber" formControlName="cardNumber" class="form-control"
+                placeholder="XXXX XXXX XXXX XXXX"
+                [class.is-invalid]="paymentForm.get('cardNumber')?.errors && paymentForm.get('cardNumber')?.touched">
+              <div class="invalid-feedback">Valid card number is required.</div>
+            </div>
+
+            <div class="col-md-4">
+              <label for="expiryDate" class="form-label">Expiry Date</label>
+              <input type="text" id="expiryDate" formControlName="expiryDate" class="form-control" placeholder="MM/YY"
+                [class.is-invalid]="paymentForm.get('expiryDate')?.errors && paymentForm.get('expiryDate')?.touched">
+              <div class="invalid-feedback">Expiry date is required.</div>
+            </div>
+
+            <div class="col-md-4">
+              <label for="cvv" class="form-label">CVV</label>
+              <input type="text" id="cvv" formControlName="cvv" class="form-control" placeholder="123"
+                [class.is-invalid]="paymentForm.get('cvv')?.errors && paymentForm.get('cvv')?.touched">
+              <div class="invalid-feedback">CVV is required.</div>
+            </div>
+
+            <div class="col-md-4">
+              <label for="amount" class="form-label">Amount</label>
+              <input type="number" id="amount" formControlName="amount" class="form-control" placeholder="Amount"
+                [class.is-invalid]="paymentForm.get('amount')?.errors && paymentForm.get('amount')?.touched">
+              <div class="invalid-feedback">Amount is required.</div>
+            </div>
+
+            <div class="col-12 mb-5 text-center">
+              <button type="submit" [disabled]="!paymentForm.valid" class="btn btn-success">Pay Now (R 99.99)</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<app-footer></app-footer>

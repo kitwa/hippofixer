@@ -52,6 +52,8 @@ import { InvoiceDetailComponent } from './invoices/invoice-detail/invoice-detail
 import { InvoiceListsComponent } from './invoices/invoice-lists/invoice-lists.component';
 import { InvoiceAddComponent } from './invoices/invoice-add/invoice-add.component';
 import { SupportComponent } from './support/support.component';
+import { CardAddComponent } from './payment/card/card-add/card-add.component';
+import { CardListComponent } from './payment/card/card-list/card-list.component';
 
 @NgModule({
   declarations: [
@@ -94,7 +96,9 @@ import { SupportComponent } from './support/support.component';
     InvoiceDetailComponent,
     InvoiceListsComponent,
     InvoiceAddComponent,
-    SupportComponent
+    SupportComponent,
+    CardAddComponent,
+    CardListComponent
   ],
   imports: [
     BrowserModule,
