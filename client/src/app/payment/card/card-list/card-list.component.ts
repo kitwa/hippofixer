@@ -12,7 +12,7 @@ export class CardListComponent implements OnInit {
 
   isModalShown = false;
   @ViewChild('autoShownModal', { static: false }) autoShownModal?: ModalDirective;
-
+  selectedCard: string = '12345'; // Default card value
 
   constructor(
     private toastr: ToastrService, 
@@ -23,7 +23,6 @@ export class CardListComponent implements OnInit {
   }
 
   showModal(): void {
-    debugger
     this.isModalShown = true;
   }
 

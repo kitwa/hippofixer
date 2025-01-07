@@ -26,6 +26,7 @@ namespace API.Data
         public DbSet<Invoice> Invoices { get; set; }
         public DbSet<InvoiceItem> InvoiceItems { get; set; }
         public DbSet<City> Cities { get; set; }
+        public DbSet<Card> Cards { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
