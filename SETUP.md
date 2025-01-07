@@ -15,14 +15,14 @@
 - download and install 
 
 ## download the repository
-- go to https://github.com/kitwa/itcareeradvisor click on button 'Code' then click on 'Download ZIP' as shown on picture
+- go to https://github.com/kitwa/hippofixer click on button 'Code' then click on 'Download ZIP' as shown on picture
 - unzip the folder
 - open the folder in visual studio code
 
 ## Run the backend
  - cd API
  - dotnet dev-certs https --trust                         (#### this command is only once)
- - docker run --detach --name troisiemeadam --env MARIADB_ROOT_PASSWORD=TroisiemeAdam1502@  -p 3306:3306 mariadb:latest 	(#### this command is only once)
+ - docker run --detach --name kibokofixer --env MARIADB_ROOT_PASSWORD=KibokoFixer1502@  -p 3306:3306 mariadb:latest 	(#### this command is only once)
  - dotnet tool install --global dotnet-ef
  - dotnet ef migrations add InitialCreate -o Data/Migrations
  - dotnet ef database drop (run this if existing database)
