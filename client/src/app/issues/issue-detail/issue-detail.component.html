@@ -77,7 +77,7 @@
                                                 class="bi bi-envelope me-2"></i>
                                             {{issue.client.email}}</a>
 
-                                        <a href="https://wa.me/+27{{issue.client.phone}}/?text=I have accepted your issue on Kiboko Fixer: {{ getFullUrl() }}"
+                                        <a href="https://wa.me/+27{{issue.client.phone}}/?text=I have accepted your issue on Hippo Fixer: {{ getFullUrl() }}"
                                             class="h4 p-3 pt-3 btn btn-lg text-info" *ngIf="issue.client.phone"><i
                                                 class="bi bi-whatsapp"></i></a>
 
@@ -93,7 +93,7 @@
                                         <a href="mailto:{{issue.clientEmail}}" class="btn btn-outline-info btn-block btn-sm"
                                             *ngIf="issue.clientEmail"><i class="bi bi-envelope me-2"></i>{{issue.clientEmail}}</a>
 
-                                        <a href="https://wa.me/+27{{issue.clientPhone}}/?text=I have accepted your issue on Kiboko Fixer: {{ getFullUrl() }}"
+                                        <a href="https://wa.me/+27{{issue.clientPhone}}/?text=I have accepted your issue on Hippo Fixer: {{ getFullUrl() }}"
                                             class="h4 p-3 pt-3 btn btn-lg text-info" *ngIf="issue.clientPhone"><i class="bi bi-whatsapp"></i></a>
 
                                     <button (click)="shareIssueDetails()" class="btn btn-outline-primary btn-sm">
