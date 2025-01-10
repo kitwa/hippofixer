@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@microsoft/signalr';
+import { CardsService } from 'src/app/_services/cards.service';
 
 @Component({
   selector: 'app-card-add',
@@ -8,30 +9,34 @@ import { HttpClient } from '@microsoft/signalr';
   styleUrl: './card-add.component.css'
 })
 export class CardAddComponent implements OnInit {
-  paymentForm: FormGroup;
+  addCardForm: FormGroup;
+  validationErrors: string[] = [];
+  cardTypes: string[] = ['Visa', 'MasterCard'];
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private cardsServices: CardsService) {}
 
   ngOnInit() {
     this.initializeForms();
   }
 
   initializeForms() {
-    this.paymentForm = this.fb.group({
+    this.addCardForm = this.fb.group({
       cardHolderName: ['', Validators.required],
       cardNumber: ['', [Validators.required, Validators.pattern(/^\d{16}$/)]],
+      cardType: ['', Validators.required],
+      bankName: ['', Validators.nullValidator],
       expiryDate: ['', Validators.required],
       cvv: ['', [Validators.required, Validators.pattern(/^\d{3}$/)]],
-      amount: [null, [Validators.required, Validators.min(1)]]
+      isDefault:[true, Validators.required]
     });
   }
 
-
-  submitPayment() {
-      const paymentData = this.paymentForm.value;
-      // this.http.post('/api/payments/debit-order', paymentData).subscribe(
-      //     (response) => console.log('Payment processed:', response),
-      //     (error) => console.error('Payment error:', error)
-      // );
+  addCard() {
+    debugger
+    this.cardsServices.addCard(this.addCardForm.value).subscribe(res => {
+      location.reload();
+    }, error => {
+      this.validationErrors = error;
+    });
   }
 }

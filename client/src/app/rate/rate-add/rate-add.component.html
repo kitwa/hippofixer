@@ -1,0 +1,50 @@
+<app-nav></app-nav>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary">
+      <app-sidebar></app-sidebar>
+    </div>
+
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+      <div
+        class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Rate Contractor</h1>
+      </div>
+
+      <div class="row">
+        <!-- Rating Form Section -->
+        <div class="col-md-3 col-lg-12">
+          <p class="h5 text-black ps-3">Rate Contractor</p>
+          <form [formGroup]="addRateForm" class="row g-3 m-2" (ngSubmit)="addRate()">
+            <!-- Star Rating -->
+            <div class="col-md-12">
+              <label for="rate" class="form-label">Rate</label>
+              <div id="rate" class="d-flex">
+                <label *ngFor="let star of stars; let i = index" 
+                       (click)="setRating(i + 1)" 
+                       class="btn"
+                       [ngClass]="{'btn-warning': i < rate, 'btn-outline-warning': i >= rate}">
+                  <i class="bi bi-star-fill"></i>
+                </label>
+              </div>
+            </div>
+
+            <!-- Comment Section -->
+            <div class="col-md-12">
+              <label for="comment" class="form-label">Comment</label>
+              <textarea id="comment" class="form-control" rows="3" formControlName="comment" placeholder="Write your comment"></textarea>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="col-12 text-center">
+              <button type="submit" name="submit" id="submit" class="btn btn-success">Submit Rating</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<app-footer></app-footer>

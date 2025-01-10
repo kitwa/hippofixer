@@ -84,7 +84,6 @@ export class InvoiceAddComponent {
     }, error => {
       this.validationErrors = error;
     });
-
   }
 
   getWorkOrder(){

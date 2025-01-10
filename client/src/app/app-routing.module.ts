@@ -32,6 +32,7 @@ import { InvoiceAddComponent } from './invoices/invoice-add/invoice-add.componen
 import { SupportComponent } from './support/support.component';
 import { CardAddComponent } from './payment/card/card-add/card-add.component';
 import { CardListComponent } from './payment/card/card-list/card-list.component';
+import { RateAddComponent } from './rate/rate-add/rate-add.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -65,6 +66,7 @@ const routes: Routes = [
       {path: 'workorder/:workorderId/invoice/add/:id', component: InvoiceAddComponent },
       {path: 'payment/cards', component: CardListComponent },
       {path: 'payment/card/add', component: CardAddComponent },
+      {path: 'rate/add', component: RateAddComponent },
     ]
   },
   {path: 'errors', component: TestErrorsComponent},
